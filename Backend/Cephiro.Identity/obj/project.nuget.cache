@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Cr36sKFjYkJnkMoWqX2l/s1EDrqL7X4sNMj2qX+ZEi5j8QRjFKyDTLxCSKVnjDUGubn4qG/9PzM945rHtHZ/wQ==",
+  "dgSpecHash": "uuk66TfuSzM6bL06rsSkaErk1pZvHVDjS6Iv6WoW2eWxzcg/N89uEJmmF2Kc4ZKoqh4EnD4pRl5php9CKA251Q==",
   "success": true,
   "projectFilePath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
   "expectedPackageFiles": [
     "/home/arkena/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
+    "/home/arkena/.nuget/packages/libphonenumber-csharp/8.13.4/libphonenumber-csharp.8.13.4.nupkg.sha512",
     "/home/arkena/.nuget/packages/microsoft.entityframeworkcore/7.0.2/microsoft.entityframeworkcore.7.0.2.nupkg.sha512",
     "/home/arkena/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.2/microsoft.entityframeworkcore.abstractions.7.0.2.nupkg.sha512",
     "/home/arkena/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.2/microsoft.entityframeworkcore.analyzers.7.0.2.nupkg.sha512",
@@ -23,6 +24,7 @@
     "/home/arkena/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "/home/arkena/.nuget/packages/npgsql/7.0.1/npgsql.7.0.1.nupkg.sha512",
     "/home/arkena/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.1/npgsql.entityframeworkcore.postgresql.7.0.1.nupkg.sha512",
+    "/home/arkena/.nuget/packages/system.collections.immutable/1.7.1/system.collections.immutable.1.7.1.nupkg.sha512",
     "/home/arkena/.nuget/packages/valueof/2.0.31/valueof.2.0.31.nupkg.sha512"
   ],
   "logs": []
