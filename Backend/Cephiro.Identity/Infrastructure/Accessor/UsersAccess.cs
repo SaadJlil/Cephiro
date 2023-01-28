@@ -5,7 +5,7 @@ using Cephiro.Identity.Infrastructure.Data;
 using Cephiro.Identity.Queries.Dtos;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cephiro.Identity.Infrastructure.Access;
+namespace Cephiro.Identity.Infrastructure.Accessor;
 
 public sealed class UserAccess: IUserAccess 
 {
