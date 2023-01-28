@@ -2,7 +2,7 @@ using Cephiro.Identity.Domain.Exceptions;
 using Cephiro.Identity.Domain.Entities;
 using Cephiro.Identity.Queries.IAccessor;
 using Cephiro.Identity.Infrastructure.Data;
-using Cephiro.Identity.Queries.Dtos;
+using Cephiro.Identity.Queries.utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cephiro.Identity.Infrastructure.Accessor;

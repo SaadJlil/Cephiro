@@ -1,4 +1,4 @@
-using Cephiro.Identity.Queries.Dtos;
+using Cephiro.Identity.Queries.utils;
 
 namespace Cephiro.Identity.Queries.IAccessor; 
 

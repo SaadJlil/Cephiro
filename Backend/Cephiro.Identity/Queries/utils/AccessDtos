@@ -1,7 +1,7 @@
 
 
 
-namespace Cephiro.Identity.Queries.Dtos;
+namespace Cephiro.Identity.Queries.utils;
 
 
 
@@ -20,4 +20,5 @@ public sealed record UserProfileDto(
     string phone,
     string Description,
     int RegularizationStage
+
 );
