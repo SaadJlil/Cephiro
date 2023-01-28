@@ -1,6 +1,6 @@
 using Cephiro.Identity.Domain.Exceptions;
 using Cephiro.Identity.Domain.Entities;
-using Cephiro.Identity.Queries.IAccess;
+using Cephiro.Identity.Queries.IAccessor;
 using Cephiro.Identity.Infrastructure.Data;
 using Cephiro.Identity.Queries.Dtos;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +16,7 @@ public sealed class UserAccess: IUserAccess
         _db = db;
     }
 
-    public async Task<IEnumerable<GetAllUsersOutputDto>> GetAllUsers()
+    public async Task<IEnumerable<GetAllUsersOutputDto>> GetAllUsersInfo()
     {
        return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(x => new GetAllUsersOutputDto(
             x.Id,
@@ -24,10 +24,10 @@ public sealed class UserAccess: IUserAccess
             x.Email
        )).ToListAsync();
     }
-    public async Task<GetUserByIdOutputDto?> GetUserById(GetUserByIdInputDto Dto)
+    public async Task<GetUserByIdOutputDto?> GetUserInfoById(Guid Id)
     {
         return await _db.Users.Where(
-            x => x.Id == Dto.Id
+            x => x.Id == Id
         ).Select(
             x => new GetUserByIdOutputDto(
                 x.Id,
@@ -37,10 +37,10 @@ public sealed class UserAccess: IUserAccess
         ).FirstOrDefaultAsync();
     }
 
-    public async Task<GetUserByEmailOutputDto?> GetUserByEmail(GetUserByEmailInputDto Dto)
+    public async Task<GetUserByEmailOutputDto?> GetUserInfoByEmail(string Email)
     {
         return await _db.Users.Where(
-            x => x.Email == Dto.Email
+            x => x.Email == Email
         ).Select(
             x => new GetUserByEmailOutputDto(
                 x.Id,
@@ -49,10 +49,10 @@ public sealed class UserAccess: IUserAccess
             )
         ).FirstOrDefaultAsync();
     }
-    public async Task<GetUserByPhoneOutputDto?> GetUserByPhone(GetUserByPhoneInputDto Dto)
+    public async Task<GetUserByPhoneOutputDto?> GetUserInfoByPhone(string PhoneNumber)
     {
         return await _db.Users.Where(
-            x => x.PhoneNumber == Dto.PhoneNumber
+            x => x.PhoneNumber == PhoneNumber
         ).Select(
             x => new GetUserByPhoneOutputDto(
                 x.Id,
@@ -61,5 +61,56 @@ public sealed class UserAccess: IUserAccess
             )
         ).FirstOrDefaultAsync();
     }
-    
+
+
+
+
+
+    //Profile
+    public async Task<IEnumerable<GetAllUsersOutputDto>> GetAllUsersProfile()
+    {
+       return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(x => new GetAllUsersOutputDto(
+            x.Id,
+            x.FirstName,
+            x.Email
+       )).ToListAsync();
+    }
+    public async Task<GetUserByIdOutputDto?> GetUserProfileById(Guid Id)
+    {
+        return await _db.Users.Where(
+            x => x.Id == Id
+        ).Select(
+            x => new GetUserByIdOutputDto(
+                x.Id,
+                x.FirstName,
+                x.Email
+            )
+        ).FirstOrDefaultAsync();
+    }
+
+    public async Task<GetUserByEmailOutputDto?> GetUserProfileByEmail(string Email)
+    {
+        return await _db.Users.Where(
+            x => x.Email == Email
+        ).Select(
+            x => new GetUserByEmailOutputDto(
+                x.Id,
+                x.FirstName,
+                x.Email
+            )
+        ).FirstOrDefaultAsync();
+    }
+    public async Task<GetUserByPhoneOutputDto?> GetUserProfileByPhone(string PhoneNumber)
+    {
+        return await _db.Users.Where(
+            x => x.PhoneNumber == PhoneNumber
+        ).Select(
+            x => new GetUserByPhoneOutputDto(
+                x.Id,
+                x.FirstName,
+                x.Email
+            )
+        ).FirstOrDefaultAsync();
+    }
+
 }

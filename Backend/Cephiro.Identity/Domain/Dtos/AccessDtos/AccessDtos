@@ -5,43 +5,19 @@ namespace Cephiro.Identity.Queries.Dtos;
 
 
 
-//All Users
-public sealed record GetAllUsersOutputDto(
-    Guid Id,
-    string FirstName,
-    string Email
-);
 
-//User by Id
-public sealed record GetUserByIdInputDto(
-    Guid Id
-);
-
-public sealed record GetUserByIdOutputDto(
-    Guid Id,
-    string FirstName,
-    string Email
-);
-
-//User by Email
-public sealed record GetUserByEmailInputDto(
-    string Email
-);
-
-public sealed record GetUserByEmailOutputDto(
+public sealed record UserIdentityInfoDto(
     Guid Id,
     string FirstName,
     string Email
 );
 
 
-//User by Phone Number
-public sealed record GetUserByPhoneInputDto(
-    string PhoneNumber 
-);
-
-public sealed record GetUserByPhoneOutputDto(
-    Guid Id,
-    string FirstName,
-    string Email
+public sealed record UserProfileDto(
+    Uri? Image,
+    string FullName,
+    string Email,
+    string phone,
+    string Description,
+    int RegularizationStage
 );
