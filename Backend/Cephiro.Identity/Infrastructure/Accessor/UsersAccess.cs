@@ -16,20 +16,21 @@ public sealed class UserAccess: IUserAccess
         _db = db;
     }
 
-    public async Task<IEnumerable<GetAllUsersOutputDto>> GetAllUsersInfo()
+    public async Task<IEnumerable<UserIdentityInfoDto?>> GetAllUsersInfo()
     {
-       return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(x => new GetAllUsersOutputDto(
+       return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(
+        x => new UserIdentityInfoDto(
             x.Id,
             x.FirstName,
             x.Email
        )).ToListAsync();
     }
-    public async Task<GetUserByIdOutputDto?> GetUserInfoById(Guid Id)
+    public async Task<UserIdentityInfoDto?> GetUserInfoById(Guid Id)
     {
         return await _db.Users.Where(
             x => x.Id == Id
         ).Select(
-            x => new GetUserByIdOutputDto(
+            x => new UserIdentityInfoDto(
                 x.Id,
                 x.FirstName,
                 x.Email
@@ -37,24 +38,24 @@ public sealed class UserAccess: IUserAccess
         ).FirstOrDefaultAsync();
     }
 
-    public async Task<GetUserByEmailOutputDto?> GetUserInfoByEmail(string Email)
+    public async Task<UserIdentityInfoDto?> GetUserInfoByEmail(string Email)
     {
         return await _db.Users.Where(
             x => x.Email == Email
         ).Select(
-            x => new GetUserByEmailOutputDto(
+            x => new UserIdentityInfoDto(
                 x.Id,
                 x.FirstName,
                 x.Email
             )
         ).FirstOrDefaultAsync();
     }
-    public async Task<GetUserByPhoneOutputDto?> GetUserInfoByPhone(string PhoneNumber)
+    public async Task<UserIdentityInfoDto?> GetUserInfoByPhone(string PhoneNumber)
     {
         return await _db.Users.Where(
             x => x.PhoneNumber == PhoneNumber
         ).Select(
-            x => new GetUserByPhoneOutputDto(
+            x => new UserIdentityInfoDto(
                 x.Id,
                 x.FirstName,
                 x.Email
@@ -67,48 +68,62 @@ public sealed class UserAccess: IUserAccess
 
 
     //Profile
-    public async Task<IEnumerable<GetAllUsersOutputDto>> GetAllUsersProfile()
+    public async Task<IEnumerable<UserProfileDto?>> GetAllUsersProfile()
     {
-       return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(x => new GetAllUsersOutputDto(
-            x.Id,
-            x.FirstName,
-            x.Email
+       return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(
+        x => new UserProfileDto(
+            x.ImageUri,
+            x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
+            x.Email,
+            x.PhoneNumber ?? "",
+            x.Description ?? "",
+            x.RegularizationStage
        )).ToListAsync();
     }
-    public async Task<GetUserByIdOutputDto?> GetUserProfileById(Guid Id)
+    public async Task<UserProfileDto?> GetUserProfileById(Guid Id)
     {
         return await _db.Users.Where(
             x => x.Id == Id
         ).Select(
-            x => new GetUserByIdOutputDto(
-                x.Id,
-                x.FirstName,
-                x.Email
+            x => new UserProfileDto(
+                x.ImageUri,
+                x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
+                x.Email,
+                x.PhoneNumber ?? "",
+                x.Description ?? "",
+                x.RegularizationStage
+
             )
         ).FirstOrDefaultAsync();
     }
 
-    public async Task<GetUserByEmailOutputDto?> GetUserProfileByEmail(string Email)
+    public async Task<UserProfileDto?> GetUserProfileByEmail(string Email)
     {
         return await _db.Users.Where(
             x => x.Email == Email
         ).Select(
-            x => new GetUserByEmailOutputDto(
-                x.Id,
-                x.FirstName,
-                x.Email
+            x => new UserProfileDto(
+                x.ImageUri,
+                x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
+                x.Email,
+                x.PhoneNumber ?? "",
+                x.Description ?? "",
+                x.RegularizationStage
             )
         ).FirstOrDefaultAsync();
     }
-    public async Task<GetUserByPhoneOutputDto?> GetUserProfileByPhone(string PhoneNumber)
+    public async Task<UserProfileDto?> GetUserProfileByPhone(string PhoneNumber)
     {
         return await _db.Users.Where(
             x => x.PhoneNumber == PhoneNumber
         ).Select(
-            x => new GetUserByPhoneOutputDto(
-                x.Id,
-                x.FirstName,
-                x.Email
+            x => new UserProfileDto(
+                x.ImageUri,
+                x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
+                x.Email,
+                x.PhoneNumber ?? "",
+                x.Description ?? "",
+                x.RegularizationStage
             )
         ).FirstOrDefaultAsync();
     }
