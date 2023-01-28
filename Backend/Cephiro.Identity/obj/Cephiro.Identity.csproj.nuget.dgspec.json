@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/arkena/Desktop/Cephiro/Cephiro/webserver/Cephiro.Identity/Cephiro.Identity.csproj": {}
+    "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {}
   },
   "projects": {
-    "/home/arkena/Desktop/Cephiro/Cephiro/webserver/Cephiro.Identity/Cephiro.Identity.csproj": {
+    "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/arkena/Desktop/Cephiro/Cephiro/webserver/Cephiro.Identity/Cephiro.Identity.csproj",
+        "projectUniqueName": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
         "projectName": "Cephiro.Identity",
-        "projectPath": "/home/arkena/Desktop/Cephiro/Cephiro/webserver/Cephiro.Identity/Cephiro.Identity.csproj",
+        "projectPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
         "packagesPath": "/home/arkena/.nuget/packages/",
-        "outputPath": "/home/arkena/Desktop/Cephiro/Cephiro/webserver/Cephiro.Identity/obj/",
+        "outputPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/arkena/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,34 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
             "ValueOf": {
               "target": "Package",
               "version": "[2.0.31, )"
