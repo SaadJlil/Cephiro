@@ -13,7 +13,8 @@ public static class ConfigureInfrastructure
     {
         services.AddDapperConnection(configuration);
         services.AddEfDbContext(configuration);
-
+        services.AddWriteRepositories();
+        
         return services;
     }
 

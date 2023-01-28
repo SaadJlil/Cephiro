@@ -1,10 +1,11 @@
-using System.Threading.Tasks;
+using Cephiro.Identity.Domain.Entities;
+using Cephiro.Identity.Domain.ValueObjects;
 
 namespace Cephiro.Identity.Commands.IExecutors;
 
 public interface IUserAuthExecutor
 {
-    public Task RegisterNewUser();
-    public Task SignUserIn();
-    public Task SignUserOut();
+    public Task<bool> RegisterNewUser(User user);
+    public Task<bool> SignUserIn(string email, Password password);
+    public Task<bool> SignUserOut(Guid id);
 }

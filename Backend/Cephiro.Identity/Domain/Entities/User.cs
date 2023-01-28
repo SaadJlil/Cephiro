@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,4 +25,5 @@ public sealed class User
     // email verified, phonenumber added, phonenumber verified, image added, description added, has creditcard
     // the regularization stage impacts the features a user can access and the visibility of his listings
     [Column("regularization_stage")] [Range(0, 6)]    public int RegularizationStage { get; set; } = 0;
+    [Column(name: "status", TypeName = "smallint")]   public int ActivityStatus { get; set; }
 }
