@@ -15,13 +15,10 @@ namespace Cephiro.Identity.Infrastructure.Accessor;
 
 public sealed class UserAccess: IUserAccess 
 {
-    private readonly IdentityDbContext _db;
     private IOptionsMonitor<DapperConfig> _settings;
-    private readonly NpgsqlConnection _connect;
 
     public UserAccess(IdentityDbContext db, IOptionsMonitor<DapperConfig> settings)
     {
-        _db = db;
         _settings = settings;
     }
 
@@ -38,7 +35,7 @@ public sealed class UserAccess: IUserAccess
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
             {
                 db.Open();
-                result = await _connect.QueryAsync<User>(query);
+                result = await db.QueryAsync<User>(query);
                 db.Close();
             }
 
@@ -66,7 +63,7 @@ public sealed class UserAccess: IUserAccess
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
             {
                 db.Open();
-                result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+                result = await db.QueryFirstOrDefaultAsync<User>(query);
                 db.Close();
             }
 
@@ -97,7 +94,7 @@ public sealed class UserAccess: IUserAccess
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
             {
                 db.Open();
-                result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+                result = await db.QueryFirstOrDefaultAsync<User>(query);
                 db.Close();
             }
 
@@ -127,7 +124,7 @@ public sealed class UserAccess: IUserAccess
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
             {
                 db.Open();
-                result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+                result = await db.QueryFirstOrDefaultAsync<User>(query);
                 db.Close();
             }
 
@@ -163,7 +160,7 @@ public sealed class UserAccess: IUserAccess
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
             {
                 db.Open();
-                result = await _connect.QueryAsync<User>(query);
+                result = await db.QueryAsync<User>(query);
                 db.Close();
             }
 
@@ -195,7 +192,7 @@ public sealed class UserAccess: IUserAccess
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
             {
                 db.Open();
-                result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+                result = await db.QueryFirstOrDefaultAsync<User>(query);
                 db.Close();
             }
 
@@ -216,44 +213,68 @@ public sealed class UserAccess: IUserAccess
 
     public async Task<UserProfileDto?> GetUserProfileByEmail(string Email, CancellationToken cancellation)
     {
-        string sqlQuery = $@"SELECT * FROM users WHERE email = @Email LIMIT 1";
+        User result;
+        try{
+            string sqlQuery = $@"SELECT * FROM users WHERE email = @Email LIMIT 1";
 
-        var query = new CommandDefinition(
-            commandText: sqlQuery, 
-            parameters: new { Email },
-            cancellationToken: cancellation);
+            var query = new CommandDefinition(
+                commandText: sqlQuery, 
+                parameters: new { Email },
+                cancellationToken: cancellation);
 
-        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+            using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
+            {
+                db.Open();
+                result = await db.QueryFirstOrDefaultAsync<User>(query);
+                db.Close();
+            }
 
-        return new UserProfileDto(
-            result.ImageUri,
-            result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
-            result.Email,
-            result.PhoneNumber ?? "",
-            result.Description ?? "",
-            result.RegularizationStage
-        );
+            return new UserProfileDto(
+                result.ImageUri,
+                result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
+                result.Email,
+                result.PhoneNumber ?? "",
+                result.Description ?? "",
+                result.RegularizationStage
+            );
+
+        }
+        catch(NpgsqlException exception){
+
+        }
+
+
     }
     public async Task<UserProfileDto?> GetUserProfileByPhone(string PhoneNumber, CancellationToken cancellation)
     {
-        string sqlQuery = $@"SELECT * FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
+        User result;
+        try{
+            string sqlQuery = $@"SELECT * FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
 
+            var query = new CommandDefinition(
+                commandText: sqlQuery, 
+                parameters: new { PhoneNumber },
+                cancellationToken: cancellation);
 
-        var query = new CommandDefinition(
-            commandText: sqlQuery, 
-            parameters: new { PhoneNumber },
-            cancellationToken: cancellation);
+            using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
+            {
+                db.Open();
+                result = await db.QueryFirstOrDefaultAsync<User>(query);
+                db.Close();
+            }
 
-        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+            return new UserProfileDto(
+                result.ImageUri,
+                result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
+                result.Email,
+                result.PhoneNumber ?? "",
+                result.Description ?? "",
+                result.RegularizationStage
+            );
 
-        return new UserProfileDto(
-            result.ImageUri,
-            result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
-            result.Email,
-            result.PhoneNumber ?? "",
-            result.Description ?? "",
-            result.RegularizationStage
-        );
-    } 
+        }
+        catch(NpgsqlException exception){
 
+        }
+   } 
 }
