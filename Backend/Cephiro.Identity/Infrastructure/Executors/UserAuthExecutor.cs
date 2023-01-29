@@ -22,15 +22,15 @@ public sealed class UserAuthExecutor : IUserAuthExecutor
         _connect.Open();
     }
 
-    public async Task<bool> RegisterNewUser(User user)
+    public async Task<bool> RegisterNewUser(User user, CancellationToken cancellation)
     {
         int result;
 
         try
         {
             _db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
-            await _db.AddAsync(user);
-            result = await _db.SaveChangesAsync();
+            await _db.AddAsync(user, cancellation);
+            result = await _db.SaveChangesAsync(cancellation);
             
         } 
 
@@ -43,30 +43,42 @@ public sealed class UserAuthExecutor : IUserAuthExecutor
         return result > 0;
     }
 
-    public async Task<bool> SignUserIn(string email, Password password)
+    public async Task<User?> SignUserIn(string email, Password password, CancellationToken cancellation)
     {
-        string query = $@"SELECT password_hash, password_salt FROM users WHERE email_address = @email LIMIT 1";
-        var queryParams = new { email };
-        var result = await _connect.QuerySingleOrDefaultAsync<(byte[] passwordHash, byte[] passwordSalt)>(query, queryParams);
+        string sqlQuery = $@"SELECT * FROM users WHERE email_address = @email LIMIT 1";
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            parameters: new { email }, 
+            cancellationToken: cancellation);
+
+        var result = await _connect.QuerySingleOrDefaultAsync<User>(query);
         
-        var passwordHash = result.passwordHash;
-        var passwordSalt = result.passwordSalt;
+        var passwordHash = result.PasswordHash!;
+        var passwordSalt = result.PasswordSalt!;
 
         if(!PasswordHashProvider.VerifyPassword(password.Value, passwordHash, passwordSalt))
-            return false;
+            return null;
 
-        string command = $@"UPDATE users SET status = @status WHERE email_address = @email LIMIT 1";
+        string sqlCmd = $@"UPDATE users SET status = @status WHERE email_address = @email LIMIT 1";
         var cmdParams = new { status = (int)Activity.ACTIVE, email };
-        await _connect.ExecuteAsync(command, cmdParams);
+        var cmd = new CommandDefinition(
+            commandText: sqlCmd,
+            parameters: cmdParams,
+            cancellationToken: cancellation
+        );
+        await _connect.ExecuteAsync(cmd);
 
-        return true;
+        return result;
     }
 
-    public async Task<bool> SignUserOut(Guid id)
+    public async Task<bool> SignUserOut(Guid id, CancellationToken cancellation)
     {
-        string command = $@"UPDATE users SET status = @status WHERE id = @id LIMIT 1";
-        var cmdParams = new { status = (int)Activity.DISCONNECTED, id };
-        await _connect.ExecuteAsync(command, cmdParams);
+        string sql = $@"UPDATE users SET status = @status WHERE id = @id LIMIT 1";
+        var param = new { status = (int)Activity.DISCONNECTED, id };
+
+        var cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: cancellation);
+        
+        await _connect.ExecuteAsync(cmd);
 
         return true;
     }
