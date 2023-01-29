@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {}
+    "/home/azureuser/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {}
   },
   "projects": {
-    "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {
+    "/home/azureuser/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
+        "projectUniqueName": "/home/azureuser/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
         "projectName": "Cephiro.Identity",
-        "projectPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
-        "packagesPath": "/home/arkena/.nuget/packages/",
-        "outputPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/",
+        "projectPath": "/home/azureuser/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
+        "packagesPath": "/home/azureuser/.nuget/packages/",
+        "outputPath": "/home/azureuser/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/arkena/.nuget/NuGet/NuGet.Config"
+          "/home/azureuser/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
