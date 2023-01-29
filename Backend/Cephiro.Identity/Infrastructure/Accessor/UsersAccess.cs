@@ -4,41 +4,60 @@ using Cephiro.Identity.Queries.IAccessor;
 using Cephiro.Identity.Infrastructure.Data;
 using Cephiro.Identity.Queries.utils;
 using Microsoft.EntityFrameworkCore;
+using Dapper;
+using Npgsql;
+using Microsoft.Extensions.Options;
+
+
+
 
 namespace Cephiro.Identity.Infrastructure.Accessor;
 
 public sealed class UserAccess: IUserAccess 
 {
     private readonly IdentityDbContext _db;
+    private readonly NpgsqlConnection _connect;
 
-    public UserAccess(IdentityDbContext db)
+    public UserAccess(IdentityDbContext db, IOptionsMonitor<DapperConfig> settings)
     {
         _db = db;
+        _connect = new NpgsqlConnection(settings.CurrentValue.IdentityConnection);
+        _connect.Open();
+
     }
 
-    public async Task<IEnumerable<UserIdentityInfoDto?>> GetAllUsersInfo()
+    public async Task<IEnumerable<UserIdentityInfoDto?>> GetAllUsersInfo(CancellationToken cancellation)
     {
-       return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(
-        x => new UserIdentityInfoDto(
-            x.Id,
-            x.FirstName,
-            x.Email
-       )).ToListAsync();
+        string sqlQuery = $@"SELECT * FROM users";
+
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            cancellationToken: cancellation);
+
+        var result = await _connect.QueryAsync<User>(query);
+
+        return (IEnumerable<UserIdentityInfoDto?>)result;
     }
-    public async Task<UserIdentityInfoDto?> GetUserInfoById(Guid Id)
+    public async Task<UserIdentityInfoDto?> GetUserInfoById(Guid Id, CancellationToken cancellation)
     {
-        return await _db.Users.Where(
-            x => x.Id == Id
-        ).Select(
-            x => new UserIdentityInfoDto(
-                x.Id,
-                x.FirstName,
-                x.Email
-            )
-        ).FirstOrDefaultAsync();
+
+        string sqlQuery = $@"SELECT * FROM users WHERE id = @Id LIMIT 1";
+
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            parameters: new { Id },
+            cancellationToken: cancellation);
+
+        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+
+        return new UserIdentityInfoDto(
+            Id: result.Id,
+            FirstName: result.FirstName,
+            Email: result.Email
+        );
     }
 
-    public async Task<UserIdentityInfoDto?> GetUserInfoByEmail(string Email)
+    public async Task<UserIdentityInfoDto?> GetUserInfoByEmail(string Email, CancellationToken cancellation)
     {
         return await _db.Users.Where(
             x => x.Email == Email
@@ -50,7 +69,7 @@ public sealed class UserAccess: IUserAccess
             )
         ).FirstOrDefaultAsync();
     }
-    public async Task<UserIdentityInfoDto?> GetUserInfoByPhone(string PhoneNumber)
+    public async Task<UserIdentityInfoDto?> GetUserInfoByPhone(string PhoneNumber, CancellationToken cancellation)
     {
         return await _db.Users.Where(
             x => x.PhoneNumber == PhoneNumber
@@ -68,7 +87,7 @@ public sealed class UserAccess: IUserAccess
 
 
     //Profile
-    public async Task<IEnumerable<UserProfileDto?>> GetAllUsersProfile()
+    public async Task<IEnumerable<UserProfileDto?>> GetAllUsersProfile(CancellationToken cancellation)
     {
        return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(
         x => new UserProfileDto(
@@ -80,7 +99,7 @@ public sealed class UserAccess: IUserAccess
             x.RegularizationStage
        )).ToListAsync();
     }
-    public async Task<UserProfileDto?> GetUserProfileById(Guid Id)
+    public async Task<UserProfileDto?> GetUserProfileById(Guid Id, CancellationToken cancellation)
     {
         return await _db.Users.Where(
             x => x.Id == Id
@@ -97,7 +116,7 @@ public sealed class UserAccess: IUserAccess
         ).FirstOrDefaultAsync();
     }
 
-    public async Task<UserProfileDto?> GetUserProfileByEmail(string Email)
+    public async Task<UserProfileDto?> GetUserProfileByEmail(string Email, CancellationToken cancellation)
     {
         return await _db.Users.Where(
             x => x.Email == Email
@@ -112,7 +131,7 @@ public sealed class UserAccess: IUserAccess
             )
         ).FirstOrDefaultAsync();
     }
-    public async Task<UserProfileDto?> GetUserProfileByPhone(string PhoneNumber)
+    public async Task<UserProfileDto?> GetUserProfileByPhone(string PhoneNumber, CancellationToken cancellation)
     {
         return await _db.Users.Where(
             x => x.PhoneNumber == PhoneNumber
