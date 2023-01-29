@@ -16,31 +16,41 @@ namespace Cephiro.Identity.Infrastructure.Accessor;
 public sealed class UserAccess: IUserAccess 
 {
     private readonly IdentityDbContext _db;
+    private IOptionsMonitor<DapperConfig> _settings;
     private readonly NpgsqlConnection _connect;
 
     public UserAccess(IdentityDbContext db, IOptionsMonitor<DapperConfig> settings)
     {
         _db = db;
-        _connect = new NpgsqlConnection(settings.CurrentValue.IdentityConnection);
-        _connect.Open();
-
+        _settings = settings;
     }
 
     public async Task<IEnumerable<UserIdentityInfoDto?>> GetAllUsersInfo(CancellationToken cancellation)
     {
-        string sqlQuery = $@"SELECT * FROM users";
+        IEnumerable<User> result;
+        try{
+            string sqlQuery = $@"SELECT * FROM users";
 
-        var query = new CommandDefinition(
-            commandText: sqlQuery, 
-            cancellationToken: cancellation);
+            var query = new CommandDefinition(
+                commandText: sqlQuery, 
+                cancellationToken: cancellation);
 
-        var result = await _connect.QueryAsync<User>(query);
+            using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
+            {
+                db.Open();
+                result = await _connect.QueryAsync<User>(query);
+                db.Close();
+            }
 
-        return result.Select(x => new UserIdentityInfoDto(
-            Id: x.Id,
-            FirstName: x.FirstName,
-            Email: x.Email
-        ));
+            return result.Select(x => new UserIdentityInfoDto(
+                Id: x.Id,
+                FirstName: x.FirstName,
+                Email: x.Email
+            ));
+        }
+        catch(NpgsqlException exception){
+
+        }
     }
     public async Task<UserIdentityInfoDto?> GetUserInfoById(Guid Id, CancellationToken cancellation)
     {
@@ -80,20 +90,25 @@ public sealed class UserAccess: IUserAccess
     }
     public async Task<UserIdentityInfoDto?> GetUserInfoByPhone(string PhoneNumber, CancellationToken cancellation)
     {
-        string sqlQuery = $@"SELECT * FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
+        try{
+            string sqlQuery = $@"SELECT * FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
 
-        var query = new CommandDefinition(
-            commandText: sqlQuery, 
-            parameters: new { PhoneNumber },
-            cancellationToken: cancellation);
+            var query = new CommandDefinition(
+                commandText: sqlQuery, 
+                parameters: new { PhoneNumber },
+                cancellationToken: cancellation);
 
-        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+            var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
 
-        return new UserIdentityInfoDto(
-            Id: result.Id,
-            FirstName: result.FirstName,
-            Email: result.Email
-        );
+            return new UserIdentityInfoDto(
+                Id: result.Id,
+                FirstName: result.FirstName,
+                Email: result.Email
+            );
+        }
+        catch(NpgsqlException){
+
+        }
 
     }
 
