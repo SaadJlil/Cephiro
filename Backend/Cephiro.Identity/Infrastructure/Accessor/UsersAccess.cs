@@ -36,7 +36,11 @@ public sealed class UserAccess: IUserAccess
 
         var result = await _connect.QueryAsync<User>(query);
 
-        return (IEnumerable<UserIdentityInfoDto?>)result;
+        return result.Select(x => new UserIdentityInfoDto(
+            Id: x.Id,
+            FirstName: x.FirstName,
+            Email: x.Email
+        ));
     }
     public async Task<UserIdentityInfoDto?> GetUserInfoById(Guid Id, CancellationToken cancellation)
     {
@@ -59,27 +63,38 @@ public sealed class UserAccess: IUserAccess
 
     public async Task<UserIdentityInfoDto?> GetUserInfoByEmail(string Email, CancellationToken cancellation)
     {
-        return await _db.Users.Where(
-            x => x.Email == Email
-        ).Select(
-            x => new UserIdentityInfoDto(
-                x.Id,
-                x.FirstName,
-                x.Email
-            )
-        ).FirstOrDefaultAsync();
+        string sqlQuery = $@"SELECT * FROM users WHERE email = @Email LIMIT 1";
+
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            parameters: new { Email },
+            cancellationToken: cancellation);
+
+        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+
+        return new UserIdentityInfoDto(
+            Id: result.Id,
+            FirstName: result.FirstName,
+            Email: result.Email
+        );
     }
     public async Task<UserIdentityInfoDto?> GetUserInfoByPhone(string PhoneNumber, CancellationToken cancellation)
     {
-        return await _db.Users.Where(
-            x => x.PhoneNumber == PhoneNumber
-        ).Select(
-            x => new UserIdentityInfoDto(
-                x.Id,
-                x.FirstName,
-                x.Email
-            )
-        ).FirstOrDefaultAsync();
+        string sqlQuery = $@"SELECT * FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
+
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            parameters: new { PhoneNumber },
+            cancellationToken: cancellation);
+
+        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+
+        return new UserIdentityInfoDto(
+            Id: result.Id,
+            FirstName: result.FirstName,
+            Email: result.Email
+        );
+
     }
 
 
@@ -89,62 +104,88 @@ public sealed class UserAccess: IUserAccess
     //Profile
     public async Task<IEnumerable<UserProfileDto?>> GetAllUsersProfile(CancellationToken cancellation)
     {
-       return await _db.Users.OrderByDescending(x => x.RegularizationStage).Select(
-        x => new UserProfileDto(
+
+        string sqlQuery = $@"SELECT * FROM users";
+
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            cancellationToken: cancellation
+        );
+
+        var result = await _connect.QueryAsync<User>(query);
+
+        return result.Select(x => new UserProfileDto(
             x.ImageUri,
             x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
             x.Email,
             x.PhoneNumber ?? "",
             x.Description ?? "",
             x.RegularizationStage
-       )).ToListAsync();
+        ));
     }
     public async Task<UserProfileDto?> GetUserProfileById(Guid Id, CancellationToken cancellation)
     {
-        return await _db.Users.Where(
-            x => x.Id == Id
-        ).Select(
-            x => new UserProfileDto(
-                x.ImageUri,
-                x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
-                x.Email,
-                x.PhoneNumber ?? "",
-                x.Description ?? "",
-                x.RegularizationStage
 
-            )
-        ).FirstOrDefaultAsync();
+        string sqlQuery = $@"SELECT * FROM users WHERE id = @Id LIMIT 1";
+
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            parameters: new { Id },
+            cancellationToken: cancellation);
+
+        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+
+        return new UserProfileDto(
+            result.ImageUri,
+            result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
+            result.Email,
+            result.PhoneNumber ?? "",
+            result.Description ?? "",
+            result.RegularizationStage
+        );
+
     }
 
     public async Task<UserProfileDto?> GetUserProfileByEmail(string Email, CancellationToken cancellation)
     {
-        return await _db.Users.Where(
-            x => x.Email == Email
-        ).Select(
-            x => new UserProfileDto(
-                x.ImageUri,
-                x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
-                x.Email,
-                x.PhoneNumber ?? "",
-                x.Description ?? "",
-                x.RegularizationStage
-            )
-        ).FirstOrDefaultAsync();
+        string sqlQuery = $@"SELECT * FROM users WHERE email = @Email LIMIT 1";
+
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            parameters: new { Email },
+            cancellationToken: cancellation);
+
+        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+
+        return new UserProfileDto(
+            result.ImageUri,
+            result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
+            result.Email,
+            result.PhoneNumber ?? "",
+            result.Description ?? "",
+            result.RegularizationStage
+        );
     }
     public async Task<UserProfileDto?> GetUserProfileByPhone(string PhoneNumber, CancellationToken cancellation)
     {
-        return await _db.Users.Where(
-            x => x.PhoneNumber == PhoneNumber
-        ).Select(
-            x => new UserProfileDto(
-                x.ImageUri,
-                x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
-                x.Email,
-                x.PhoneNumber ?? "",
-                x.Description ?? "",
-                x.RegularizationStage
-            )
-        ).FirstOrDefaultAsync();
-    }
+        string sqlQuery = $@"SELECT * FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
+
+
+        var query = new CommandDefinition(
+            commandText: sqlQuery, 
+            parameters: new { PhoneNumber },
+            cancellationToken: cancellation);
+
+        var result = await _connect.QueryFirstOrDefaultAsync<User>(query);
+
+        return new UserProfileDto(
+            result.ImageUri,
+            result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
+            result.Email,
+            result.PhoneNumber ?? "",
+            result.Description ?? "",
+            result.RegularizationStage
+        );
+    } 
 
 }
