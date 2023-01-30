@@ -16,6 +16,8 @@ namespace Cephiro.Identity.Infrastructure.Accessor;
 public sealed class UserAccess: IUserAccess 
 {
     private IOptionsMonitor<DapperConfig> _settings;
+    private string Profilesql = "image_uri, first_name, middle_name, last_name, phone_number, description, regularization_stage";
+    private string Infosql = "id, first_name, email";
 
     public UserAccess(IdentityDbContext db, IOptionsMonitor<DapperConfig> settings)
     {
@@ -26,10 +28,11 @@ public sealed class UserAccess: IUserAccess
     {
         IEnumerable<User> result;
         try{
-            string sqlQuery = $@"SELECT * FROM users";
+            string sqlQuery = $@"SELECT @Infosql FROM users";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
+                parameters: new { Infosql },
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
@@ -53,11 +56,11 @@ public sealed class UserAccess: IUserAccess
     {
         User result;
         try{
-            string sqlQuery = $@"SELECT * FROM users WHERE id = @Id LIMIT 1";
+            string sqlQuery = $@"SELECT @Infosql FROM users WHERE id = @Id LIMIT 1";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
-                parameters: new { Id },
+                parameters: new { Infosql, Id },
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
@@ -84,11 +87,11 @@ public sealed class UserAccess: IUserAccess
     {
         User result;
         try{
-            string sqlQuery = $@"SELECT * FROM users WHERE email = @Email LIMIT 1";
+            string sqlQuery = $@"SELECT @Infosql FROM users WHERE email = @Email LIMIT 1";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
-                parameters: new { Email },
+                parameters: new { Infosql, Email },
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
@@ -114,11 +117,11 @@ public sealed class UserAccess: IUserAccess
     {
         User result;
         try{
-            string sqlQuery = $@"SELECT * FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
+            string sqlQuery = $@"SELECT @Infosql FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
-                parameters: new { PhoneNumber },
+                parameters: new { Infosql, PhoneNumber },
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
@@ -151,10 +154,11 @@ public sealed class UserAccess: IUserAccess
         
         IEnumerable<User> result;
         try{
-            string sqlQuery = $@"SELECT * FROM users";
+            string sqlQuery = $@"SELECT @Profilesql FROM users";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
+                parameters: new {Profilesql},
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
@@ -182,11 +186,11 @@ public sealed class UserAccess: IUserAccess
     {
         User result;
         try{
-            string sqlQuery = $@"SELECT * FROM users WHERE id = @Id LIMIT 1";
+            string sqlQuery = $@"SELECT @Profilesql FROM users WHERE id = @Id LIMIT 1";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
-                parameters: new { Id },
+                parameters: new { Profilesql, Id },
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
@@ -215,11 +219,11 @@ public sealed class UserAccess: IUserAccess
     {
         User result;
         try{
-            string sqlQuery = $@"SELECT * FROM users WHERE email = @Email LIMIT 1";
+            string sqlQuery = $@"SELECT @Profilesql FROM users WHERE email = @Email LIMIT 1";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
-                parameters: new { Email },
+                parameters: new { Profilesql , Email },
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
@@ -249,11 +253,11 @@ public sealed class UserAccess: IUserAccess
     {
         User result;
         try{
-            string sqlQuery = $@"SELECT * FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
+            string sqlQuery = $@"SELECT @Profilesql FROM users WHERE phone_number = @PhoneNumber LIMIT 1";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
-                parameters: new { PhoneNumber },
+                parameters: new { Profilesql, PhoneNumber },
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
