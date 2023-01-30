@@ -18,21 +18,26 @@ public sealed class UserAccess: IUserAccess
     private IOptionsMonitor<DapperConfig> _settings;
     private string Profilesql = "image_uri, first_name, middle_name, last_name, phone_number, description, regularization_stage";
     private string Infosql = "id, first_name, email";
+    private int rows_per_page;
 
-    public UserAccess(IdentityDbContext db, IOptionsMonitor<DapperConfig> settings)
+    public UserAccess(IdentityDbContext db, int rows, IOptionsMonitor<DapperConfig> settings)
     {
         _settings = settings;
+        rows_per_page = rows;
     }
 
-    public async Task<IEnumerable<UserIdentityInfoDto?>> GetAllUsersInfo(CancellationToken cancellation)
+    public async Task<IEnumerable<UserIdentityInfoDto?>> GetAllUsersInfo(int page, CancellationToken cancellation)
     {
         IEnumerable<User> result;
+        var frompage = (page-1)*rows_per_page;
+        var topage = page*rows_per_page;
         try{
-            string sqlQuery = $@"SELECT @Infosql FROM users";
+
+            string sqlQuery = $@"SELECT @Infosql FROM users ORDER BY regularization_stage DESC LIMIT @frompage, @topage";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
-                parameters: new { Infosql },
+                parameters: new { Infosql, frompage, topage},
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
@@ -149,16 +154,18 @@ public sealed class UserAccess: IUserAccess
 
 
     //Profile
-    public async Task<IEnumerable<UserProfileDto?>> GetAllUsersProfile(CancellationToken cancellation)
+    public async Task<IEnumerable<UserProfileDto?>> GetAllUsersProfile(int page, CancellationToken cancellation)
     {
         
         IEnumerable<User> result;
+        var frompage = (page-1)*rows_per_page;
+        var topage = page*rows_per_page;
         try{
-            string sqlQuery = $@"SELECT @Profilesql FROM users";
+            string sqlQuery = $@"SELECT @Profilesql FROM users ORDER BY regularization_stage DESC LIMIT @frompage, @topage";
 
             var query = new CommandDefinition(
                 commandText: sqlQuery, 
-                parameters: new {Profilesql},
+                parameters: new {Profilesql, frompage, topage},
                 cancellationToken: cancellation);
 
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
