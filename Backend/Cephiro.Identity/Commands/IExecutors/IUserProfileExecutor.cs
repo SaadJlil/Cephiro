@@ -1,11 +1,10 @@
-using Cephiro.Identity.Domain.ValueObjects;
+using ErrorOr;
 
 namespace Cephiro.Identity.Commands.IExecutors;
 
 public interface IUserProfileExecutor
 {
-    public Task<bool> ChangeUserPassword(Guid id, Password oldPass, Password newPass);
-    public Task<bool> UpdateUserPhoneNumber(Guid id, string phonenumber);
-    public Task<bool> UpdateUserImage(Guid id, Uri imageUri);
-    public Task<bool> UpdateDescription(Guid id, string description);
+    public Task<ErrorOr<bool>> UpdateUserPhoneNumber(Guid id, string phonenumber, CancellationToken token);
+    public Task<ErrorOr<bool>> UpdateUserImage(Guid id, Uri imageUri, CancellationToken token);
+    public Task<ErrorOr<bool>> UpdateDescription(Guid id, string description, CancellationToken token);
 }

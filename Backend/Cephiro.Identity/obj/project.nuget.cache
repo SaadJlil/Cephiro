@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "uXdHcrT2tJWHBR18S17z62zW5IcO9YnUTmL6rUkBJDxzDbUmnnSL48DIRcXPoP3sdWs2Keb87VkgAmqTO0vTIA==",
+  "dgSpecHash": "eTXB9Is/AWjHzToeZAc4AstMeMByB7t61GKU9G9QGkLerQIpbqfVyOkCZCPwBx3y91hSxzUiN4iwRKotW5jIqA==",
   "success": true,
   "projectFilePath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
   "expectedPackageFiles": [
     "/home/arkena/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
+    "/home/arkena/.nuget/packages/erroror/1.2.1/erroror.1.2.1.nupkg.sha512",
     "/home/arkena/.nuget/packages/libphonenumber-csharp/8.13.4/libphonenumber-csharp.8.13.4.nupkg.sha512",
     "/home/arkena/.nuget/packages/masstransit/8.0.12/masstransit.8.0.12.nupkg.sha512",
     "/home/arkena/.nuget/packages/masstransit.abstractions/8.0.12/masstransit.abstractions.8.0.12.nupkg.sha512",

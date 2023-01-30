@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Cephiro.Identity.Domain.Entities;
 using Cephiro.Identity.Domain.ValueObjects;
 
-namespace Cephiro.Identity.Contracts.Request;
+namespace Cephiro.Identity.Contracts.Request.Authentication;
 
 public sealed record UserRegistrationRequest
 {

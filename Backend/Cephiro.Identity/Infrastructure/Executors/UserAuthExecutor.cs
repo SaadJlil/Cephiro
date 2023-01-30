@@ -5,6 +5,7 @@ using Cephiro.Identity.Domain.Enum;
 using Cephiro.Identity.Domain.ValueObjects;
 using Cephiro.Identity.Infrastructure.Data;
 using Dapper;
+using ErrorOr;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Npgsql;
@@ -13,26 +14,30 @@ namespace Cephiro.Identity.Infrastructure.Executors;
 
 public sealed class UserAuthExecutor : IUserAuthExecutor
 {
-    private readonly NpgsqlConnection _connect;
+    private readonly IOptionsMonitor<DapperConfig> _settings;
     private readonly IdentityDbContext _db;
     public UserAuthExecutor(IdentityDbContext db, IOptionsMonitor<DapperConfig> settings)
     {
         _db = db;
-        _connect = new NpgsqlConnection(settings.CurrentValue.IdentityConnection);
-        _connect.Open();
+        _settings = settings;
     }
 
-    public async Task<bool> RegisterNewUser(User user, CancellationToken cancellation)
+    public async Task<ErrorOr<bool>> RegisterNewUser(User user, CancellationToken token)
     {
         int result;
 
         try
         {
             _db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
-            await _db.AddAsync(user, cancellation);
-            result = await _db.SaveChangesAsync(cancellation);
+            await _db.AddAsync(user, token);
+            result = await _db.SaveChangesAsync(token);
             
         } 
+
+        catch (DbUpdateException exception)
+        {
+            return Error.Failure(exception.Message);
+        }
 
         finally
         {
@@ -43,43 +48,58 @@ public sealed class UserAuthExecutor : IUserAuthExecutor
         return result > 0;
     }
 
-    public async Task<User?> SignUserIn(string email, Password password, CancellationToken cancellation)
+    public async Task<ErrorOr<bool>> UpdateUserStatus(Guid id, Activity status, CancellationToken token)
     {
-        string sqlQuery = $@"SELECT * FROM users WHERE email_address = @email LIMIT 1";
-        var query = new CommandDefinition(
-            commandText: sqlQuery, 
-            parameters: new { email }, 
-            cancellationToken: cancellation);
 
-        var result = await _connect.QuerySingleOrDefaultAsync<User>(query);
-        
-        var passwordHash = result.PasswordHash!;
-        var passwordSalt = result.PasswordSalt!;
+        string sqlCmd = $@"UPDATE users SET status = @status WHERE id = @id LIMIT 1";
+        var cmdParams = new { status, id };
 
-        if(!PasswordHashProvider.VerifyPassword(password.Value, passwordHash, passwordSalt))
-            return null;
+        var cmd = new CommandDefinition(commandText: sqlCmd, parameters: cmdParams, cancellationToken: token);
+        int result = 0;
 
-        string sqlCmd = $@"UPDATE users SET status = @status WHERE email_address = @email LIMIT 1";
-        var cmdParams = new { status = (int)Activity.ACTIVE, email };
-        var cmd = new CommandDefinition(
-            commandText: sqlCmd,
-            parameters: cmdParams,
-            cancellationToken: cancellation
-        );
-        await _connect.ExecuteAsync(cmd);
+        try
+        {
+            using NpgsqlConnection db = new(_settings.CurrentValue.IdentityConnection);
+            db.Open();
+            await db.ExecuteAsync(cmd);
+            db.Close();
+        }
 
-        return result;
+        catch(NpgsqlException exception)
+        {
+            return Error.Failure(exception.Message);
+        }
+
+        return result > 0;
     }
 
-    public async Task<bool> SignUserOut(Guid id, CancellationToken cancellation)
+
+    public async Task<ErrorOr<bool>> ChangeUserPassword(Guid id, byte[] passwordHash, byte[] passwordSalt, CancellationToken token)
     {
-        string sql = $@"UPDATE users SET status = @status WHERE id = @id LIMIT 1";
-        var param = new { status = (int)Activity.DISCONNECTED, id };
+        string sql = $@"
+            UPDATE users 
+            SET password_hash = @newHash
+            SET password_salt = @newSalt 
+            FROM users WHERE id = @id LIMIT 1";
 
-        var cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: cancellation);
-        
-        await _connect.ExecuteAsync(cmd);
+        var param = new { newHash = passwordHash, newSalt = passwordSalt, id};
+        var cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: token);
+        int result = 0;
 
-        return true;
+        try
+        {
+            using NpgsqlConnection db = new(_settings.CurrentValue.IdentityConnection);
+            db.Open();
+            result = await db.ExecuteAsync(cmd);
+            db.Close();
+        }
+
+        catch(NpgsqlException exception)
+        {
+            return Error.Failure(exception.Message);
+        }
+
+        return result > 0;
     }
+
 }
