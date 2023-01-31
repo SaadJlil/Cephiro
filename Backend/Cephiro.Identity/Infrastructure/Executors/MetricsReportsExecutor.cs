@@ -1,4 +1,5 @@
 using Cephiro.Identity.Commands.IExecutors;
+using Cephiro.Identity.Domain.Entities;
 using Cephiro.Identity.Infrastructure.Data;
 using Dapper;
 using ErrorOr;
@@ -7,25 +8,19 @@ using Npgsql;
 
 namespace Cephiro.Identity.Infrastructure.Executors;
 
-public sealed class UserProfileExecutor : IUserProfileExecutor
+public sealed class MetricsReportsExecutor : IMetricsReportsExecutor
 {
     private readonly IOptionsMonitor<DapperConfig> _settings;
-    public UserProfileExecutor(IOptionsMonitor<DapperConfig> settings)
+    public MetricsReportsExecutor(IOptionsMonitor<DapperConfig> settings)
     {
         _settings = settings;
     }
-
-    public async Task<ErrorOr<bool>> UpdateDescription(Guid id, string description, CancellationToken token)
+    
+    public async Task<ErrorOr<bool>> DecrementUnverifiedUserCount(CancellationToken token)
     {
-        string sql = $@"
-            UPDATE users 
-            SET description = @description
-            FROM users WHERE id = @id LIMIT 1";
-
-        var param = new { description, id };
-
-        var cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: token);
         int result = 0;
+        string sql = $@"UPDATE metrics SET unverified_user_count = unverified_user_count - 1";
+        CommandDefinition cmd = new(commandText: sql, cancellationToken: token);
 
         try
         {
@@ -43,17 +38,15 @@ public sealed class UserProfileExecutor : IUserProfileExecutor
         return result > 0;
     }
 
-    public async Task<ErrorOr<bool>> UpdateUserImage(Guid id, Uri imageUri, CancellationToken token)
+    public async Task<ErrorOr<bool>> UpdateActiveUserCount(bool increment, CancellationToken token)
     {
-        string sql = $@"
-            UPDATE users 
-            SET image_uri = @imageUri
-            FROM users WHERE id = @id LIMIT 1";
-
-        var param = new { imageUri = imageUri.LocalPath, id};
-
-        CommandDefinition cmd = new(commandText: sql, parameters: param, cancellationToken: token);
         int result = 0;
+        string sql;
+
+        if(increment) sql = $@"Update metrics SET active_user_count = active_user_count + 1";
+        else sql = $@"UPDATE metrics SET active_user_count = active_user_count - 1";
+        
+        CommandDefinition cmd = new(sql, cancellationToken: token);
 
         try
         {
@@ -71,17 +64,15 @@ public sealed class UserProfileExecutor : IUserProfileExecutor
         return result > 0;
     }
 
-    public async Task<ErrorOr<bool>> UpdateUserPhoneNumber(Guid id, string phonenumber, CancellationToken token)
+    public async Task<ErrorOr<bool>> UpdateUserCount(bool increment, CancellationToken token)
     {
-        string sql = $@"
-            UPDATE users 
-            SET phone_number = @phonenumber
-            FROM users WHERE id = @id LIMIT 1";
-
-        var param = new { phonenumber, id};
-
-        CommandDefinition cmd = new(commandText: sql, parameters: param, cancellationToken: token);
         int result = 0;
+        string sql;
+
+        if(increment) sql = $@"Update metrics SET user_count = active_user_count + 1";
+        else sql = $@"UPDATE metrics SET user_count = active_user_count - 1";
+        
+        CommandDefinition cmd = new(sql, cancellationToken: token);
 
         try
         {

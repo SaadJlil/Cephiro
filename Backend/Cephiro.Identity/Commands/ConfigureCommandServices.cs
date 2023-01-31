@@ -3,12 +3,11 @@ using Cephiro.Identity.Commands.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Cephiro.Identity.Commands;
 
-public static class ConfigureCommands
+public static class ConfigureCommandServices
 {
     public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {

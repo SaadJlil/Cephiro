@@ -23,6 +23,7 @@ public sealed class UpdatePhoneNumberHandler : IConsumer<UpdatePhoneNumberReques
             await context.RespondAsync(Error.Validation("You need to authenticate to access this feature"));
             await context.ConsumeCompleted;
         }
+        
 
         var result = await _userProfile.UpdateUserPhoneNumber(id, context.Message.NewPhoneNumber, context.CancellationToken);
         if(result.IsError)
