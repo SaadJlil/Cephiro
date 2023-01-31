@@ -1,9 +1,8 @@
 using Cephiro.Identity.Domain.Exceptions;
 using Cephiro.Identity.Domain.Entities;
-<<<<<<< HEAD
 using Cephiro.Identity.Queries.IAccessor;
 using Cephiro.Identity.Infrastructure.Data;
-using Cephiro.Identity.Queries.utils;
+using Cephiro.Identity.Contracts.Response;
 using Microsoft.EntityFrameworkCore;
 using Dapper;
 using Npgsql;
@@ -27,7 +26,7 @@ public sealed class UserAccess: IUserAccess
         rows_per_page = rows;
     }
 
-    public async Task<IEnumerable<UserIdentityInfoDto?>> GetAllUsersInfo(int page, CancellationToken cancellation)
+    public async Task<IEnumerable<UserInfoResponse?>> GetAllUsersInfo(int page, CancellationToken cancellation)
     {
         IEnumerable<User> result;
         var frompage = (page-1)*rows_per_page;
@@ -48,17 +47,19 @@ public sealed class UserAccess: IUserAccess
                 db.Close();
             }
 
-            return result.Select(x => new UserIdentityInfoDto(
-                Id: x.Id,
-                FirstName: x.FirstName,
-                Email: x.Email
-            ));
+
+            return result.Select(x => new UserInfoResponse{
+                LastName = x.LastName,
+                FirstName =  x.FirstName,
+                Email = x.Email
+            });
+            
         }
         catch(NpgsqlException exception){
 
         }
     }
-    public async Task<UserIdentityInfoDto?> GetUserInfoById(Guid Id, CancellationToken cancellation)
+    public async Task<UserInfoResponse?> GetUserInfoById(Guid Id, CancellationToken cancellation)
     {
         User result;
         try{
@@ -76,11 +77,12 @@ public sealed class UserAccess: IUserAccess
                 db.Close();
             }
 
-            return new UserIdentityInfoDto(
-                Id: result.Id,
-                FirstName: result.FirstName,
-                Email: result.Email
-            );
+            
+            return new UserInfoResponse{
+                LastName = result.LastName,
+                FirstName =  result.FirstName,
+                Email = result.Email
+            };
         }
         catch(NpgsqlException exception){
 
@@ -89,7 +91,7 @@ public sealed class UserAccess: IUserAccess
 
     }
 
-    public async Task<UserIdentityInfoDto?> GetUserInfoByEmail(string Email, CancellationToken cancellation)
+    public async Task<UserInfoResponse?> GetUserInfoByEmail(string Email, CancellationToken cancellation)
     {
         User result;
         try{
@@ -107,11 +109,11 @@ public sealed class UserAccess: IUserAccess
                 db.Close();
             }
 
-            return new UserIdentityInfoDto(
-                Id: result.Id,
-                FirstName: result.FirstName,
-                Email: result.Email
-            );
+            return new UserInfoResponse{
+                LastName = result.LastName,
+                FirstName =  result.FirstName,
+                Email = result.Email
+            };
         }
         catch(NpgsqlException exception){
 
@@ -119,7 +121,7 @@ public sealed class UserAccess: IUserAccess
 
 
     }
-    public async Task<UserIdentityInfoDto?> GetUserInfoByPhone(string PhoneNumber, CancellationToken cancellation)
+    public async Task<UserInfoResponse?> GetUserInfoByPhone(string PhoneNumber, CancellationToken cancellation)
     {
         User result;
         try{
@@ -137,11 +139,11 @@ public sealed class UserAccess: IUserAccess
                 db.Close();
             }
 
-            return new UserIdentityInfoDto(
-                Id: result.Id,
-                FirstName: result.FirstName,
-                Email: result.Email
-            );
+            return new UserInfoResponse{
+                LastName = result.LastName,
+                FirstName =  result.FirstName,
+                Email = result.Email
+            };
         }
         catch(NpgsqlException exception){
 
@@ -152,10 +154,10 @@ public sealed class UserAccess: IUserAccess
 
 
 
-
+UserProfileResponse
 
     //Profile
-    public async Task<IEnumerable<UserProfileDto?>> GetAllUsersProfile(int page, CancellationToken cancellation)
+    public async Task<IEnumerable<UserProfileResponse?>> GetAllUsersProfile(int page, CancellationToken cancellation)
     {
         
         IEnumerable<User> result;
@@ -176,21 +178,21 @@ public sealed class UserAccess: IUserAccess
                 db.Close();
             }
 
-            return result.Select(x => new UserProfileDto(
-                x.ImageUri,
-                x.MiddleName != "" ? $"{x.FirstName} {x.MiddleName} {x.LastName}" : $"{x.FirstName} {x.LastName}",
-                x.Email,
-                x.PhoneNumber ?? "",
-                x.Description ?? "",
-                x.RegularizationStage
-            ));
+            return result.Select(x => new UserProfileResponse{
+                ImageUri = x.ImageUri,
+                FirstName = x.FirstName, 
+                MiddleName = x.MiddleName,
+                LastName = x.LastName,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber 
+            });
 
        }
         catch(NpgsqlException exception){
 
         }
     }
-    public async Task<UserProfileDto?> GetUserProfileById(Guid Id, CancellationToken cancellation)
+    public async Task<UserProfileResponse?> GetUserProfileById(Guid Id, CancellationToken cancellation)
     {
         User result;
         try{
@@ -208,22 +210,23 @@ public sealed class UserAccess: IUserAccess
                 db.Close();
             }
 
-            return new UserProfileDto(
-                result.ImageUri,
-                result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
-                result.Email,
-                result.PhoneNumber ?? "",
-                result.Description ?? "",
-                result.RegularizationStage
-            );
-       }
+
+            return new UserProfileResponse{
+                ImageUri = result.ImageUri,
+                FirstName = result.FirstName, 
+                MiddleName = result.MiddleName,
+                LastName = result.LastName,
+                Email = result.Email,
+                PhoneNumber = result.PhoneNumber 
+            };
+        }
         catch(NpgsqlException exception){
 
         }
 
    }
 
-    public async Task<UserProfileDto?> GetUserProfileByEmail(string Email, CancellationToken cancellation)
+    public async Task<UserProfileResponse?> GetUserProfileByEmail(string Email, CancellationToken cancellation)
     {
         User result;
         try{
@@ -241,14 +244,14 @@ public sealed class UserAccess: IUserAccess
                 db.Close();
             }
 
-            return new UserProfileDto(
-                result.ImageUri,
-                result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
-                result.Email,
-                result.PhoneNumber ?? "",
-                result.Description ?? "",
-                result.RegularizationStage
-            );
+            return new UserProfileResponse{
+                ImageUri = result.ImageUri,
+                FirstName = result.FirstName, 
+                MiddleName = result.MiddleName,
+                LastName = result.LastName,
+                Email = result.Email,
+                PhoneNumber = result.PhoneNumber 
+            };
 
         }
         catch(NpgsqlException exception){
@@ -257,7 +260,7 @@ public sealed class UserAccess: IUserAccess
 
 
     }
-    public async Task<UserProfileDto?> GetUserProfileByPhone(string PhoneNumber, CancellationToken cancellation)
+    public async Task<UserProfileResponse?> GetUserProfileByPhone(string PhoneNumber, CancellationToken cancellation)
     {
         User result;
         try{
@@ -275,14 +278,14 @@ public sealed class UserAccess: IUserAccess
                 db.Close();
             }
 
-            return new UserProfileDto(
-                result.ImageUri,
-                result.MiddleName != "" ? $"{result.FirstName} {result.MiddleName} {result.LastName}" : $"{result.FirstName} {result.LastName}",
-                result.Email,
-                result.PhoneNumber ?? "",
-                result.Description ?? "",
-                result.RegularizationStage
-            );
+            return new UserProfileResponse{
+                ImageUri = result.ImageUri,
+                FirstName = result.FirstName, 
+                MiddleName = result.MiddleName,
+                LastName = result.LastName,
+                Email = result.Email,
+                PhoneNumber = result.PhoneNumber 
+            };
 
         }
         catch(NpgsqlException exception){
