@@ -3,10 +3,10 @@ using Cephiro.Identity.Domain.Entities;
 using Cephiro.Identity.Queries.IAccessor;
 using Cephiro.Identity.Infrastructure.Data;
 using Cephiro.Identity.Contracts.Response;
-using Microsoft.EntityFrameworkCore;
 using Dapper;
 using Npgsql;
 using Microsoft.Extensions.Options;
+using ErrorOr;
 
 
 
@@ -26,9 +26,9 @@ public sealed class UserAccess: IUserAccess
         rows_per_page = rows;
     }
 
-    public async Task<IEnumerable<UserInfoResponse?>> GetAllUsersInfo(int page, CancellationToken cancellation)
+    public async Task<ErrorOr<List<UserInfoResponse>>> GetAllUsersInfo(int page, CancellationToken cancellation)
     {
-        IEnumerable<User> result;
+        IEnumerable<User?> result;
         var frompage = (page-1)*rows_per_page;
         var topage = page*rows_per_page;
         try{
@@ -43,23 +43,23 @@ public sealed class UserAccess: IUserAccess
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
             {
                 db.Open();
-                result = await db.QueryAsync<User>(query);
+                result = await db.QueryAsync<User?>(query);
                 db.Close();
             }
-
 
             return result.Select(x => new UserInfoResponse{
                 LastName = x.LastName,
                 FirstName =  x.FirstName,
                 Email = x.Email
-            });
+            }).ToList();
+
             
         }
         catch(NpgsqlException exception){
-
+            return Error.Failure(exception.Message);
         }
     }
-    public async Task<UserInfoResponse?> GetUserInfoById(Guid Id, CancellationToken cancellation)
+    public async Task<ErrorOr<UserInfoResponse?>> GetUserInfoById(Guid Id, CancellationToken cancellation)
     {
         User result;
         try{
@@ -85,13 +85,13 @@ public sealed class UserAccess: IUserAccess
             };
         }
         catch(NpgsqlException exception){
-
+            return Error.Failure(exception.Message);
         }
 
 
     }
 
-    public async Task<UserInfoResponse?> GetUserInfoByEmail(string Email, CancellationToken cancellation)
+    public async Task<ErrorOr<UserInfoResponse>> GetUserInfoByEmail(string Email, CancellationToken cancellation)
     {
         User result;
         try{
@@ -117,11 +117,12 @@ public sealed class UserAccess: IUserAccess
         }
         catch(NpgsqlException exception){
 
+            return Error.Failure(exception.Message);
         }
 
 
     }
-    public async Task<UserInfoResponse?> GetUserInfoByPhone(string PhoneNumber, CancellationToken cancellation)
+    public async Task<ErrorOr<UserInfoResponse>> GetUserInfoByPhone(string PhoneNumber, CancellationToken cancellation)
     {
         User result;
         try{
@@ -146,6 +147,7 @@ public sealed class UserAccess: IUserAccess
             };
         }
         catch(NpgsqlException exception){
+            return Error.Failure(exception.Message);
 
         }
 
@@ -154,10 +156,9 @@ public sealed class UserAccess: IUserAccess
 
 
 
-UserProfileResponse
 
     //Profile
-    public async Task<IEnumerable<UserProfileResponse?>> GetAllUsersProfile(int page, CancellationToken cancellation)
+    public async Task<ErrorOr<List<UserProfileResponse>>> GetAllUsersProfile(int page, CancellationToken cancellation)
     {
         
         IEnumerable<User> result;
@@ -185,14 +186,14 @@ UserProfileResponse
                 LastName = x.LastName,
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber 
-            });
+            }).ToList();
 
        }
         catch(NpgsqlException exception){
-
+            return Error.Failure(exception.Message);
         }
     }
-    public async Task<UserProfileResponse?> GetUserProfileById(Guid Id, CancellationToken cancellation)
+    public async Task<ErrorOr<UserProfileResponse>> GetUserProfileById(Guid Id, CancellationToken cancellation)
     {
         User result;
         try{
@@ -221,12 +222,11 @@ UserProfileResponse
             };
         }
         catch(NpgsqlException exception){
-
+            return Error.Failure(exception.Message);
         }
-
    }
 
-    public async Task<UserProfileResponse?> GetUserProfileByEmail(string Email, CancellationToken cancellation)
+    public async Task<ErrorOr<UserProfileResponse>> GetUserProfileByEmail(string Email, CancellationToken cancellation)
     {
         User result;
         try{
@@ -255,12 +255,13 @@ UserProfileResponse
 
         }
         catch(NpgsqlException exception){
+            return Error.Failure(exception.Message);
 
         }
 
 
     }
-    public async Task<UserProfileResponse?> GetUserProfileByPhone(string PhoneNumber, CancellationToken cancellation)
+    public async Task<ErrorOr<UserProfileResponse>> GetUserProfileByPhone(string PhoneNumber, CancellationToken cancellation)
     {
         User result;
         try{
@@ -289,7 +290,7 @@ UserProfileResponse
 
         }
         catch(NpgsqlException exception){
-
+            return Error.Failure(exception.Message);
         }
    } 
 }
