@@ -15,5 +15,8 @@ public static class QueriesRegistration
         
         //Profile
         cfg.AddRequestClient<UserProfileRequest>();
+
+        //Metrics
+        cfg.AddRequestClient<UserProfileRequest>();
    }
 }
