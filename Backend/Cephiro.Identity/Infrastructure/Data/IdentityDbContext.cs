@@ -11,7 +11,7 @@ public class IdentityDbContext : DbContext
     }
 
     public required DbSet<User> Users { get; set; }
-    public required DbSet<Configuration> Configurations { get; set; }
+    public required DbSet<Metrics> Metrics { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -28,5 +28,10 @@ public class IdentityDbContext : DbContext
         modelBuilder.Entity<User>()
             .HasIndex(e => e.PhoneNumber)
             .IsUnique();
+
+        modelBuilder.Entity<Metrics>()
+            .HasIndex(e => e.Id)
+            .IsUnique();
+
     }
 }

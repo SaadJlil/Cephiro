@@ -28,7 +28,7 @@ public sealed class UserAccess: IUserAccess
 
     public async Task<ErrorOr<List<UserInfoResponse>>> GetAllUsersInfo(int page, CancellationToken cancellation)
     {
-        IEnumerable<User?> result;
+        IEnumerable<User> result;
         var frompage = (page-1)*rows_per_page;
         var topage = page*rows_per_page;
         try{
@@ -43,7 +43,7 @@ public sealed class UserAccess: IUserAccess
             using(NpgsqlConnection db = new NpgsqlConnection(_settings.CurrentValue.IdentityConnection))
             {
                 db.Open();
-                result = await db.QueryAsync<User?>(query);
+                result = await db.QueryAsync<User>(query);
                 db.Close();
             }
 
@@ -59,7 +59,7 @@ public sealed class UserAccess: IUserAccess
             return Error.Failure(exception.Message);
         }
     }
-    public async Task<ErrorOr<UserInfoResponse?>> GetUserInfoById(Guid Id, CancellationToken cancellation)
+    public async Task<ErrorOr<UserInfoResponse>> GetUserInfoById(Guid Id, CancellationToken cancellation)
     {
         User result;
         try{
