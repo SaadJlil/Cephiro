@@ -1,6 +1,6 @@
 namespace Cephiro.Identity.Contracts.Request.Metrics;
 
-public sealed class MetricsRequest 
+public sealed class UserCountRequest 
 {
     private Guid _id = Guid.Empty;
 

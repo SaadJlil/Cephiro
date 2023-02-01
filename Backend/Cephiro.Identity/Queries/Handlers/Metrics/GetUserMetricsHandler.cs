@@ -6,7 +6,7 @@ using ErrorOr;
 namespace Cephiro.Identity.Queries.Handlers.Metrics;
 
 
-public sealed class GetMetricsHandler: IConsumer<MetricsRequest>
+public sealed class GetMetricsHandler: IConsumer<UserMetricsRequest>
 {
     private readonly IMetricsAccess _metricaccess;
 
@@ -15,7 +15,7 @@ public sealed class GetMetricsHandler: IConsumer<MetricsRequest>
         _metricaccess = metricaccess;
     }
 
-    public async Task Consume(ConsumeContext<MetricsRequest> context)
+    public async Task Consume(ConsumeContext<UserMetricsRequest> context)
     {
         Guid id = context.Message.GetIdFromRequestHeaders();
 

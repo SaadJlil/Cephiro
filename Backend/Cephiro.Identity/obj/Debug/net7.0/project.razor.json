@@ -1,0 +1,20 @@
+{
+  "SerializedFilePath": "/home/azureuser/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/project.razor.json",
+  "FilePath": "/home/azureuser/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 1100
+  },
+  "RootNamespace": null,
+  "Documents": [],
+  "SerializationFormat": "0.3"
+}

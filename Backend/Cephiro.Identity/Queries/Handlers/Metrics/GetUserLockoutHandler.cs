@@ -6,7 +6,7 @@ using ErrorOr;
 namespace Cephiro.Identity.Queries.Handlers.Metrics;
 
 
-public sealed class GetUserLockoutHandler: IConsumer<MetricsRequest>
+public sealed class GetUserLockoutHandler: IConsumer<UserLockoutRequest>
 {
     private readonly IMetricsAccess _metricaccess;
 
@@ -15,7 +15,7 @@ public sealed class GetUserLockoutHandler: IConsumer<MetricsRequest>
         _metricaccess = metricaccess;
     }
 
-    public async Task Consume(ConsumeContext<MetricsRequest> context)
+    public async Task Consume(ConsumeContext<UserLockoutRequest> context)
     {
         Guid id = context.Message.GetIdFromRequestHeaders();
 
