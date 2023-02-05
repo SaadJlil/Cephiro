@@ -1,0 +1,5 @@
+/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/Debug/net7.0/Cephiro.Listings.csproj.AssemblyReference.cache
+/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/Debug/net7.0/Cephiro.Listings.GeneratedMSBuildEditorConfig.editorconfig
+/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/Debug/net7.0/Cephiro.Listings.AssemblyInfoInputs.cache
+/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/Debug/net7.0/Cephiro.Listings.AssemblyInfo.cs
+/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/Debug/net7.0/Cephiro.Listings.csproj.CoreCompileInputs.cache
