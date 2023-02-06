@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "AG3QcwzVDV4PzeKGmc4ZzuTNWu0MT00J0LiTGEQg3y4PpXxRJlQtjS6FlClFx19PVFRqHJFtxsJTY23FlNDUxw==",
+  "dgSpecHash": "p+JPzXGoXcunmtBcSUj+eWI4j0acEI71M8FijK+ly5UP341yGgF9YrdgiDVUD8urz2BSUcoh7UILzdpNhQsLqQ==",
   "success": true,
   "projectFilePath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
   "expectedPackageFiles": [
+    "/home/azureuser/.nuget/packages/geolocation/1.2.1/geolocation.1.2.1.nupkg.sha512",
     "/home/azureuser/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
     "/home/azureuser/.nuget/packages/microsoft.identitymodel.abstractions/6.26.0/microsoft.identitymodel.abstractions.6.26.0.nupkg.sha512",
     "/home/azureuser/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.26.0/microsoft.identitymodel.jsonwebtokens.6.26.0.nupkg.sha512",
