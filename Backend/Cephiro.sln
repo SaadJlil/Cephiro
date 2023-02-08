@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cephiro.Identity", "Cephiro.Identity\Cephiro.Identity.csproj", "{7B41C350-59F6-442B-8562-C10A001A45FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cephiro.Api", "Cephiro.Api\Cephiro.Api.csproj", "{8248762E-8050-4A5E-9883-6A6B033CBD85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{7B41C350-59F6-442B-8562-C10A001A45FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B41C350-59F6-442B-8562-C10A001A45FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B41C350-59F6-442B-8562-C10A001A45FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8248762E-8050-4A5E-9883-6A6B033CBD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8248762E-8050-4A5E-9883-6A6B033CBD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8248762E-8050-4A5E-9883-6A6B033CBD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8248762E-8050-4A5E-9883-6A6B033CBD85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

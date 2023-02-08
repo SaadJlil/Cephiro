@@ -21,6 +21,8 @@ public class IdentityDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasPostgresExtension("uuid-ossp");
+        
         modelBuilder.Entity<User>()
             .HasIndex(e => e.Email)
             .IsUnique();
@@ -30,10 +32,6 @@ public class IdentityDbContext : DbContext
 
         modelBuilder.Entity<User>()
             .HasIndex(e => e.PhoneNumber)
-            .IsUnique();
-
-        modelBuilder.Entity<Metrics>()
-            .HasIndex(e => e.Id)
             .IsUnique();
     }
 }

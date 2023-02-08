@@ -10,3 +10,5 @@
 /home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/refint/Cephiro.Identity.dll
 /home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.pdb
 /home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/ref/Cephiro.Identity.dll
+/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/bin/Debug/net7.0/Cephiro.Identity.runtimeconfig.json
+/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.genruntimeconfig.cache
