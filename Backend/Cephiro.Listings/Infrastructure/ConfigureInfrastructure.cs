@@ -14,6 +14,7 @@ public static class ConfigureInfrastructure
     public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
 //        services.AddDapperConnection(configuration);
+        System.Console.WriteLine("happened");
         services.AddEfDbContext(configuration);
         //services.AddWriteRepositories();
         

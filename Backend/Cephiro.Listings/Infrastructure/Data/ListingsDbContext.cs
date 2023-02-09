@@ -10,7 +10,8 @@ public class ListingsDbContext : DbContext
         
     }
     public required DbSet<entities.Tag> Tag { get; set; }
-    public required DbSet<entities.Listings> Listings { get; set; }
+    public required DbSet<entities.Listings> Listing { get; set; }
+    public required DbSet<entities.Photos> Image { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -21,5 +22,7 @@ public class ListingsDbContext : DbContext
         modelBuilder.Entity<entities.Tag>()
             .HasIndex(e => e.Tag_string)
             .IsUnique();
+        modelBuilder.Entity<entities.Listings>()
+            .OwnsOne(e => e.Addresse);
    }
 }

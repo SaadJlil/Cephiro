@@ -5,10 +5,9 @@ using Cephiro.Listings.Domain.ValueObjects;
 namespace Cephiro.Listings.Domain.Entities;
 
 [Table(name: "listing", Schema = "listings")]
-public sealed class Listings
+public sealed class Listings: BaseEntity<Guid>
 {
-    [Column("id")] [Required] public Guid Id {get; set;}
-    [Column("images")] [Required] public IEnumerable<Uri>? Imageuris { get; set; }//might want to change this. But since it has little to no performance issues, it doesn't seem like problem 
+    [Column("images")] [Required] public IEnumerable<Photos>? Images { get; set; }//might want to change this. But since it has little to no performance issues, it doesn't seem like problem 
     [Column("location")] [Required] public Location? Addresse { get; set; }
     [Column("description")] [MaxLength(500)] public string? Description { get; set; }
 
