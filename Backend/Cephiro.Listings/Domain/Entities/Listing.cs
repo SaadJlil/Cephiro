@@ -4,7 +4,7 @@ using Cephiro.Listings.Domain.ValueObjects;
 
 namespace Cephiro.Listings.Domain.Entities;
 
-[Table(name: "listing", Schema = "listings")]
+[Table(name: "listing")]
 public sealed class Listings: BaseEntity<Guid>
 {
     [Column("images")] [Required] public IEnumerable<Photos>? Images { get; set; }//might want to change this. But since it has little to no performance issues, it doesn't seem like problem 
