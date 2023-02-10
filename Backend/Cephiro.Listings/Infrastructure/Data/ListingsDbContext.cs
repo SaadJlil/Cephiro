@@ -24,5 +24,5 @@ public class ListingsDbContext : DbContext
             .IsUnique();
         modelBuilder.Entity<entities.Listings>()
             .OwnsOne(e => e.Addresse);
-   }
+    }
 }
