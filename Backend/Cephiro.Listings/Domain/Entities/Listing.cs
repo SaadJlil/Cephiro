@@ -17,7 +17,7 @@ public sealed class Listings: BaseEntity<Guid>
     [Column("number_reserved_days")] public int Number_reserved_days { get; set; } = 0;
     [Column("creation_date")] [Required] public DateTime Creation_date { get; set; }
     [Column("tags")] public IEnumerable<Tag>? Tags { get; set; }
-    [Column("average_stars")] public float Average_stars { get; set; }
+    [Column("average_stars")] public float Average_stars { get; set; } = 0;
  //   [Column("user")] public Users User{ get; set; }
     [Column("Name")] [MaxLength(70)] [Required] public string? Name { get; set; }
 }

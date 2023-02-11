@@ -21,9 +21,20 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
 
     public async Task Consume(ConsumeContext<CreationRequest> context)
     {
-        Error error = new() {Code = 400, Message = ""};
-        CreationResponse erro
+        CreationResponse result = new () {IsError = false, Error = null};
 
+        var response = await _catalogRepository.CreateListing(context.Message, context.CancellationToken); 
+
+        if(response.Error is null)
+        {
+            await context.RespondAsync<CreationResponse>(result);
+            return;
+        }
+
+        result.Error = response.Error;
+        result.IsError = true;
+        await context.RespondAsync<CreationResponse>(result);
+        return;
     }
 
 }
