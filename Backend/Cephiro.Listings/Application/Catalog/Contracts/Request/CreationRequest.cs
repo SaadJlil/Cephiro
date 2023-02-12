@@ -14,6 +14,6 @@ public sealed class CreationRequest
     [Required] public ListingType Type { get; set; }
 
     public IEnumerable<string>? Tags { get; set; }
- //   [Column("user")] public Users User{ get; set; }
+    public required Guid UserId{ get; set; }
     [MaxLength(70)] [Required] public string? Name { get; set; }
 }

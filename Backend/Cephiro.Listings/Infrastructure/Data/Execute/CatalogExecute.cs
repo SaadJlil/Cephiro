@@ -25,7 +25,7 @@ public class CatalogExecute : ICatalogExecute
         };
         var phts = listing.Images.Select(x => new models.Photos{
             Image = x
-        });
+        }).ToList();
         models.Listings lst = new models.Listings{
             Images = phts,
             Addresse = listing.Addresse,
@@ -33,6 +33,7 @@ public class CatalogExecute : ICatalogExecute
             Price_day = listing.Price_day,
             Creation_date = DateTime.Now,
             Type = listing.Type,
+            UserId = listing.UserId,
             //Add tags later on 
             Name = listing.Name
         };
