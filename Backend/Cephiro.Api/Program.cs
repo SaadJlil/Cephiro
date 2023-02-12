@@ -1,3 +1,6 @@
+using listings_conf = Cephiro.Listings.Infrastructure;
+using Cephiro.Listings.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
