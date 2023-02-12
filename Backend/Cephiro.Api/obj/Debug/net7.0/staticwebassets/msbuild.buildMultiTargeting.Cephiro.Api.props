@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/Cephiro.Api.props" />
-</Project>
