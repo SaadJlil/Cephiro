@@ -2,6 +2,7 @@ using Cephiro.Listings.Application.Catalog.Commands;
 using Cephiro.Listings.Application.Catalog.Contracts.Request;
 using Cephiro.Listings.Application.Shared.Contracts.Internal;
 using models = Cephiro.Listings.Domain.Entities;
+using Cephiro.Listings.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -31,6 +32,7 @@ public class CatalogExecute : ICatalogExecute
             Description = listing.Description,
             Price_day = listing.Price_day,
             Creation_date = DateTime.Now,
+            Type = listing.Type,
             //Add tags later on 
             Name = listing.Name
         };
