@@ -4,6 +4,6 @@ namespace Cephiro.Listings.Domain.Entities;
 
 public class Photos: BaseEntity<Guid>
 {
-    [Required] public Listings Listing { get; set; }
-    [Required] public Uri? Image { get; set; }
+    public required Listings Listing { get; set; }
+    public required Uri? Image { get; set; }
 }

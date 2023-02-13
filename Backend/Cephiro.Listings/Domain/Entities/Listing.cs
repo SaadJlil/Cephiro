@@ -9,7 +9,7 @@ namespace Cephiro.Listings.Domain.Entities;
 [Table(name: "listing")]
 public sealed class Listings: BaseEntity<Guid>
 {
-    [Column("images")] public required List<Photos>? Images { get; set; }//might want to change this. But since it has little to no performance issues, it doesn't seem like problem 
+    [Column("images")] public List<Photos>? Images { get; set; }
     [Column("location")] public required Location? Addresse { get; set; }
     [Column("description")] [MaxLength(500)] public string? Description { get; set; }
 
@@ -21,5 +21,5 @@ public sealed class Listings: BaseEntity<Guid>
     [Column("listing_type")] public required ListingType Type { get; set; }
     [Column("average_stars")] public float Average_stars { get; set; } = 0;
     [Column("userid")] public required Guid UserId{ get; set; }
-    [Column("Name")] [MaxLength(70)] public required string? Name { get; set; }
+    [Column("Name")] [MaxLength(70)] public required string Name { get; set; }
 }

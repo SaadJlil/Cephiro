@@ -55,6 +55,14 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasColumnType("real")
                         .HasColumnName("price_day");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("listing_type");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("userid");
+
                     b.Property<int>("Views")
                         .HasColumnType("integer")
                         .HasColumnName("number_views");
@@ -71,41 +79,16 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("ListingsId")
+                    b.Property<Guid>("ListingId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ListingsId");
+                    b.HasIndex("ListingId");
 
                     b.ToTable("Image");
-                });
-
-            modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Tag", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("ListingsId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Tag_string")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("tag_string");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ListingsId");
-
-                    b.HasIndex("Tag_string")
-                        .IsUnique();
-
-                    b.ToTable("tag");
                 });
 
             modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Listings", b =>
@@ -145,29 +128,23 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                                 .HasForeignKey("ListingsId");
                         });
 
-                    b.Navigation("Addresse")
-                        .IsRequired();
+                    b.Navigation("Addresse");
                 });
 
             modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Photos", b =>
                 {
-                    b.HasOne("Cephiro.Listings.Domain.Entities.Listings", null)
+                    b.HasOne("Cephiro.Listings.Domain.Entities.Listings", "Listing")
                         .WithMany("Images")
-                        .HasForeignKey("ListingsId");
-                });
+                        .HasForeignKey("ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Tag", b =>
-                {
-                    b.HasOne("Cephiro.Listings.Domain.Entities.Listings", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("ListingsId");
+                    b.Navigation("Listing");
                 });
 
             modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Listings", b =>
                 {
                     b.Navigation("Images");
-
-                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

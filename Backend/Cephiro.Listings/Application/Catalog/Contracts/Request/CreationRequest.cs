@@ -7,13 +7,11 @@ namespace Cephiro.Listings.Application.Catalog.Contracts.Request;
 
 public sealed class CreationRequest
 {
-    [Required] public required IEnumerable<Uri> Images { get; set; }
-    [Required] public Location? Addresse { get; set; }
+    public required IEnumerable<Uri> Images { get; set; }
+    public required Location Addresse { get; set; }
     [MaxLength(500)] public string? Description { get; set; }
-    [Required] public float Price_day { get; set; }
-    [Required] public ListingType Type { get; set; }
-
-    public IEnumerable<string>? Tags { get; set; }
+    public required float Price_day { get; set; }
+    public required ListingType Type { get; set; }
     public required Guid UserId{ get; set; }
-    [MaxLength(70)] [Required] public string? Name { get; set; }
+    [MaxLength(70)] public required string Name { get; set; }
 }

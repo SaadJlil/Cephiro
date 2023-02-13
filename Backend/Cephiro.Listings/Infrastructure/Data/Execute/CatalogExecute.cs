@@ -18,16 +18,11 @@ public class CatalogExecute : ICatalogExecute
     }
     public async Task<DbWriteInternal> CreateListing(CreationRequest listing, CancellationToken token)
     {
-
         DbWriteInternal result = new() {
             ChangeCount = 0,
             Error = null
         };
-        var phts = listing.Images.Select(x => new models.Photos{
-            Image = x
-        }).ToList();
         models.Listings lst = new models.Listings{
-            Images = phts,
             Addresse = listing.Addresse,
             Description = listing.Description,
             Price_day = listing.Price_day,
@@ -37,6 +32,11 @@ public class CatalogExecute : ICatalogExecute
             //Add tags later on 
             Name = listing.Name
         };
+        var phts = listing.Images.Select(x => new models.Photos{
+            Listing = lst,
+            Image = x
+        }).ToList();
+        lst.Images = phts;
         try{
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
             await _context.Image.AddRangeAsync(phts);
