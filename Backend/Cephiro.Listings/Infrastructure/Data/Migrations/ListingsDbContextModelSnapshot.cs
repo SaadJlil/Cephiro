@@ -128,7 +128,8 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                                 .HasForeignKey("ListingsId");
                         });
 
-                    b.Navigation("Addresse");
+                    b.Navigation("Addresse")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Photos", b =>

@@ -16,10 +16,10 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    AddresseStreet = table.Column<string>(name: "Addresse_Street", type: "text", nullable: true),
-                    AddresseCountry = table.Column<string>(name: "Addresse_Country", type: "text", nullable: true),
-                    AddresseCity = table.Column<string>(name: "Addresse_City", type: "text", nullable: true),
-                    AddresseZipCode = table.Column<string>(name: "Addresse_ZipCode", type: "text", nullable: true),
+                    AddresseStreet = table.Column<string>(name: "Addresse_Street", type: "text", nullable: false),
+                    AddresseCountry = table.Column<string>(name: "Addresse_Country", type: "text", nullable: false),
+                    AddresseCity = table.Column<string>(name: "Addresse_City", type: "text", nullable: false),
+                    AddresseZipCode = table.Column<string>(name: "Addresse_ZipCode", type: "text", nullable: false),
                     AddresseLongitude = table.Column<double>(name: "Addresse_Longitude", type: "double precision", nullable: true),
                     AddresseLatitude = table.Column<double>(name: "Addresse_Latitude", type: "double precision", nullable: true),
                     description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),

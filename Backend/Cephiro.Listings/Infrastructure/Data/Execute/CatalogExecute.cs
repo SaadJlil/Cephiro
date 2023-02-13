@@ -6,14 +6,26 @@ using Cephiro.Listings.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 
+
+using Dapper;
+using ErrorOr;
+using Microsoft.Extensions.Options;
+using Npgsql;
+
+
+
+
 namespace Cephiro.Listings.Infrastructure.Data.Execute;
 
 
 public class CatalogExecute : ICatalogExecute
 {
     private readonly ListingsDbContext _context;
-    public CatalogExecute(ListingsDbContext context)
+    private readonly IOptionsMonitor<DapperConfig> _settings;
+
+    public CatalogExecute(ListingsDbContext context, IOptionsMonitor<DapperConfig> settings)
     {
+        _settings = settings;
         _context = context;
     }
     public async Task<DbWriteInternal> CreateListing(CreationRequest listing, CancellationToken token)
@@ -62,4 +74,12 @@ public class CatalogExecute : ICatalogExecute
 
         return result;
     }
+    public async Task<DbWriteInternal> UpdateListing(UpdateListingRequest Uplisting, CancellationToken token)
+    {
+        DbWriteInternal result = new() {
+            ChangeCount = 0,
+            Error = null
+        };
+
+   }
 }

@@ -10,7 +10,7 @@ namespace Cephiro.Listings.Domain.Entities;
 public sealed class Listings: BaseEntity<Guid>
 {
     [Column("images")] public List<Photos>? Images { get; set; }
-    [Column("location")] public required Location? Addresse { get; set; }
+    [Column("location")] public required Location Addresse { get; set; }
     [Column("description")] [MaxLength(500)] public string? Description { get; set; }
 
     [Column("number_views")] public int Views { get; set; } = 0;

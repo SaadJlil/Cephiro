@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cephiro.Listings.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ListingsDbContext))]
-    [Migration("20230213163855_Initial")]
+    [Migration("20230213192602_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -131,7 +131,8 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                                 .HasForeignKey("ListingsId");
                         });
 
-                    b.Navigation("Addresse");
+                    b.Navigation("Addresse")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Photos", b =>
