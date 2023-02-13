@@ -81,5 +81,62 @@ public class CatalogExecute : ICatalogExecute
             Error = null
         };
 
+        //Checking if the listing belongs to the user
+        string sql = $@"SELECT 1 FROM listing WHERE Id = @listingid AND userid = @userid LIMIT 1";
+        var param = new { Uplisting.ListingId, Uplisting.UserId};
+
+        var cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: token);
+
+        try
+        {
+            using NpgsqlConnection db = new(_settings.CurrentValue.IdentityConnection);
+            db.Open();
+            if(await db.QueryFirstOrDefaultAsync(cmd) is null)
+            {
+                result.Error = new Application.Shared.Contracts.Error{
+                    Code = 404,
+                    Message = "Listing doesn't exist or belong to the user"
+                };
+                return result;
+            }
+            db.Close();
+        }
+        catch (NpgsqlException exception)
+        {
+            result.Error = new Application.Shared.Contracts.Error{
+                Code = 404,
+                Message = exception.Message
+            };
+            return result;
+        }
+
+ 
+
+        string sql = $@"
+            UPDATE users 
+            SET phone_number = @phonenumber
+            FROM users WHERE id = @id LIMIT 1";
+
+        var param = new { phonenumber, id};
+
+        CommandDefinition cmd = new(commandText: sql, parameters: param, cancellationToken: token);
+        int result = 0;
+
+        try
+        {
+            using NpgsqlConnection db = new(_settings.CurrentValue.IdentityConnection);
+            db.Open();
+            result = await db.ExecuteAsync(cmd);
+            db.Close();
+        }
+
+        catch (NpgsqlException exception)
+        {
+            return Error.Failure(exception.Message);
+        }
+
+        return result > 0;
+
+
    }
 }
