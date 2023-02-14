@@ -15,7 +15,7 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 name: "listing",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     AddresseStreet = table.Column<string>(name: "Addresse_Street", type: "text", nullable: false),
                     AddresseCountry = table.Column<string>(name: "Addresse_Country", type: "text", nullable: false),
                     AddresseCity = table.Column<string>(name: "Addresse_City", type: "text", nullable: false),
@@ -30,29 +30,29 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                     listingtype = table.Column<int>(name: "listing_type", type: "integer", nullable: false),
                     averagestars = table.Column<float>(name: "average_stars", type: "real", nullable: false),
                     userid = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: false)
+                    name = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_listing", x => x.Id);
+                    table.PrimaryKey("PK_listing", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Image",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     ListingId = table.Column<Guid>(type: "uuid", nullable: false),
                     Image = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Image", x => x.Id);
+                    table.PrimaryKey("PK_Image", x => x.id);
                     table.ForeignKey(
                         name: "FK_Image_listing_ListingId",
                         column: x => x.ListingId,
                         principalTable: "listing",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 

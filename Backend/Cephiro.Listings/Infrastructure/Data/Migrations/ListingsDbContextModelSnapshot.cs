@@ -26,7 +26,8 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<float>("Average_stars")
                         .HasColumnType("real")
@@ -45,7 +46,7 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("character varying(70)")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<int>("Number_reserved_days")
                         .HasColumnType("integer")
@@ -76,7 +77,8 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Image")
                         .HasColumnType("text");

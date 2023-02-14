@@ -21,5 +21,5 @@ public sealed class Listings: BaseEntity<Guid>
     [Column("listing_type")] public required ListingType Type { get; set; }
     [Column("average_stars")] public float Average_stars { get; set; } = 0;
     [Column("userid")] public required Guid UserId{ get; set; }
-    [Column("Name")] [MaxLength(70)] public required string Name { get; set; }
+    [Column("name")] [MaxLength(70)] public required string Name { get; set; }
 }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cephiro.Listings.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ListingsDbContext))]
-    [Migration("20230213192602_Initial")]
+    [Migration("20230214012019_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -29,7 +29,8 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<float>("Average_stars")
                         .HasColumnType("real")
@@ -48,7 +49,7 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("character varying(70)")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<int>("Number_reserved_days")
                         .HasColumnType("integer")
@@ -79,7 +80,8 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Image")
                         .HasColumnType("text");

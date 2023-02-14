@@ -74,6 +74,9 @@ public class CatalogExecute : ICatalogExecute
 
         return result;
     }
+
+
+
     public async Task<DbWriteInternal> UpdateListing(UpdateListingRequest Uplisting, CancellationToken token)
     {
         DbWriteInternal result = new() {
@@ -110,33 +113,77 @@ public class CatalogExecute : ICatalogExecute
             return result;
         }
 
- 
+        //Update image and listing tables depending on what changes have been done 
+        var paramarray = new DynamicParameters();
+        var updatearray = new List<string>();
 
-        string sql = $@"
-            UPDATE users 
-            SET phone_number = @phonenumber
-            FROM users WHERE id = @id LIMIT 1";
 
-        var param = new { phonenumber, id};
+        if(Uplisting.Name != null) 
+            updatearray.Append($@" name = @uplistingname ");
+            paramarray.AddDynamicParams(new { uplisingname = Uplisting.Name });
+        if(Uplisting.Addresse != null)
+            updatearray.Append($@" Addresse_Street = @street ");
+            updatearray.Append($@" Addresse_Country = @country ");
+            updatearray.Append($@" Addresse_City = @city ");
+            updatearray.Append($@" Addresse_ZipCode = @zipcode ");
+            paramarray.AddDynamicParams(new { street = Uplisting.Addresse.Street });
+            paramarray.AddDynamicParams(new { country = Uplisting.Addresse.Country });
+            paramarray.AddDynamicParams(new { city = Uplisting.Addresse.City });
+            paramarray.AddDynamicParams(new { zipcode = Uplisting.Addresse.ZipCode });
+            if(Uplisting.Addresse.Latitude != null && Uplisting.Addresse.Latitude != null)
+            {
+                updatearray.Append($@" Addresse_Longitude = @longitude ");
+                updatearray.Append($@" Addresse_Latitude = @latitude ");
+                paramarray.AddDynamicParams(new { longitude = Uplisting.Addresse.Longitude });
+                paramarray.AddDynamicParams(new { latitude = Uplisting.Addresse.Latitude });
+            }
+        if(Uplisting.Description != null)
+            updatearray.Append($@" description = @desc ");
+            paramarray.AddDynamicParams(new { desc = Uplisting.Description });
+        if(Uplisting.Type != null)
+            updatearray.Append($@" listing_type = @type ");
+            paramarray.AddDynamicParams(new { type = Uplisting.Type});
+        if(Uplisting.Price_day != null)
+            updatearray.Append($@" price_day = @price ");
+            paramarray.AddDynamicParams(new { price = Uplisting.Price_day });
 
-        CommandDefinition cmd = new(commandText: sql, parameters: param, cancellationToken: token);
-        int result = 0;
+        sql = $@"
+            UPDATE listing
+            SET {updatearray.Aggregate((i, j) => i + "," + j)}
+            WHERE Id = @listingid AND userid = @userid LIMIT 1;";
+
+        if(Uplisting.Images != null) 
+        {
+
+            sql += $@" 
+                        DELETE FROM image WHERE ListingId = {Uplisting.ListingId};
+                        INSERT INTO image (Id, ListingId, Image) VALUES (@Id, @listingid, @photo)";
+
+            foreach (var image in Uplisting.Images)
+            {
+                paramarray.AddDynamicParams(new {Id = new Guid(), listingid = Uplisting.ListingId, photo = image});
+            }
+
+        }
+
+        cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: token);
 
         try
         {
             using NpgsqlConnection db = new(_settings.CurrentValue.IdentityConnection);
             db.Open();
-            result = await db.ExecuteAsync(cmd);
+            result.ChangeCount = await db.ExecuteAsync(cmd);
             db.Close();
         }
-
         catch (NpgsqlException exception)
         {
-            return Error.Failure(exception.Message);
+            result.Error = new Application.Shared.Contracts.Error{
+                Code = 404,
+                Message = exception.Message
+            };
+            return result; 
         }
 
-        return result > 0;
-
-
+        return result;
    }
 }
