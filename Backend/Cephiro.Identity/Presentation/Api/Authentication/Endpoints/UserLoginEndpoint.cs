@@ -11,7 +11,6 @@ namespace Cephiro.Identity.Presentation.Api.Authentication.Endpoints;
 public sealed class UserLoginEndpoint : EndpointBaseAsync
     .WithRequest<UserLoginRequest>
     .WithActionResult<ErrorOr<string>>
-
 {
     private readonly IRequestClient<UserLoginRequest> _login;
     public UserLoginEndpoint(IRequestClient<UserLoginRequest> login)

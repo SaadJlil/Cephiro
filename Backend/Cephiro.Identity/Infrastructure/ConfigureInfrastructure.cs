@@ -9,6 +9,7 @@ namespace Cephiro.Identity.Infrastructure;
 
 public static class ConfigureInfrastructure
 {
+    /*
     public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDapperConnection(configuration);
@@ -28,8 +29,7 @@ public static class ConfigureInfrastructure
         return services;
     }
 
-    public static IServiceCollection AddEfDbContext(this IServiceCollection services, IConfiguration configuration)
-    {
+    public static IServiceCollection AddEfDbContext(this IServiceCollection services, IConfiguration configuration)string{
         services.AddDbContextFactory<IdentityDbContext>(options => 
             options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
             .UseNpgsql(configuration.GetConnectionString("IdentityConnection"),
@@ -46,4 +46,5 @@ public static class ConfigureInfrastructure
         
         return services;
     }
+    */
 }

@@ -12,6 +12,3 @@
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/Debug/net7.0/ref/Cephiro.Listings.dll
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/bin/Debug/net7.0/Cephiro.Listings.runtimeconfig.json
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/Debug/net7.0/Cephiro.Listings.genruntimeconfig.cache
-/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/bin/Debug/net7.0/Cephiro.Identity.dll
-/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/bin/Debug/net7.0/Cephiro.Identity.pdb
-/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/Debug/net7.0/Cephiro.Listings.csproj.CopyComplete

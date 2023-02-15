@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wy6ejGhhH5hk5O4CnEmf/ENGSLjvSgQETY5OP3AEU6eMGAy2lFL9/1XBbRY/kCML/BdBNMh452BIFX2QDQhZyg==",
+  "dgSpecHash": "Pj0wE+MciR7+aI+YFZ7HdXdM1kTQrs4u0AnsxDpW17hbdsE/h+vJbohq9zG89ODwwz4URnzn8VtOg9EUvjzJIg==",
   "success": true,
   "projectFilePath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
   "expectedPackageFiles": [
@@ -74,8 +74,9 @@
     "/home/azureuser/.nuget/packages/npgsql/7.0.1/npgsql.7.0.1.nupkg.sha512",
     "/home/azureuser/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.1/npgsql.entityframeworkcore.postgresql.7.0.1.nupkg.sha512",
     "/home/azureuser/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
-    "/home/azureuser/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
-    "/home/azureuser/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "/home/azureuser/.nuget/packages/swashbuckle.aspnetcore.annotations/6.5.0/swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512",
+    "/home/azureuser/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "/home/azureuser/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "/home/azureuser/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
     "/home/azureuser/.nuget/packages/system.buffers/4.5.0/system.buffers.4.5.0.nupkg.sha512",
     "/home/azureuser/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",

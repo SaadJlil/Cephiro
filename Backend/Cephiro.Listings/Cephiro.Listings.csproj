@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Ardalis.ApiEndpoints" Version="4.0.1" />
     <PackageReference Include="Geolocation" Version="1.2.1" />
     <PackageReference Include="Masstransit" Version="8.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
@@ -17,8 +18,22 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.0" />
     <PackageReference Include="ValueOf" Version="2.0.31" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cephiro.Identity\Cephiro.Identity.csproj" />
+    <PackageReference Include="Ardalis.ApiEndpoints" Version="4.0.1" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="ErrorOr" Version="1.2.1" />
+    <PackageReference Include="libphonenumber-csharp" Version="8.13.4" />
+    <PackageReference Include="MassTransit" Version="8.0.12" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.0" />
+    <PackageReference Include="Npgsql" Version="7.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.0" />
+    <PackageReference Include="ValueOf" Version="2.0.31" />
+ 
   </ItemGroup>
 </Project>

@@ -28,13 +28,11 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
         if(response.Error is null)
         {
             await context.RespondAsync<CreationResponse>(result);
-            return;
         }
 
         result.Error = response.Error;
         result.IsError = true;
         await context.RespondAsync<CreationResponse>(result);
-        return;
     }
 
 }

@@ -43,10 +43,8 @@
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/System.CodeDom.dll
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/ValueOf.dll
-/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/Cephiro.Identity.dll
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/Cephiro.Listings.dll
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/Cephiro.Listings.pdb
-/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/Cephiro.Identity.pdb
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/obj/Debug/net7.0/Cephiro.Api.csproj.AssemblyReference.cache
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/obj/Debug/net7.0/Cephiro.Api.GeneratedMSBuildEditorConfig.editorconfig
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/obj/Debug/net7.0/Cephiro.Api.AssemblyInfoInputs.cache
@@ -68,3 +66,4 @@
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/obj/Debug/net7.0/Cephiro.Api.pdb
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/obj/Debug/net7.0/Cephiro.Api.genruntimeconfig.cache
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/obj/Debug/net7.0/ref/Cephiro.Api.dll
+/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/Swashbuckle.AspNetCore.Annotations.dll

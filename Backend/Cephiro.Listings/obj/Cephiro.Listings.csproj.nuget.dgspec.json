@@ -4,14 +4,14 @@
     "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj": {}
   },
   "projects": {
-    "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {
+    "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
-        "projectName": "Cephiro.Identity",
-        "projectPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
+        "projectUniqueName": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
+        "projectName": "Cephiro.Listings",
+        "projectPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
         "packagesPath": "/home/azureuser/.nuget/packages/",
-        "outputPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/obj/",
+        "outputPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/azureuser/.nuget/NuGet/NuGet.Config"
@@ -50,7 +50,11 @@
               "target": "Package",
               "version": "[1.2.1, )"
             },
-            "MassTransit": {
+            "Geolocation": {
+              "target": "Package",
+              "version": "[1.2.1, )"
+            },
+            "Masstransit": {
               "target": "Package",
               "version": "[8.0.12, )"
             },
@@ -63,6 +67,12 @@
               "version": "[7.0.2, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.2, )"
             },
@@ -90,103 +100,6 @@
               "target": "Package",
               "version": "[7.0.1, )"
             },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[6.26.0, )"
-            },
-            "ValueOf": {
-              "target": "Package",
-              "version": "[2.0.31, )"
-            },
-            "libphonenumber-csharp": {
-              "target": "Package",
-              "version": "[8.13.4, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
-        "projectName": "Cephiro.Listings",
-        "projectPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
-        "packagesPath": "/home/azureuser/.nuget/packages/",
-        "outputPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/azureuser/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net7.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
-            "projectReferences": {
-              "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {
-                "projectPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
-          "dependencies": {
-            "Geolocation": {
-              "target": "Package",
-              "version": "[1.2.1, )"
-            },
-            "Masstransit": {
-              "target": "Package",
-              "version": "[8.0.12, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.2, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.2, )"
-            },
-            "Microsoft.Extensions.Configuration": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[7.0.1, )"
-            },
             "System.ComponentModel.Annotations": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -198,6 +111,10 @@
             "ValueOf": {
               "target": "Package",
               "version": "[2.0.31, )"
+            },
+            "libphonenumber-csharp": {
+              "target": "Package",
+              "version": "[8.13.4, )"
             }
           },
           "imports": [
