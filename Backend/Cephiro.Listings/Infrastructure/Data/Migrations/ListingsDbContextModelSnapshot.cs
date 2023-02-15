@@ -90,7 +90,7 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
 
                     b.HasIndex("ListingId");
 
-                    b.ToTable("Image");
+                    b.ToTable("image");
                 });
 
             modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Listings", b =>
@@ -102,25 +102,31 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
 
                             b1.Property<string>("City")
                                 .IsRequired()
-                                .HasColumnType("text");
+                                .HasColumnType("text")
+                                .HasColumnName("city");
 
                             b1.Property<string>("Country")
                                 .IsRequired()
-                                .HasColumnType("text");
+                                .HasColumnType("text")
+                                .HasColumnName("country");
 
                             b1.Property<double?>("Latitude")
-                                .HasColumnType("double precision");
+                                .HasColumnType("double precision")
+                                .HasColumnName("latitude");
 
                             b1.Property<double?>("Longitude")
-                                .HasColumnType("double precision");
+                                .HasColumnType("double precision")
+                                .HasColumnName("longitude");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
-                                .HasColumnType("text");
+                                .HasColumnType("text")
+                                .HasColumnName("street");
 
                             b1.Property<string>("ZipCode")
                                 .IsRequired()
-                                .HasColumnType("text");
+                                .HasColumnType("text")
+                                .HasColumnName("zipcode");
 
                             b1.HasKey("ListingsId");
 

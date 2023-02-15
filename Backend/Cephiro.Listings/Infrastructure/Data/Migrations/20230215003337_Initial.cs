@@ -16,12 +16,12 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    AddresseStreet = table.Column<string>(name: "Addresse_Street", type: "text", nullable: false),
-                    AddresseCountry = table.Column<string>(name: "Addresse_Country", type: "text", nullable: false),
-                    AddresseCity = table.Column<string>(name: "Addresse_City", type: "text", nullable: false),
-                    AddresseZipCode = table.Column<string>(name: "Addresse_ZipCode", type: "text", nullable: false),
-                    AddresseLongitude = table.Column<double>(name: "Addresse_Longitude", type: "double precision", nullable: true),
-                    AddresseLatitude = table.Column<double>(name: "Addresse_Latitude", type: "double precision", nullable: true),
+                    street = table.Column<string>(type: "text", nullable: false),
+                    country = table.Column<string>(type: "text", nullable: false),
+                    city = table.Column<string>(type: "text", nullable: false),
+                    zipcode = table.Column<string>(type: "text", nullable: false),
+                    longitude = table.Column<double>(type: "double precision", nullable: true),
+                    latitude = table.Column<double>(type: "double precision", nullable: true),
                     description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     numberviews = table.Column<int>(name: "number_views", type: "integer", nullable: false),
                     priceday = table.Column<float>(name: "price_day", type: "real", nullable: false),
@@ -38,7 +38,7 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Image",
+                name: "image",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -47,9 +47,9 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Image", x => x.id);
+                    table.PrimaryKey("PK_image", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Image_listing_ListingId",
+                        name: "FK_image_listing_ListingId",
                         column: x => x.ListingId,
                         principalTable: "listing",
                         principalColumn: "id",
@@ -57,8 +57,8 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_ListingId",
-                table: "Image",
+                name: "IX_image_ListingId",
+                table: "image",
                 column: "ListingId");
         }
 
@@ -66,7 +66,7 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Image");
+                name: "image");
 
             migrationBuilder.DropTable(
                 name: "listing");

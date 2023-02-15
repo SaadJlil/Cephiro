@@ -1,17 +1,18 @@
 using Cephiro.Listings.Domain.ValueObjects;
 using Geolocation;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Cephiro.Listings.Domain.ValueObjects;
 
 public class Location: ValueObject
 {
-    public string Street {get; set;}
-    public string Country {get; set;}
-    public string City {get; set;}
-    public string ZipCode {get; set;}
-    public double? Longitude { get; set; }
-    public double? Latitude { get; set; }
+    [Column("street")] public string Street {get; set;}
+    [Column("country")] public string Country {get; set;}
+    [Column("city")] public string City {get; set;}
+    [Column("zipcode")] public string ZipCode {get; set;}
+    [Column("longitude")] public double? Longitude { get; set; }
+    [Column("latitude")] public double? Latitude { get; set; }
     public Location(string country, string street, string zipCode, string city, double? latitude, double? longitude)
     {
         Country = country;
