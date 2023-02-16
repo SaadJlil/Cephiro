@@ -8,5 +8,6 @@ public static class CatalogCommands
     public static void AddCatalogCommands(this IMediatorRegistrationConfigurator cfg)
     {
         cfg.AddRequestClient<CreationRequest>();
+        cfg.AddRequestClient<UpdateListingRequest>();
     }
 }

@@ -38,7 +38,7 @@ public class CatalogExecute : ICatalogExecute
             Addresse = listing.Addresse,
             Description = listing.Description,
             Price_day = listing.Price_day,
-            Creation_date = DateTime.Now,
+            Creation_date = DateTime.Now.ToUniversalTime(),
             Type = listing.Type,
             UserId = listing.UserId,
             //Add tags later on 
@@ -79,6 +79,9 @@ public class CatalogExecute : ICatalogExecute
 
     public async Task<DbWriteInternal> UpdateListing(UpdateListingRequest Uplisting, CancellationToken token)
     {
+
+
+
         DbWriteInternal result = new() {
             ChangeCount = 0,
             Error = null
@@ -92,7 +95,7 @@ public class CatalogExecute : ICatalogExecute
 
         try
         {
-            using NpgsqlConnection db = new(_settings.CurrentValue.IdentityConnection);
+            using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
             db.Open();
             if(await db.QueryFirstOrDefaultAsync(cmd) is null)
             {
@@ -113,11 +116,13 @@ public class CatalogExecute : ICatalogExecute
             return result;
         }
 
+
         //Update image and listing tables depending on what changes have been done 
         var paramarray = new DynamicParameters();
         var updatearray = new List<string>();
 
 
+        System.Console.WriteLine("**************************");
         if(Uplisting.Name != null) 
             updatearray.Append($@" name = @uplistingname ");
             paramarray.AddDynamicParams(new { uplisingname = Uplisting.Name });
@@ -147,6 +152,7 @@ public class CatalogExecute : ICatalogExecute
             updatearray.Append($@" price_day = @price ");
             paramarray.AddDynamicParams(new { price = Uplisting.Price_day });
 
+        System.Console.WriteLine("**************************");
         sql = $@"
             UPDATE listing
             SET {updatearray.Aggregate((i, j) => i + "," + j)}
@@ -170,7 +176,7 @@ public class CatalogExecute : ICatalogExecute
 
         try
         {
-            using NpgsqlConnection db = new(_settings.CurrentValue.IdentityConnection);
+            using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
             db.Open();
             result.ChangeCount = await db.ExecuteAsync(cmd);
             db.Close();

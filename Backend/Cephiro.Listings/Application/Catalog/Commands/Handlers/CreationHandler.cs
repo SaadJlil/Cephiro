@@ -14,7 +14,7 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
 {
     private readonly ICatalogExecute _catalogRepository; 
 
-    public CreationHandler(ICatalogExecute catalogRepository, CancellationToken token)
+    public CreationHandler(ICatalogExecute catalogRepository)
     {
         _catalogRepository = catalogRepository;
     }
@@ -31,7 +31,7 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
         }
 
         result.Error = response.Error;
-        result.IsError = true;
+        result.IsError = false;
         await context.RespondAsync<CreationResponse>(result);
     }
 

@@ -14,7 +14,7 @@ public sealed class UpdateListingHandler: IConsumer<UpdateListingRequest>
 {
     private readonly ICatalogExecute _catalogRepository; 
 
-    public UpdateListingHandler(ICatalogExecute catalogRepository, CancellationToken token)
+    public UpdateListingHandler(ICatalogExecute catalogRepository)
     {
         _catalogRepository = catalogRepository;
     }
@@ -28,13 +28,11 @@ public sealed class UpdateListingHandler: IConsumer<UpdateListingRequest>
         if(response.Error is null)
         {
             await context.RespondAsync<CreationResponse>(result);
-            return;
         }
 
         result.Error = response.Error;
-        result.IsError = true;
+        result.IsError = false;
         await context.RespondAsync<CreationResponse>(result);
-        return;
     }
 
 }

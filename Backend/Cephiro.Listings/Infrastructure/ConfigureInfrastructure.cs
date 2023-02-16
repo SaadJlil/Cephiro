@@ -31,10 +31,11 @@ public static class ConfigureInfrastructure
 
     public static IServiceCollection AddDapperConnection(this IServiceCollection services, IConfiguration configuration)
     {
-        var DapperSettings = new DapperConfig();
-        configuration.Bind(DapperConfig.SectionName, DapperSettings);
-
         services.AddSingleton<DapperConfig>();
+    
+        services.Configure<DapperConfig>(
+        configuration.GetSection(DapperConfig.SectionName));
+
 
         return services;
     }
