@@ -6,6 +6,6 @@ namespace Cephiro.Listings.Domain.Entities;
 [Table(name: "image")]
 public class Photos: BaseEntity<Guid>
 {
-    public required Listings Listing { get; set; }
-    public required Uri? Image { get; set; }
+    [Column("listing")] public required Listings Listing { get; set; }
+    [Column("imageuri")] public required Uri? ImageUri { get; set; }
 }

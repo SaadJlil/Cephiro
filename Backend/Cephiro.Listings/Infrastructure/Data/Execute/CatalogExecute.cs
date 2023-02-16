@@ -30,11 +30,13 @@ public class CatalogExecute : ICatalogExecute
     }
     public async Task<DbWriteInternal> CreateListing(CreationRequest listing, CancellationToken token)
     {
-        DbWriteInternal result = new() {
+        DbWriteInternal result = new()
+        {
             ChangeCount = 0,
             Error = null
         };
-        models.Listings lst = new models.Listings{
+        models.Listings lst = new models.Listings
+        {
             Addresse = listing.Addresse,
             Description = listing.Description,
             Price_day = listing.Price_day,
@@ -44,12 +46,14 @@ public class CatalogExecute : ICatalogExecute
             //Add tags later on 
             Name = listing.Name
         };
-        var phts = listing.Images.Select(x => new models.Photos{
+        var phts = listing.Images.Select(x => new models.Photos
+        {
             Listing = lst,
-            Image = x
+            ImageUri = x
         }).ToList();
         lst.Images = phts;
-        try{
+        try
+        {
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
             await _context.Image.AddRangeAsync(phts);
             await _context.Listing.AddAsync(lst);
@@ -57,13 +61,15 @@ public class CatalogExecute : ICatalogExecute
         }
         catch (DbUpdateException exception)
         {
-            return new DbWriteInternal() 
-            { 
-                ChangeCount = 0, Error = new() 
+            return new DbWriteInternal()
+            {
+                ChangeCount = 0,
+                Error = new()
                 {
-                    Code = 502, 
+                    Code = 502,
                     Message = $"Could not establish connection to the database - ${exception.Message + exception.InnerException}",
-                }};
+                }
+            };
         }
 
         finally
@@ -82,14 +88,15 @@ public class CatalogExecute : ICatalogExecute
 
 
 
-        DbWriteInternal result = new() {
+        DbWriteInternal result = new()
+        {
             ChangeCount = 0,
             Error = null
         };
 
         //Checking if the listing belongs to the user
-        string sql = $@"SELECT 1 FROM listing WHERE Id = @listingid AND userid = @userid LIMIT 1";
-        var param = new { Uplisting.ListingId, Uplisting.UserId};
+        string sql = $@"SELECT 1 FROM listing WHERE id = @listingid AND userid = @userid LIMIT 1";
+        var param = new { Uplisting.ListingId, Uplisting.UserId };
 
         var cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: token);
 
@@ -97,9 +104,10 @@ public class CatalogExecute : ICatalogExecute
         {
             using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
             db.Open();
-            if(await db.QueryFirstOrDefaultAsync(cmd) is null)
+            if (await db.QueryFirstOrDefaultAsync(cmd) is null)
             {
-                result.Error = new Application.Shared.Contracts.Error{
+                result.Error = new Application.Shared.Contracts.Error
+                {
                     Code = 404,
                     Message = "Listing doesn't exist or belong to the user"
                 };
@@ -109,7 +117,8 @@ public class CatalogExecute : ICatalogExecute
         }
         catch (NpgsqlException exception)
         {
-            result.Error = new Application.Shared.Contracts.Error{
+            result.Error = new Application.Shared.Contracts.Error
+            {
                 Code = 404,
                 Message = exception.Message
             };
@@ -122,57 +131,79 @@ public class CatalogExecute : ICatalogExecute
         var updatearray = new List<string>();
 
 
-        System.Console.WriteLine("**************************");
-        if(Uplisting.Name != null) 
-            updatearray.Append($@" name = @uplistingname ");
-            paramarray.AddDynamicParams(new { uplisingname = Uplisting.Name });
-        if(Uplisting.Addresse != null)
-            updatearray.Append($@" Addresse_Street = @street ");
-            updatearray.Append($@" Addresse_Country = @country ");
-            updatearray.Append($@" Addresse_City = @city ");
-            updatearray.Append($@" Addresse_ZipCode = @zipcode ");
+        paramarray.AddDynamicParams(new { listingid = Uplisting.ListingId });
+        paramarray.AddDynamicParams(new { userid = Uplisting.UserId });
+
+        if (Uplisting.Name != null)
+        {
+            updatearray.Add($@" name = @uplistingname ");
+            paramarray.AddDynamicParams(new { uplistingname = Uplisting.Name });
+        }
+
+        if (Uplisting.Addresse != null)
+        {
+            updatearray.Add($@" Addresse_Street = @street ");
+            updatearray.Add($@" Addresse_Country = @country ");
+            updatearray.Add($@" Addresse_City = @city ");
+            updatearray.Add($@" Addresse_ZipCode = @zipcode ");
             paramarray.AddDynamicParams(new { street = Uplisting.Addresse.Street });
             paramarray.AddDynamicParams(new { country = Uplisting.Addresse.Country });
             paramarray.AddDynamicParams(new { city = Uplisting.Addresse.City });
             paramarray.AddDynamicParams(new { zipcode = Uplisting.Addresse.ZipCode });
-            if(Uplisting.Addresse.Latitude != null && Uplisting.Addresse.Latitude != null)
+            if (Uplisting.Addresse.Latitude != null && Uplisting.Addresse.Latitude != null)
             {
-                updatearray.Append($@" Addresse_Longitude = @longitude ");
-                updatearray.Append($@" Addresse_Latitude = @latitude ");
+                updatearray.Add($@" Addresse_Longitude = @longitude ");
+                updatearray.Add($@" Addresse_Latitude = @latitude ");
                 paramarray.AddDynamicParams(new { longitude = Uplisting.Addresse.Longitude });
                 paramarray.AddDynamicParams(new { latitude = Uplisting.Addresse.Latitude });
             }
-        if(Uplisting.Description != null)
-            updatearray.Append($@" description = @desc ");
-            paramarray.AddDynamicParams(new { desc = Uplisting.Description });
-        if(Uplisting.Type != null)
-            updatearray.Append($@" listing_type = @type ");
-            paramarray.AddDynamicParams(new { type = Uplisting.Type});
-        if(Uplisting.Price_day != null)
-            updatearray.Append($@" price_day = @price ");
-            paramarray.AddDynamicParams(new { price = Uplisting.Price_day });
+        }
 
-        System.Console.WriteLine("**************************");
-        sql = $@"
+        if (Uplisting.Description != null)
+        {
+            updatearray.Add($@" description = @desc ");
+            paramarray.AddDynamicParams(new { desc = Uplisting.Description });
+        }
+
+        if (Uplisting.Type != null)
+        {
+            updatearray.Add($@" listing_type = @type ");
+            paramarray.AddDynamicParams(new { type = Uplisting.Type });
+        }
+
+        if (Uplisting.Price_day != null)
+        {
+            updatearray.Add($@" price_day = @price ");
+            paramarray.AddDynamicParams(new { price = Uplisting.Price_day });
+        }
+        sql = "";
+
+        if (updatearray.Count() > 0)
+        {
+            sql = $@"
             UPDATE listing
             SET {updatearray.Aggregate((i, j) => i + "," + j)}
-            WHERE Id = @listingid AND userid = @userid LIMIT 1;";
+            WHERE id = @listingid AND userid = @userid;";
+        }
 
-        if(Uplisting.Images != null) 
+
+
+
+        if (Uplisting.Images != null)
         {
 
-            sql += $@" 
-                        DELETE FROM image WHERE ListingId = {Uplisting.ListingId};
-                        INSERT INTO image (Id, ListingId, Image) VALUES (@Id, @listingid, @photo)";
+            sql += $" DELETE FROM image WHERE \"ListingId\" = @listingid ; INSERT INTO image (id, \"ListingId\", imageuri) VALUES (@Id, @listingid, @photo);";
 
             foreach (var image in Uplisting.Images)
             {
-                paramarray.AddDynamicParams(new {Id = new Guid(), listingid = Uplisting.ListingId, photo = image});
+                paramarray.AddDynamicParams(new { Id = Guid.NewGuid(), photo = image.ToString() });
             }
 
         }
 
-        cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: token);
+
+
+        cmd = new CommandDefinition(commandText: sql, parameters: paramarray, cancellationToken: token);
 
         try
         {
@@ -183,13 +214,14 @@ public class CatalogExecute : ICatalogExecute
         }
         catch (NpgsqlException exception)
         {
-            result.Error = new Application.Shared.Contracts.Error{
+            result.Error = new Application.Shared.Contracts.Error
+            {
                 Code = 404,
                 Message = exception.Message
             };
-            return result; 
+            return result;
         }
 
         return result;
-   }
+    }
 }

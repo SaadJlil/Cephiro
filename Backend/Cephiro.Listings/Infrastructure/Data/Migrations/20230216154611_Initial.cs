@@ -43,7 +43,7 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     ListingId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Image = table.Column<string>(type: "text", nullable: true)
+                    imageuri = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

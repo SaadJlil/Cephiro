@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cephiro.Listings.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ListingsDbContext))]
-    [Migration("20230215003337_Initial")]
+    [Migration("20230216154611_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -83,8 +83,9 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
+                    b.Property<string>("ImageUri")
+                        .HasColumnType("text")
+                        .HasColumnName("imageuri");
 
                     b.Property<Guid>("ListingId")
                         .HasColumnType("uuid");

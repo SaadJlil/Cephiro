@@ -28,11 +28,13 @@ public sealed class UpdateListingHandler: IConsumer<UpdateListingRequest>
         if(response.Error is null)
         {
             await context.RespondAsync<CreationResponse>(result);
+            return;
         }
 
         result.Error = response.Error;
-        result.IsError = false;
+        result.IsError = true;
         await context.RespondAsync<CreationResponse>(result);
+        return;
     }
 
 }

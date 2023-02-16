@@ -80,8 +80,9 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
+                    b.Property<string>("ImageUri")
+                        .HasColumnType("text")
+                        .HasColumnName("imageuri");
 
                     b.Property<Guid>("ListingId")
                         .HasColumnType("uuid");
