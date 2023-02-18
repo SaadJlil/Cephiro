@@ -86,8 +86,6 @@ public class CatalogExecute : ICatalogExecute
     public async Task<DbWriteInternal> UpdateListing(UpdateListingRequest Uplisting, CancellationToken token)
     {
 
-
-
         DbWriteInternal result = new()
         {
             ChangeCount = 0,
@@ -96,9 +94,8 @@ public class CatalogExecute : ICatalogExecute
 
         //Checking if the listing belongs to the user
         string sql = $@"SELECT 1 FROM listing WHERE id = @listingid AND userid = @userid LIMIT 1";
-        var param = new { Uplisting.ListingId, Uplisting.UserId };
-
-        var cmd = new CommandDefinition(commandText: sql, parameters: param, cancellationToken: token);
+        
+        var cmd = new CommandDefinition(commandText: sql, parameters: new { Uplisting.ListingId, Uplisting.UserId }, cancellationToken: token);
 
         try
         {
@@ -209,6 +206,54 @@ public class CatalogExecute : ICatalogExecute
             using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
             db.Open();
             result.ChangeCount = await db.ExecuteAsync(cmd);
+            db.Close();
+        }
+        catch (NpgsqlException exception)
+        {
+            result.Error = new Application.Shared.Contracts.Error
+            {
+                Code = 404,
+                Message = exception.Message
+            };
+            return result;
+        }
+
+        return result;
+    }
+
+    public async Task<DbWriteInternal> DeleteListing(DeleteListingRequest Dellisting, CancellationToken token)
+    {
+        DbWriteInternal result = new()
+        {
+            ChangeCount = 0,
+            Error = null
+        };
+
+        //Checking if the listing belongs to the user
+        string sql = $@"SELECT 1 FROM listing WHERE id = @listingid AND userid = @userid LIMIT 1";
+
+        var cmd = new CommandDefinition(commandText: sql, parameters: new { Dellisting.ListingId, Dellisting.UserId }, cancellationToken: token);
+
+        try
+        {
+            using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
+            db.Open();
+            if (await db.QueryFirstOrDefaultAsync(cmd) is null)
+            {
+                result.Error = new Application.Shared.Contracts.Error
+                {
+                    Code = 404,
+                    Message = "Listing doesn't exist or belong to the user"
+                };
+                return result;
+            }
+
+
+            sql = $" DELETE FROM image WHERE \"ListingId\" = @listingid; DELETE FROM listing WHERE id = @listingid;";
+            cmd = new CommandDefinition(commandText: sql, parameters: new {listingid = Dellisting.ListingId}, cancellationToken: token);
+
+            result.ChangeCount = await db.ExecuteAsync(cmd);
+
             db.Close();
         }
         catch (NpgsqlException exception)

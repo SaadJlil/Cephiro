@@ -9,5 +9,6 @@ public static class CatalogCommands
     {
         cfg.AddRequestClient<CreationRequest>();
         cfg.AddRequestClient<UpdateListingRequest>();
+        cfg.AddRequestClient<DeleteListingRequest>();
     }
 }

@@ -8,4 +8,5 @@ public interface ICatalogExecute
 {
     public Task<DbWriteInternal> CreateListing(CreationRequest listing, CancellationToken token);
     public Task<DbWriteInternal> UpdateListing(UpdateListingRequest Uplisting, CancellationToken token);
+    public Task<DbWriteInternal> DeleteListing(DeleteListingRequest Uplisting, CancellationToken token);
 }
