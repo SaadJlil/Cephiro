@@ -127,54 +127,56 @@ public class CatalogExecute : ICatalogExecute
 
 
         //Update image and listing tables depending on what changes have been done 
-        var paramarray = new DynamicParameters();
+
+        //var paramarray = new DynamicParameters();
+        var paramDic = new Dictionary<string, object>();
         var updatearray = new List<string>();
 
 
-        paramarray.AddDynamicParams(new { listingid = Uplisting.ListingId });
-        paramarray.AddDynamicParams(new { userid = Uplisting.UserId });
+        paramDic.Add("@listingid" ,Uplisting.ListingId);
+        paramDic.Add("@userid", Uplisting.UserId);
 
         if (Uplisting.Name != null)
         {
             updatearray.Add($@" name = @uplistingname ");
-            paramarray.AddDynamicParams(new { uplistingname = Uplisting.Name });
+            paramDic.Add("@uplistingname", Uplisting.Name);
         }
 
         if (Uplisting.Addresse != null)
         {
-            updatearray.Add($@" Addresse_Street = @street ");
-            updatearray.Add($@" Addresse_Country = @country ");
-            updatearray.Add($@" Addresse_City = @city ");
-            updatearray.Add($@" Addresse_ZipCode = @zipcode ");
-            paramarray.AddDynamicParams(new { street = Uplisting.Addresse.Street });
-            paramarray.AddDynamicParams(new { country = Uplisting.Addresse.Country });
-            paramarray.AddDynamicParams(new { city = Uplisting.Addresse.City });
-            paramarray.AddDynamicParams(new { zipcode = Uplisting.Addresse.ZipCode });
+            updatearray.Add($@" street = @street ");
+            updatearray.Add($@" country = @country ");
+            updatearray.Add($@" city = @city ");
+            updatearray.Add($@" zipcode = @zipcode ");
+            paramDic.Add("@street", Uplisting.Addresse.Street);
+            paramDic.Add("@country", Uplisting.Addresse.Country);
+            paramDic.Add("@city", Uplisting.Addresse.City);
+            paramDic.Add("@zipcode", Uplisting.Addresse.ZipCode);
             if (Uplisting.Addresse.Latitude != null && Uplisting.Addresse.Latitude != null)
             {
-                updatearray.Add($@" Addresse_Longitude = @longitude ");
-                updatearray.Add($@" Addresse_Latitude = @latitude ");
-                paramarray.AddDynamicParams(new { longitude = Uplisting.Addresse.Longitude });
-                paramarray.AddDynamicParams(new { latitude = Uplisting.Addresse.Latitude });
+                updatearray.Add($@" longitude = @longitude ");
+                updatearray.Add($@" latitude = @latitude ");
+                paramDic.Add("@longitude", Uplisting.Addresse.Longitude);
+                paramDic.Add("@latitude", Uplisting.Addresse.Latitude);
             }
         }
 
         if (Uplisting.Description != null)
         {
             updatearray.Add($@" description = @desc ");
-            paramarray.AddDynamicParams(new { desc = Uplisting.Description });
+            paramDic.Add("@desc", Uplisting.Description);
         }
 
         if (Uplisting.Type != null)
         {
             updatearray.Add($@" listing_type = @type ");
-            paramarray.AddDynamicParams(new { type = Uplisting.Type });
+            paramDic.Add("@type", Uplisting.Type);
         }
 
         if (Uplisting.Price_day != null)
         {
             updatearray.Add($@" price_day = @price ");
-            paramarray.AddDynamicParams(new { price = Uplisting.Price_day });
+            paramDic.Add("@price", Uplisting.Price_day);
         }
         sql = "";
 
@@ -192,18 +194,19 @@ public class CatalogExecute : ICatalogExecute
         if (Uplisting.Images != null)
         {
 
-            sql += $" DELETE FROM image WHERE \"ListingId\" = @listingid ; INSERT INTO image (id, \"ListingId\", imageuri) VALUES (@Id, @listingid, @photo);";
-
+            sql += $" DELETE FROM image WHERE \"ListingId\" = @listingid;";
+            int i = 0;
             foreach (var image in Uplisting.Images)
             {
-                paramarray.AddDynamicParams(new { Id = Guid.NewGuid(), photo = image.ToString() });
+                sql += $"INSERT INTO image (id, \"ListingId\", imageuri) VALUES (@Id{i}, @listingid, @photo{i});";
+                paramDic.Add("@Id"+i, Guid.NewGuid());
+                paramDic.Add("@photo"+i, image.ToString());
+                i++;
             }
 
         }
 
-
-
-        cmd = new CommandDefinition(commandText: sql, parameters: paramarray, cancellationToken: token);
+        cmd = new CommandDefinition(commandText: sql, parameters: paramDic, cancellationToken: token);
 
         try
         {
