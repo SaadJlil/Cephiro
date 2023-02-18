@@ -128,7 +128,6 @@ public class CatalogExecute : ICatalogExecute
 
         //Update image and listing tables depending on what changes have been done 
 
-        //var paramarray = new DynamicParameters();
         var paramDic = new Dictionary<string, object>();
         var updatearray = new List<string>();
 
@@ -152,7 +151,7 @@ public class CatalogExecute : ICatalogExecute
             paramDic.Add("@country", Uplisting.Addresse.Country);
             paramDic.Add("@city", Uplisting.Addresse.City);
             paramDic.Add("@zipcode", Uplisting.Addresse.ZipCode);
-            if (Uplisting.Addresse.Latitude != null && Uplisting.Addresse.Latitude != null)
+            if (Uplisting.Addresse.Longitude != null && Uplisting.Addresse.Latitude != null)
             {
                 updatearray.Add($@" longitude = @longitude ");
                 updatearray.Add($@" latitude = @latitude ");
@@ -187,9 +186,6 @@ public class CatalogExecute : ICatalogExecute
             SET {updatearray.Aggregate((i, j) => i + "," + j)}
             WHERE id = @listingid AND userid = @userid;";
         }
-
-
-
 
         if (Uplisting.Images != null)
         {
