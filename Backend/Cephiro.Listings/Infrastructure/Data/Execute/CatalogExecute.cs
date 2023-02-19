@@ -268,4 +268,41 @@ public class CatalogExecute : ICatalogExecute
 
         return result;
     }
+
+    public async Task<DbWriteInternal> DeleteUserListings(DeleteUserListingsRequest Dellisting, CancellationToken token)
+    {
+        DbWriteInternal result = new()
+        {
+            ChangeCount = 0,
+            Error = null
+        };
+
+        string sql = $"DELETE FROM image WHERE \"ListingId\" = (SELECT id FROM listing WHERE userid = @UserId); DELETE FROM listing WHERE userid = @UserId;";
+
+        var cmd = new CommandDefinition(commandText: sql, parameters: new { UserId = Dellisting.UserId }, cancellationToken: token);
+
+        try
+        {
+            using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
+            db.Open();
+
+            result.ChangeCount = await db.ExecuteAsync(cmd);
+
+            db.Close();
+        }
+        catch (NpgsqlException exception)
+        {
+            result.Error = new Application.Shared.Contracts.Error
+            {
+                Code = 404,
+                Message = exception.Message
+            };
+            return result;
+        }
+
+        return result;
+    }
+
+
+
 }
