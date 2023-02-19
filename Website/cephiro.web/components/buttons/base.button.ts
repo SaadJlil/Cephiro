@@ -15,7 +15,9 @@ export const Button = styled.button<ButtonProp>`
     outline-offset: 2px;
     border: 1px solid transparent;
     width: ${props => props.block ? '100%' : 'null'};
-    display: block;
+    display: ${props => props.block ? 'block' : 'flex'};
+    align-items: ${props => props.block ? 'none' : 'center'};
+    justify-content: ${props => props.block ? 'none' : 'center'};
     font-weight: 500;
     ${props => SetSize(props.size)};
     ${props => SetButton(props.button)};

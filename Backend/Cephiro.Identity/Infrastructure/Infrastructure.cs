@@ -20,7 +20,9 @@ public static class Infrastructure
     {
         services.AddDapperConnection(configuration);
         services.AddEfDbContext(configuration);
+        
         services.AddWriteRepositories();
+        services.AddReadRepositories();
         
         return services;
     }
@@ -53,6 +55,11 @@ public static class Infrastructure
         services.AddScoped<IProfileExecute, ProfileExecute>();
         services.AddScoped<IReportExecute, ReportExecute>();
 
+        return services;
+    }
+
+    public static IServiceCollection AddReadRepositories(this IServiceCollection services)
+    {
         services.AddScoped<IAuthAccess, AuthAccess>();
         services.AddScoped<IReportAccess, ReportAccess>();
         services.AddScoped<IProfileAccess, ProfileAccess>();

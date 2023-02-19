@@ -9,7 +9,7 @@ const Tiny = css`
 `
 
 const Small = css`
-    padding: 0.rem 0.750rem;
+    padding: 0.5rem 0.750rem;
     font-size: 0.875rem;
     line-height:1rem;
 `

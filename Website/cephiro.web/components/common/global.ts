@@ -29,4 +29,12 @@ export const GlobalStyle = createGlobalStyle<{theme: any}>`
     color: inherit;
     text-decoration: none;
   }
+
+  label {
+    color: ${props => props.theme.default12};
+    font-size: 0.82rem;
+    font-weight: 400;
+    display: block;
+  }
+  label:after { content: ": " }
 `

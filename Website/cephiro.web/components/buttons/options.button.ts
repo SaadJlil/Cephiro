@@ -4,7 +4,7 @@ export declare type ButtonVariant = "primary" | "secondary" | "default" | "text"
 
 const PrimaryButton = css`
     background-color: ${props => props.theme.primary4};
-    color: ${props => props.theme.default13};
+    color: white;
     &:hover {
         background-color: ${props => props.theme.primary3};
         box-shadow: 0 0 1px ${props => props.theme.primary5}, 0 0 4px ${props => props.theme.primary5}, 0 0 8px ${props => props.theme.primary5};
@@ -36,6 +36,13 @@ const DefaultButton = css`
         background-color: ${props => props.theme.default12};
         border-color: ${props => props.theme.default12};
         color: ${props => props.theme.default4};
+        svg {
+            color: ${props => props.theme.default4};
+        }
+    }
+    &:active {
+        background-color: ${props => props.theme.default13};
+        border-color: ${props => props.theme.default13};
     }
 `
 
@@ -52,8 +59,8 @@ const TextButton = css`
     }
 `
 
-export const SetButton = (button?: ButtonVariant | undefined) => {
-    switch (button)
+export const SetButton = (type?: ButtonVariant | undefined) => {
+    switch (type)
     {
         case "primary": return PrimaryButton
         case "secondary": return SecondaryButton

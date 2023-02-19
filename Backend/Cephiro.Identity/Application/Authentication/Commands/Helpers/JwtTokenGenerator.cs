@@ -22,7 +22,7 @@ public class JwtTokenGenerator
         // Encoding.UTF8.GetBytes should use: "Environment.GetEnvironmentVariable(_jwtSettings.Secret)!"
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("mysuperhiddensecret")),
+                Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_ENV")!)),
             SecurityAlgorithms.HmacSha256
         );
 
@@ -33,10 +33,10 @@ public class JwtTokenGenerator
             new Claim(JwtRegisteredClaimNames.Name, user.FirstName),
             new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            // new Claim(ClaimTypes.MobilePhone, user.PhoneNumber!.ToString()),
-            // new Claim("HasCreditCard", user.HasCreditCard.ToString()),
-            // new Claim("EmailConfirmed", user.EmailConfirmed.ToString()),
-            // new Claim("PhoneNumberConfirmed", user.PhoneNumberConfirmed.ToString()),
+            new Claim(ClaimTypes.MobilePhone, user.PhoneNumber!.ToString()),
+            new Claim("HasCreditCard", user.HasCreditCard.ToString()),
+            new Claim("EmailConfirmed", user.EmailConfirmed.ToString()),
+            new Claim("PhoneNumberConfirmed", user.PhoneNumberConfirmed.ToString()),
         };
 
 
