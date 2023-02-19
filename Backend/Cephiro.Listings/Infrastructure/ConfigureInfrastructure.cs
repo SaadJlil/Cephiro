@@ -3,10 +3,12 @@
 using Npgsql;
 using Cephiro.Listings.Infrastructure.Data;
 using Cephiro.Listings.Infrastructure.Data.Execute;
+using Cephiro.Listings.Infrastructure.Data.Access;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Cephiro.Listings.Application.Catalog.Commands;
+using Cephiro.Listings.Application.Catalog.Queries;
 
 
 
@@ -54,7 +56,8 @@ public static class ConfigureInfrastructure
     public static IServiceCollection AddWriteRepositories(this IServiceCollection services)
     {
         services.AddTransient<ICatalogExecute, CatalogExecute>();
-        
+        services.AddTransient<ICatalogAccess, CatalogAccess>();
+
         return services;
     }
 }

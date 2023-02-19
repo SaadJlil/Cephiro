@@ -7,6 +7,6 @@ public static class CatalogQuery
 {
     public static void AddCatalogQueries(this IMediatorRegistrationConfigurator cfg)
     {
-        cfg.AddRequestClient<CreationRequest>();
+        cfg.AddRequestClient<ListingInfoRequest>();
     }
 }
