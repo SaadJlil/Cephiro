@@ -61,7 +61,7 @@ public class CatalogAccess: ICatalogAccess
         UserListingsResponse? list_info = new UserListingsResponse{};
 
         //Add Order by date and limit 
-        string sql  = $"SELECT id, country, city, name FROM listing WHERE userid = @UserId; SELECT \"ListingId\" as id, imageuri as uri FROM image WHERE \"ListingId\" IN (SELECT id FROM listing WHERE userid = @UserId);";
+        string sql  = $"SELECT id, country, city, name FROM listing WHERE userid = @UserId ORDER BY creation_date LIMIT @take OFFSET @skip * @take; SELECT \"ListingId\" as id, imageuri as uri FROM image WHERE \"ListingId\" IN (SELECT id FROM listing WHERE userid = @UserId ORDER BY creation_date LIMIT @take OFFSET @skip * @take);";
 
         try
         {
@@ -69,7 +69,7 @@ public class CatalogAccess: ICatalogAccess
 
             db.Open();
 
-            var multi = await db.QueryMultipleAsync(sql, new {UserId = InfoListing.UserId});
+            var multi = await db.QueryMultipleAsync(sql, new {UserId = InfoListing.UserId, take = InfoListing.take, skip = InfoListing.skip});
             list_info.minilistings = await multi.ReadAsync<MinimalListingInfoInternal>();
             var imgs = await multi.ReadAsync<Images>();
 

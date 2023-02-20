@@ -7,5 +7,7 @@ namespace Cephiro.Listings.Application.Catalog.Contracts.Request;
 
 public sealed class UserListingsRequest 
 {
+    public int take { get; set; } = 1;
+    public int skip { get; set; } = 0;
     public required Guid UserId{ get; set; }
 }
