@@ -9,4 +9,5 @@ namespace Cephiro.Listings.Application.Catalog.Queries;
 public interface ICatalogAccess 
 {
     public Task<ErrorOr<ListingInfoIntern>> GetListingInfo(ListingInfoRequest InfoListing, CancellationToken token);
+    public Task<UserListingsResponse> UserListings(UserListingsRequest InfoListing, CancellationToken token);
 }

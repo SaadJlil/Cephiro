@@ -30,10 +30,10 @@ public class CatalogAccess: ICatalogAccess
     public async Task<ErrorOr<ListingInfoIntern>> GetListingInfo(ListingInfoRequest InfoListing, CancellationToken token)
     {
 
-        entities.Listings result;
+        entities.Listings? result;
         try
         {
-            result = _context.Listing.Where(x => x.Id == InfoListing.Id).Include(x => x.Images).FirstOrDefault();
+            result = await _context.Listing.Where(x => x.Id == InfoListing.Id).Include(x => x.Images).FirstOrDefaultAsync();
 
             if(result is null)
                 return Error.NotFound("Listing Not Found");
@@ -44,7 +44,7 @@ public class CatalogAccess: ICatalogAccess
             return Error.Failure(exception.Message);
         }
 
-        var thing = new ListingInfoIntern{
+        return new ListingInfoIntern{
             Images = result.Images.Select(x => x.ImageUri).ToList(),
             Addresse = result.Addresse,
             Price_day = result.Price_day,
@@ -54,7 +54,51 @@ public class CatalogAccess: ICatalogAccess
             UserId = result.UserId,
             Name = result.Name
         };
+    }
 
-        return thing;
+    public async Task<UserListingsResponse> UserListings(UserListingsRequest InfoListing, CancellationToken token)
+    {
+        UserListingsResponse? list_info = new UserListingsResponse{};
+
+        //Add Order by date and limit 
+        string sql  = $"SELECT id, country, city, name FROM listing WHERE userid = @UserId; SELECT \"ListingId\" as id, imageuri as uri FROM image WHERE \"ListingId\" IN (SELECT id FROM listing WHERE userid = @UserId);";
+
+        try
+        {
+            using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
+
+            db.Open();
+
+            var multi = await db.QueryMultipleAsync(sql, new {UserId = InfoListing.UserId});
+            list_info.minilistings = await multi.ReadAsync<MinimalListingInfoInternal>();
+            var imgs = await multi.ReadAsync<Images>();
+
+            foreach(var l in list_info.minilistings)
+            {
+                foreach(var img in imgs.Where(x => x.Id == l.Id))
+                {
+                    l.Images.Add(img.uri);
+                }
+            }
+
+            if (list_info.minilistings is null)
+            {
+                list_info.IsError = true;
+                list_info.Message = "User doesn't have any listing";
+                list_info.code = 404;
+                return list_info;
+            }
+
+            db.Close();
+        }
+        catch (NpgsqlException exception)
+        {
+            list_info.IsError = true;
+            list_info.Message = exception.Message;
+            list_info.code = 404;
+            return list_info;
+        }
+
+        return list_info;
     }
 }
