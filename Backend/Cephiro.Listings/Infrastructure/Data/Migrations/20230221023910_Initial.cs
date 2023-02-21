@@ -38,6 +38,25 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "reservation",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    userid = table.Column<Guid>(type: "uuid", nullable: false),
+                    listingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    price = table.Column<float>(type: "real", nullable: false),
+                    reservationdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    startdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    enddate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    reviewstar = table.Column<int>(type: "integer", nullable: true),
+                    reviewdescription = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_reservation", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "image",
                 columns: table => new
                 {
@@ -67,6 +86,9 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "image");
+
+            migrationBuilder.DropTable(
+                name: "reservation");
 
             migrationBuilder.DropTable(
                 name: "listing");

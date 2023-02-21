@@ -94,6 +94,50 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                     b.ToTable("image");
                 });
 
+            modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Reservations", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("enddate");
+
+                    b.Property<Guid>("ListingId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("listingid");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real")
+                        .HasColumnName("price");
+
+                    b.Property<DateTime>("ReservationDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("reservationdate");
+
+                    b.Property<string>("ReviewDescription")
+                        .HasColumnType("text")
+                        .HasColumnName("reviewdescription");
+
+                    b.Property<int?>("Stars")
+                        .HasColumnType("integer")
+                        .HasColumnName("reviewstar");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("startdate");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("userid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("reservation");
+                });
+
             modelBuilder.Entity("Cephiro.Listings.Domain.Entities.Listings", b =>
                 {
                     b.OwnsOne("Cephiro.Listings.Domain.ValueObjects.Location", "Addresse", b1 =>

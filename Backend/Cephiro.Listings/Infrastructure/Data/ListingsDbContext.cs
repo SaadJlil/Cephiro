@@ -11,6 +11,7 @@ public class ListingsDbContext : DbContext
     }
     public required DbSet<entities.Listings> Listing { get; set; }
     public required DbSet<entities.Photos> Image { get; set; }
+    public required DbSet<entities.Reservations> Reservation { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
