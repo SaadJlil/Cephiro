@@ -7,6 +7,6 @@ public static class ReservationCommands
 {
     public static void AddReservationCommands(this IMediatorRegistrationConfigurator cfg)
     {
-        //cfg.AddRequestClient<CreationRequest>();
+        cfg.AddRequestClient<CreateReservationRequest>();
     }
 }

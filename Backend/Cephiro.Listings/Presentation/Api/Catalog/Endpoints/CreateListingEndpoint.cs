@@ -23,7 +23,6 @@ public sealed class CreateListingEndpoint : EndpointBaseAsync
     public override async Task<ActionResult<CreationResponse>> HandleAsync([FromBody] CreationRequest request, CancellationToken cancellationToken = default)
     {
         var response = await _create.GetResponse<CreationResponse>(request);
-        System.Console.WriteLine(response.GetType().ToString());
         return response.Message;
     }
 }

@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Cephiro.Listings.Application.Catalog.Commands;
 using Cephiro.Listings.Application.Catalog.Queries;
+using Cephiro.Listings.Application.Reservation.Commands;
+using Cephiro.Listings.Application.Reservation.Queries;
 
 
 
@@ -57,6 +59,9 @@ public static class ConfigureInfrastructure
     {
         services.AddTransient<ICatalogExecute, CatalogExecute>();
         services.AddTransient<ICatalogAccess, CatalogAccess>();
+
+        services.AddTransient<IReservationExecute, ReservationExecute>();
+        services.AddTransient<IReservationAccess, ReservationAccess>();
 
         return services;
     }
