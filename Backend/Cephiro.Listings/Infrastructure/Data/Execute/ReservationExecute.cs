@@ -94,16 +94,15 @@ public class ReservationExecute : IReservationExecute
             Error = null
         };
 
-        string sql = $@"DELETE FROM reservation WHERE id = @ReservationId 
-                AND 1 = CASE EXISTS 
-                    (SELECT 1 FROM listingreservation 
+        string sql = $@"DELETE FROM reservation WHERE reservation.id = @ReservationId 
+                AND 1 = (CASE WHEN EXISTS 
+                    (SELECT 1 FROM reservation 
                     INNER JOIN listing 
-                    ON reservation.userid = listing.id 
-                    WHERE reservation.listingid id = @ReservationId 
+                    ON reservation.listingid = listing.id 
+                    WHERE reservation.id = @ReservationId 
                     AND listing.userid = @UserId
-                    AND reservation.reservationdate < @LimitDate) 
-                    THEN 1 ELSE 0 END";
-
+                    AND reservation.reservationdate > @LimitDate) 
+                    THEN 1 ELSE 0 END);";
 
         var cmd = new CommandDefinition(commandText: sql, 
             parameters: new { ReservationId = reservation.ReservationId, UserId = reservation.UserId, LimitDate = DateTime.Now.AddDays(-3).ToUniversalTime()}, 
@@ -116,22 +115,17 @@ public class ReservationExecute : IReservationExecute
             using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
             db.Open();
 
-            //Here problem here
             result.ChangeCount = await db.ExecuteAsync(cmd);
 
             db.Close();
         }
         catch (NpgsqlException exception)
         {
-            return new DbWriteInternal()
-            {
-                ChangeCount = 0,
-                Error = new()
-                {
-                    Code = 502,
-                    Message = exception.Message
-                }
+            result.Error = new Application.Shared.Contracts.Error{
+                Code = 404,
+                Message = exception.Message
             };
+            return result; 
         }
 
         return result;

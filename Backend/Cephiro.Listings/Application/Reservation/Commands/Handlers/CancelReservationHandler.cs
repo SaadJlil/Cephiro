@@ -33,7 +33,7 @@ public sealed class CancelReservationHandler: IConsumer<CancelReservationRequest
 
         result.Error = response.Error;
         result.IsError = false;
-        await context.RespondAsync<CreateReservationResponse>(result);
+        await context.RespondAsync<CancelReservationResponse>(result);
     }
 
 }
