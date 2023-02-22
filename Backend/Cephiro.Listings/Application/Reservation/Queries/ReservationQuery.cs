@@ -8,5 +8,6 @@ public static class ReservationQuery
     public static void AddReservationQueries(this IMediatorRegistrationConfigurator cfg)
     {
         cfg.AddRequestClient<ListingReservationDatesRequest>();
+        cfg.AddRequestClient<UserReservationsRequest>();
     }
 }

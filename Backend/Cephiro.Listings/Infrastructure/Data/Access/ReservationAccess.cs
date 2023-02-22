@@ -55,4 +55,46 @@ public class ReservationAccess: IReservationAccess
 
         return list_dates;
     }
+
+    public async Task<UserReservationsResponse> GetUserReservations(UserReservationsRequest reservation, CancellationToken token)
+    {
+        UserReservationsResponse? list_reservs = new UserReservationsResponse{};
+
+        //Add Order by date and limit 
+        string sql  = $@"SELECT listing.name,
+                        listing.city,
+                        listing.country,
+                        listing.id as listingid,
+                        reservation.price as invoicevalue,
+                        reservation.reservationdate as reservationdate,
+                        reservation.id as reservationid
+                        FROM reservation
+                        INNER JOIN listing 
+                        ON reservation.listingid = listing.id
+                        WHERE listing.userid = @UserId
+                        ORDER BY reservation.startdate;"; 
+
+        var cmd = new CommandDefinition(commandText: sql, parameters: new { UserId = reservation.UserId }, cancellationToken: token);
+
+        try
+        {
+            using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
+
+            db.Open();
+
+            list_reservs.ListReservations = await db.QueryAsync<UserReservationsInternal>(cmd);
+
+            db.Close();
+        }
+        catch (NpgsqlException exception)
+        {
+            list_reservs.IsError = true;
+            list_reservs.Message = exception.Message;
+            list_reservs.Code = 404;
+            return list_reservs;
+        }
+
+        return list_reservs;
+    }
+
 }
