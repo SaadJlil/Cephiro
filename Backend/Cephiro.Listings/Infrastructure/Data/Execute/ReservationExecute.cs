@@ -36,10 +36,10 @@ public class ReservationExecute : IReservationExecute
             Error = null
         };
         bool existing_reservations = await _context.Reservation.Where(x => x.ListingId == reservation.ListingId 
-            && !(x.StartDate <= reservation.EndDate && x.StartDate >= reservation.StartDate)
-            && !(reservation.StartDate <= x.EndDate && reservation.StartDate >= x.StartDate)
-            && !(x.EndDate >= reservation.StartDate && x.EndDate <= reservation.EndDate)
-            && !(reservation.EndDate >= reservation.StartDate && x.StartDate <= reservation.EndDate))
+            && ((x.StartDate <= reservation.EndDate && x.StartDate >= reservation.StartDate)
+            || (reservation.StartDate <= x.EndDate && reservation.StartDate >= x.StartDate)
+            || (x.EndDate >= reservation.StartDate && x.EndDate <= reservation.EndDate)
+            || (x.EndDate >= reservation.StartDate && x.StartDate <= reservation.EndDate)))
             .AnyAsync();
         
 
@@ -131,4 +131,67 @@ public class ReservationExecute : IReservationExecute
         return result;
 
     }
+    public async Task<DbWriteInternal> SubmitReview(SubmitReviewRequest review, CancellationToken token)
+    {
+
+        DbWriteInternal result = new()
+        {
+            ChangeCount = 0,
+            Error = null
+        };
+//Stars ReservationId Description UserId DateNow
+        string sql = $@"UPDATE listing 
+                    SET average_stars = (average_stars * number_reviews + @Stars)/(number_reviews + 1), 
+                        number_reviews = number_reviews + 1
+                    WHERE listing.id = (SELECT listingid FROM reservation WHERE reservation.id = @ReservationId) 
+                    AND 1 = (CASE WHEN EXISTS 
+                    (SELECT 1 FROM reservation 
+                    INNER JOIN listing 
+                    ON reservation.listingid = listing.id 
+                    WHERE reservation.id = @ReservationId 
+                    AND listing.userid = @UserId
+                    AND reservation.enddate > @DateNow
+                    AND reservation.reviewstar IS NULL) 
+                    THEN 1 ELSE 0 END);";
+        sql += $@"UPDATE reservation
+                SET reviewstar = @Stars,
+                    reviewdescription = @Description
+                WHERE id = @ReservationId
+                AND 1 = (CASE WHEN EXISTS 
+                (SELECT 1 FROM reservation 
+                INNER JOIN listing 
+                ON reservation.listingid = listing.id 
+                WHERE reservation.id = @ReservationId 
+                AND listing.userid = @UserId
+                AND reservation.enddate > @DateNow
+                AND reservation.reviewstar IS NULL) 
+                THEN 1 ELSE 0 END);";
+
+        var cmd = new CommandDefinition(commandText: sql, 
+            parameters: new { ReservationId = review.ReservationId, UserId = review.UserId, DateNow = DateTime.Now.ToUniversalTime(), Stars = review.Stars, Description = review.Description ?? "No Description"}, 
+            cancellationToken: token
+        );
+
+        try
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+            using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
+            db.Open();
+
+            result.ChangeCount = await db.ExecuteAsync(cmd);
+
+            db.Close();
+        }
+        catch (NpgsqlException exception)
+        {
+            result.Error = new Application.Shared.Contracts.Error{
+                Code = 404,
+                Message = exception.Message
+            };
+            return result; 
+        }
+
+        return result;
+    }
+
 }

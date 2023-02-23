@@ -26,7 +26,7 @@ public class ReservationAccess: IReservationAccess
         _context = context;
     }
 
-    public async Task<ListingReservationDatesResponse> GetListingReservations(ListingReservationDatesRequest Listing, CancellationToken token)
+    public async Task<ListingReservationDatesResponse> GetListingReservationDates(ListingReservationDatesRequest Listing, CancellationToken token)
     {
         ListingReservationDatesResponse? list_dates = new ListingReservationDatesResponse{};
 
@@ -62,6 +62,7 @@ public class ReservationAccess: IReservationAccess
 
         //Add Order by date and limit 
         string sql  = $@"SELECT listing.name,
+                        listing.average_stars as stars
                         listing.city,
                         listing.country,
                         listing.id as listingid,

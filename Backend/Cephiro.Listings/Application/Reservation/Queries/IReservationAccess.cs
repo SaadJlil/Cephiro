@@ -7,6 +7,6 @@ namespace Cephiro.Listings.Application.Reservation.Queries;
 
 public interface IReservationAccess
 {
-    public Task<ListingReservationDatesResponse> GetListingReservations(ListingReservationDatesRequest Listing, CancellationToken token);
+    public Task<ListingReservationDatesResponse> GetListingReservationDates(ListingReservationDatesRequest Listing, CancellationToken token);
     public Task<UserReservationsResponse> GetUserReservations(UserReservationsRequest reservation, CancellationToken token);
 }

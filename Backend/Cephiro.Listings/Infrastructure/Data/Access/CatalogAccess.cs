@@ -45,6 +45,8 @@ public class CatalogAccess: ICatalogAccess
         }
 
         return new ListingInfoIntern{
+            NumberReviews = result.NumberReviews,
+            ListingId = result.Id,
             Images = result.Images.Select(x => x.ImageUri).ToList(),
             Addresse = result.Addresse,
             Price_day = result.Price_day,
@@ -61,7 +63,7 @@ public class CatalogAccess: ICatalogAccess
         UserListingsResponse? list_info = new UserListingsResponse{};
 
         //Add Order by date and limit 
-        string sql  = $"SELECT id, country, city, name FROM listing WHERE userid = @UserId ORDER BY creation_date LIMIT @take OFFSET @skip * @take; SELECT \"ListingId\" as id, imageuri as uri FROM image WHERE \"ListingId\" IN (SELECT id FROM listing WHERE userid = @UserId ORDER BY creation_date LIMIT @take OFFSET @skip * @take);";
+        string sql  = $"SELECT id, country, city, name, average_stars as stars FROM listing WHERE userid = @UserId ORDER BY creation_date LIMIT @take OFFSET @skip * @take; SELECT \"ListingId\" as id, imageuri as uri FROM image WHERE \"ListingId\" IN (SELECT id FROM listing WHERE userid = @UserId ORDER BY creation_date LIMIT @take OFFSET @skip * @take);";
 
         try
         {

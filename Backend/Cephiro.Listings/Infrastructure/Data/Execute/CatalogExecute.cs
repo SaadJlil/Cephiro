@@ -13,8 +13,6 @@ using Microsoft.Extensions.Options;
 using Npgsql;
 
 
-
-
 namespace Cephiro.Listings.Infrastructure.Data.Execute;
 
 
@@ -238,6 +236,7 @@ public class CatalogExecute : ICatalogExecute
         {
             using NpgsqlConnection db = new(_settings.CurrentValue.ListingsConnection);
             db.Open();
+
             if (await db.QueryFirstOrDefaultAsync(cmd) is null)
             {
                 result.Error = new Application.Shared.Contracts.Error
@@ -249,8 +248,8 @@ public class CatalogExecute : ICatalogExecute
             }
 
 
-            sql = $" DELETE FROM image WHERE \"ListingId\" = @listingid; DELETE FROM listing WHERE id = @listingid;";
-            cmd = new CommandDefinition(commandText: sql, parameters: new {listingid = Dellisting.ListingId}, cancellationToken: token);
+            sql = $" DELETE FROM image WHERE \"ListingId\" = @listingid; DELETE FROM reservation WHERE listingid = @listingid AND startdate > @LimitDate; DELETE FROM listing WHERE id = @listingid;";
+            cmd = new CommandDefinition(commandText: sql, parameters: new {listingid = Dellisting.ListingId, LimitDate = DateTime.Now.ToUniversalTime()}, cancellationToken: token);
 
             result.ChangeCount = await db.ExecuteAsync(cmd);
 
@@ -277,9 +276,9 @@ public class CatalogExecute : ICatalogExecute
             Error = null
         };
 
-        string sql = $"DELETE FROM image WHERE \"ListingId\" = (SELECT id FROM listing WHERE userid = @UserId); DELETE FROM listing WHERE userid = @UserId;";
+        string sql = $"DELETE FROM image WHERE \"ListingId\" IN (SELECT id FROM listing WHERE userid = @UserId);  DELETE FROM reservation WHERE listingid IN (SELECT listingid FROM listing WHERE userid = @UserId) AND startdate > @LimitDate; DELETE FROM listing WHERE userid = @UserId;";
 
-        var cmd = new CommandDefinition(commandText: sql, parameters: new { UserId = Dellisting.UserId }, cancellationToken: token);
+        var cmd = new CommandDefinition(commandText: sql, parameters: new { UserId = Dellisting.UserId, LimitDate = DateTime.Now.ToUniversalTime() }, cancellationToken: token);
 
         try
         {
@@ -302,7 +301,6 @@ public class CatalogExecute : ICatalogExecute
 
         return result;
     }
-
 
 
 }

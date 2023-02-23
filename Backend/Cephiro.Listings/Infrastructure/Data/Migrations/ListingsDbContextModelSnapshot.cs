@@ -48,6 +48,10 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasColumnType("character varying(70)")
                         .HasColumnName("name");
 
+                    b.Property<int>("NumberReviews")
+                        .HasColumnType("integer")
+                        .HasColumnName("number_reviews");
+
                     b.Property<int>("Number_reserved_days")
                         .HasColumnType("integer")
                         .HasColumnName("number_reserved_days");

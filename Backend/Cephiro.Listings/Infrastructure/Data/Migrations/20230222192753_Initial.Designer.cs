@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cephiro.Listings.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ListingsDbContext))]
-    [Migration("20230221023910_Initial")]
+    [Migration("20230222192753_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -50,6 +50,10 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("character varying(70)")
                         .HasColumnName("name");
+
+                    b.Property<int>("NumberReviews")
+                        .HasColumnType("integer")
+                        .HasColumnName("number_reviews");
 
                     b.Property<int>("Number_reserved_days")
                         .HasColumnType("integer")

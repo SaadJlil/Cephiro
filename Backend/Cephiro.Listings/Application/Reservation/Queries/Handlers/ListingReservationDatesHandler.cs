@@ -21,7 +21,7 @@ public sealed class ListingReservationDatesHandler: IConsumer<ListingReservation
 
     public async Task Consume(ConsumeContext<ListingReservationDatesRequest> context)
     {
-        var response = await _ReservationRepository.GetListingReservations(context.Message, context.CancellationToken); 
+        var response = await _ReservationRepository.GetListingReservationDates(context.Message, context.CancellationToken); 
         await context.RespondAsync<ListingReservationDatesResponse>(response);
    }
 

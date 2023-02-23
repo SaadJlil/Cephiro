@@ -8,4 +8,5 @@ public interface IReservationExecute
 {
     public Task<DbWriteInternal> CreateReservation(CreateReservationRequest reservation, CancellationToken token);
     public Task<DbWriteInternal> CancelReservation(CancelReservationRequest reservation, CancellationToken token);
+    public Task<DbWriteInternal> SubmitReview(SubmitReviewRequest review, CancellationToken token);
 }

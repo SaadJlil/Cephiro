@@ -4,6 +4,7 @@ namespace Cephiro.Listings.Application.Shared.Contracts.Internal;
 public sealed class UserReservationsInternal 
 {
     //public required string ImageUri { get; set; }
+    public required float Stars { get; set; }
     public required string Name { get; set; }
     public required float InvoiceValue { get; set; }
     public required Guid ReservationId { get; set; }

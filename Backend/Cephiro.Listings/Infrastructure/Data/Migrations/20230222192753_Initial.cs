@@ -23,14 +23,15 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                     longitude = table.Column<double>(type: "double precision", nullable: true),
                     latitude = table.Column<double>(type: "double precision", nullable: true),
                     description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    numberviews = table.Column<int>(name: "number_views", type: "integer", nullable: false),
                     priceday = table.Column<float>(name: "price_day", type: "real", nullable: false),
                     numberreserveddays = table.Column<int>(name: "number_reserved_days", type: "integer", nullable: false),
                     creationdate = table.Column<DateTime>(name: "creation_date", type: "timestamp with time zone", nullable: false),
                     listingtype = table.Column<int>(name: "listing_type", type: "integer", nullable: false),
                     averagestars = table.Column<float>(name: "average_stars", type: "real", nullable: false),
                     userid = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: false)
+                    name = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: false),
+                    numberviews = table.Column<int>(name: "number_views", type: "integer", nullable: false),
+                    numberreviews = table.Column<int>(name: "number_reviews", type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

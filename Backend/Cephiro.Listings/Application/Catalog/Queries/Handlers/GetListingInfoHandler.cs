@@ -18,13 +18,9 @@ public sealed class GetListingInfoHandler: IConsumer<ListingInfoRequest>
 
     public async Task Consume(ConsumeContext<ListingInfoRequest> context)
     {
-
-
         var response = await _catalogRepository.GetListingInfo(context.Message, context.CancellationToken); 
         await context.RespondAsync<ListingInfoResponse>(new ListingInfoResponse{
             Info = response
         });
-
     }
-
 }
