@@ -8,6 +8,7 @@ public sealed class MinimalListingInfoInternal
     public required string Country { get; set; }
     public required string City{ get; set; }
     public required string Name { get; set; }
+    public required int Price { get; set; }
     public float? Stars { get; set; }
 }
 

@@ -1,4 +1,5 @@
 using System.Reflection;
+using Cephiro.Listings.Application.Search;
 using Cephiro.Listings.Application.Catalog;
 using Cephiro.Listings.Application.Reservation;
 using MassTransit;
@@ -13,5 +14,6 @@ public static class Mediator
         
         cfg.AddCatalogMediator();
         cfg.AddReservationMediator();
+        cfg.AddSearchMediator();
     }
 }

@@ -11,6 +11,7 @@ using Cephiro.Listings.Application.Catalog.Commands;
 using Cephiro.Listings.Application.Catalog.Queries;
 using Cephiro.Listings.Application.Reservation.Commands;
 using Cephiro.Listings.Application.Reservation.Queries;
+using Cephiro.Listings.Application.Search.Queries;
 
 
 
@@ -62,6 +63,8 @@ public static class ConfigureInfrastructure
 
         services.AddTransient<IReservationExecute, ReservationExecute>();
         services.AddTransient<IReservationAccess, ReservationAccess>();
+
+        services.AddTransient<ISearchAccess, SearchAccess>();
 
         return services;
     }
