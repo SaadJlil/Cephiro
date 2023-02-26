@@ -3918,19 +3918,19 @@
     ]
   },
   "packageFolders": {
-    "/home/azureuser/.nuget/packages/": {}
+    "/home/whoami/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
+      "projectUniqueName": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
       "projectName": "Cephiro.Api",
-      "projectPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
-      "packagesPath": "/home/azureuser/.nuget/packages/",
-      "outputPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Api/obj/",
+      "projectPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
+      "packagesPath": "/home/whoami/.nuget/packages/",
+      "outputPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/azureuser/.nuget/NuGet/NuGet.Config"
+        "/home/whoami/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -3942,8 +3942,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj": {
-              "projectPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj"
+            "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj": {
+              "projectPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj"
             }
           }
         }
@@ -3996,7 +3996,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.201/RuntimeIdentifierGraph.json"
       }
     }
   },

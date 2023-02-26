@@ -3402,19 +3402,19 @@
     ]
   },
   "packageFolders": {
-    "/home/azureuser/.nuget/packages/": {}
+    "/home/whoami/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
+      "projectUniqueName": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
       "projectName": "Cephiro.Listings",
-      "projectPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
-      "packagesPath": "/home/azureuser/.nuget/packages/",
-      "outputPath": "/home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Listings/obj/",
+      "projectPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj",
+      "packagesPath": "/home/whoami/.nuget/packages/",
+      "outputPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Listings/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/azureuser/.nuget/NuGet/NuGet.Config"
+        "/home/whoami/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -3533,7 +3533,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.201/RuntimeIdentifierGraph.json"
       }
     }
   },

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cephiro.Listings.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ListingsDbContext))]
-    [Migration("20230222192753_Initial")]
+    [Migration("20230226174328_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

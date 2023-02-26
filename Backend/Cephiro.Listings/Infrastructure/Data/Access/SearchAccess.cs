@@ -90,11 +90,21 @@ public class SearchAccess: ISearchAccess
                 break;
         }
 
+        if(Search.QueryString is not null)
+        {
+            paramDic.Add("@SearchQuery", Search.QueryString);
+            if(Search.OrderBy is null)
+            {
+                orderby = "ORDER BY search @@ websearch_to_tsquery('english', @SearchQuery) or search @@ websearch_to_tsquery('simple', @SearchQuery) DESC";
+            }
+            else
+                orderby += ", search @@ websearch_to_tsquery('english', @SearchQuery) or search @@ websearch_to_tsquery('simple', @SearchQuery) DESC";
+        }
+
         listingarray.Add($@" 0 = (CASE WHEN EXISTS (SELECT 1 FROM reservation WHERE listing.id = reservation.listingid AND ((reservation.startdate BETWEEN @StartDate AND @EndDate) OR (reservation.enddate BETWEEN @StartDate AND @EndDate) OR (@StartDate BETWEEN reservation.startdate AND reservation.enddate) OR  (@EndDate BETWEEN reservation.startdate AND reservation.enddate))) THEN 1 ELSE 0 END) ");
 
         string sql  = $"SELECT id, country, city, name, price_day as price, average_stars as stars FROM listing WHERE {listingarray.Aggregate((i, j) => i + "AND" + j)} {orderby} LIMIT @take OFFSET @skip * @take ; SELECT \"ListingId\" as id, imageuri as uri FROM image WHERE \"ListingId\" IN (SELECT id FROM listing WHERE {listingarray.Aggregate((i, j) => i + "AND" + j)} {orderby} LIMIT @take OFFSET @skip * @take);"; 
 //DECLARE @variable_name etc.. 
-
 
         try
         {

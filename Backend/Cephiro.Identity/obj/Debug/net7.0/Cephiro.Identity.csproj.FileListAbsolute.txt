@@ -22,3 +22,15 @@
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/refint/Cephiro.Identity.dll
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.pdb
 /home/azureuser/Desktop/Cephiro/Cephiro_Listings/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/ref/Cephiro.Identity.dll
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/bin/Debug/net7.0/Cephiro.Identity.deps.json
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/bin/Debug/net7.0/Cephiro.Identity.dll
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/bin/Debug/net7.0/Cephiro.Identity.pdb
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.csproj.AssemblyReference.cache
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.GeneratedMSBuildEditorConfig.editorconfig
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.AssemblyInfoInputs.cache
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.AssemblyInfo.cs
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.csproj.CoreCompileInputs.cache
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.dll
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/refint/Cephiro.Identity.dll
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/Cephiro.Identity.pdb
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/Debug/net7.0/ref/Cephiro.Identity.dll
