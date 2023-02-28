@@ -42,7 +42,16 @@ public class CatalogExecute : ICatalogExecute
             Type = listing.Type,
             UserId = listing.UserId,
             //Add tags later on 
-            Name = listing.Name
+            Name = listing.Name,
+            Beds = listing.Beds,
+            Bedrooms = listing.Bedrooms,
+            Bathrooms = listing.Bathrooms,
+            Wifi = listing.Wifi,
+            AirConditioning = listing.Wifi,
+            Smoking = listing.Smoking,
+            WashingMachine = listing.WashingMachine,
+            DishWasher = listing.DishWasher
+
         };
         var phts = listing.Images.Select(x => new models.Photos
         {
@@ -172,6 +181,55 @@ public class CatalogExecute : ICatalogExecute
             updatearray.Add($@" price_day = @price ");
             paramDic.Add("@price", Uplisting.Price_day);
         }
+
+        if(Uplisting.Beds != null)
+        {
+            updatearray.Add($@" beds = @Beds ");
+            paramDic.Add("@Beds", Uplisting.Beds);
+        }
+
+        if(Uplisting.Bedrooms != null)
+        {
+            updatearray.Add($@" bedrooms = @Bedrooms ");
+            paramDic.Add("@Bedrooms", Uplisting.Bedrooms);
+        }
+
+        if(Uplisting.Bathrooms != null)
+        {
+            updatearray.Add($@" bathrooms = @Bathrooms ");
+            paramDic.Add("@Bathrooms", Uplisting.Bathrooms);
+        }
+
+        if(Uplisting.Wifi != null)
+        {
+            updatearray.Add($@" wifi = @Wifi ");
+            paramDic.Add("@Wifi", Uplisting.Wifi);
+        }
+
+        if(Uplisting.AirConditioning != null)
+        {
+            updatearray.Add($@" airconditioning = @AirConditioning ");
+            paramDic.Add("@AirConditioning", Uplisting.AirConditioning);
+        }
+
+        if(Uplisting.Smoking != null)
+        {
+            updatearray.Add($@" smoking = @Smoking ");
+            paramDic.Add("@Smoking", Uplisting.Smoking);
+        }
+
+        if(Uplisting.WashingMachine != null)
+        {
+            updatearray.Add($@" washing_machine = @WashingMachine ");
+            paramDic.Add("@WashingMachine", Uplisting.WashingMachine);
+        }
+
+        if(Uplisting.DishWasher != null)
+        {
+            updatearray.Add($@" dish_washer = @DishWasher ");
+            paramDic.Add("@DishWasher", Uplisting.DishWasher);
+        }
+
         sql = "";
 
         if (updatearray.Count() > 0)

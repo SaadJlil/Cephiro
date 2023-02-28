@@ -14,4 +14,13 @@ public sealed class CreationRequest
     public required ListingType Type { get; set; }
     public required Guid UserId{ get; set; }
     [MaxLength(70)] public required string Name { get; set; }
+    public required int Beds { get; set; }
+    public required int Bedrooms { get; set; }
+    public required int Bathrooms { get; set; }
+    public required bool Wifi { get; set; }
+    public required bool AirConditioning { get; set; }
+    public required bool Smoking { get; set; }
+    public required bool WashingMachine { get; set; }
+    public required bool DishWasher { get; set; }
+
 }

@@ -21,4 +21,13 @@ public sealed class Listings: BaseEntity<Guid>
     [Column("name")] [MaxLength(70)] public required string Name { get; set; }
     [Column("number_views")] public int Views { get; set; } = 0;
     [Column("number_reviews")] public int NumberReviews { get; set; } = 0;
+    [Column("beds")]  public required int Beds { get; set; }
+    [Column("bedrooms")]  public required int Bedrooms { get; set; }
+    [Column("bathrooms")]  public required int Bathrooms { get; set; }
+    [Column("wifi")]  public required bool Wifi { get; set; }
+    [Column("airconditioning")]  public required bool AirConditioning { get; set; }
+    [Column("smoking")]  public required bool Smoking { get; set; }
+    [Column("washing_machine")]  public required bool WashingMachine { get; set; }
+    [Column("dish_washer")]  public required bool DishWasher { get; set; }
+
 }

@@ -31,7 +31,15 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                     userid = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(70)", maxLength: 70, nullable: false),
                     numberviews = table.Column<int>(name: "number_views", type: "integer", nullable: false),
-                    numberreviews = table.Column<int>(name: "number_reviews", type: "integer", nullable: false)
+                    numberreviews = table.Column<int>(name: "number_reviews", type: "integer", nullable: false),
+                    beds = table.Column<int>(type: "integer", nullable: false),
+                    bedrooms = table.Column<int>(type: "integer", nullable: false),
+                    bathrooms = table.Column<int>(type: "integer", nullable: false),
+                    wifi = table.Column<bool>(type: "boolean", nullable: false),
+                    airconditioning = table.Column<bool>(type: "boolean", nullable: false),
+                    smoking = table.Column<bool>(type: "boolean", nullable: false),
+                    washingmachine = table.Column<bool>(name: "washing_machine", type: "boolean", nullable: false),
+                    dishwasher = table.Column<bool>(name: "dish_washer", type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

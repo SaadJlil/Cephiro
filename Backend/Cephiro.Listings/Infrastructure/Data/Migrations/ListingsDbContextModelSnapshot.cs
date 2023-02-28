@@ -29,9 +29,25 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<bool>("AirConditioning")
+                        .HasColumnType("boolean")
+                        .HasColumnName("airconditioning");
+
                     b.Property<float>("Average_stars")
                         .HasColumnType("real")
                         .HasColumnName("average_stars");
+
+                    b.Property<int>("Bathrooms")
+                        .HasColumnType("integer")
+                        .HasColumnName("bathrooms");
+
+                    b.Property<int>("Bedrooms")
+                        .HasColumnType("integer")
+                        .HasColumnName("bedrooms");
+
+                    b.Property<int>("Beds")
+                        .HasColumnType("integer")
+                        .HasColumnName("beds");
 
                     b.Property<DateTime>("Creation_date")
                         .HasColumnType("timestamp with time zone")
@@ -41,6 +57,10 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)")
                         .HasColumnName("description");
+
+                    b.Property<bool>("DishWasher")
+                        .HasColumnType("boolean")
+                        .HasColumnName("dish_washer");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -60,6 +80,10 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                         .HasColumnType("real")
                         .HasColumnName("price_day");
 
+                    b.Property<bool>("Smoking")
+                        .HasColumnType("boolean")
+                        .HasColumnName("smoking");
+
                     b.Property<int>("Type")
                         .HasColumnType("integer")
                         .HasColumnName("listing_type");
@@ -71,6 +95,14 @@ namespace Cephiro.Listings.Infrastructure.Data.Migrations
                     b.Property<int>("Views")
                         .HasColumnType("integer")
                         .HasColumnName("number_views");
+
+                    b.Property<bool>("WashingMachine")
+                        .HasColumnType("boolean")
+                        .HasColumnName("washing_machine");
+
+                    b.Property<bool>("Wifi")
+                        .HasColumnType("boolean")
+                        .HasColumnName("wifi");
 
                     b.HasKey("Id");
 

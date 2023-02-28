@@ -77,6 +77,54 @@ public class SearchAccess: ISearchAccess
             paramDic.Add("@MaximumPrice", Search.MaximumPrice);
         }
 
+        if(Search.Beds != null)
+        {
+            listingarray.Add($@" beds = @Beds ");
+            paramDic.Add("@Beds", Search.Beds);
+        }
+
+        if(Search.Bedrooms != null)
+        {
+            listingarray.Add($@" bedrooms = @Bedrooms ");
+            paramDic.Add("@Bedrooms", Search.Bedrooms);
+        }
+
+        if(Search.Bathrooms != null)
+        {
+            listingarray.Add($@" bathrooms = @Bathrooms ");
+            paramDic.Add("@Bathrooms", Search.Bathrooms);
+        }
+
+        if(Search.Wifi != null && Search.Wifi == true)
+        {
+            listingarray.Add($@" wifi = @Wifi ");
+            paramDic.Add("@Wifi", Search.Wifi);
+        }
+
+        if(Search.AirConditioning != null && Search.AirConditioning == true)
+        {
+            listingarray.Add($@" airconditioning = @AirConditioning ");
+            paramDic.Add("@AirConditioning", Search.AirConditioning);
+        }
+
+        if(Search.Smoking != null && Search.Smoking == true)
+        {
+            listingarray.Add($@" smoking = @Smoking ");
+            paramDic.Add("@Smoking", Search.Smoking);
+        }
+
+        if(Search.WashingMachine != null && Search.WashingMachine == true)
+        {
+            listingarray.Add($@" washing_machine = @WashingMachine ");
+            paramDic.Add("@WashingMachine", Search.WashingMachine);
+        }
+
+        if(Search.DishWasher != null && Search.DishWasher == true)
+        {
+            listingarray.Add($@" dish_washer = @DishWasher ");
+            paramDic.Add("@DishWasher", Search.DishWasher);
+        }
+
 
 
         switch(Search.OrderBy)

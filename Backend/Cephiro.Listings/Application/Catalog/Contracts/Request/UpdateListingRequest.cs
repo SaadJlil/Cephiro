@@ -15,4 +15,13 @@ public sealed class UpdateListingRequest
     public required Guid UserId{ get; set; }
     public required Guid ListingId{ get; set; }
     [MaxLength(70)] public string? Name { get; set; }
+    public int? Beds { get; set; }
+    public int? Bedrooms { get; set; }
+    public int? Bathrooms { get; set; }
+    public bool? Wifi { get; set; }
+    public bool? AirConditioning { get; set; }
+    public bool? Smoking { get; set; }
+    public bool? WashingMachine { get; set; }
+    public bool? DishWasher { get; set; }
+
 }
