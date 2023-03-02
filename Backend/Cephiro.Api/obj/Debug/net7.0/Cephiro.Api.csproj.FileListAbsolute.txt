@@ -138,3 +138,4 @@
 /home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/obj/Debug/net7.0/ref/Cephiro.Api.dll
 /home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/FluentValidation.dll
 /home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/FluentValidation.DependencyInjectionExtensions.dll
+/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/bin/Debug/net7.0/FluentValidation.AspNetCore.dll

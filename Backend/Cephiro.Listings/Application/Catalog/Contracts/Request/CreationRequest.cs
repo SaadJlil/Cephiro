@@ -17,11 +17,11 @@ public sealed class CreationRequest
     public required int Beds { get; set; }
     public required int Bedrooms { get; set; }
     public required int Bathrooms { get; set; }
-    public required bool Wifi { get; set; }
-    public required bool AirConditioning { get; set; }
-    public required bool Smoking { get; set; }
-    public required bool WashingMachine { get; set; }
-    public required bool DishWasher { get; set; }
+    public bool Wifi { get; set; } = false;
+    public bool AirConditioning { get; set; } = false;
+    public bool Smoking { get; set; } = false;
+    public bool WashingMachine { get; set; } = false;
+    public bool DishWasher { get; set; } = false;
 
 }
 

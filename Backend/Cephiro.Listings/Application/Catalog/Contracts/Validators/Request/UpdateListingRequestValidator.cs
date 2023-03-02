@@ -6,13 +6,13 @@ namespace Cephiro.Listings.Application.Catalog.Contracts.Validators.Request;
 
 
 
-public sealed class UpdateListingValidator: AbstractValidator<UpdateListingRequest>
+public sealed class UpdateListingRequestValidator: AbstractValidator<UpdateListingRequest>
 {
-    public UpdateListingValidator()
+    public UpdateListingRequestValidator()
     {
         //Not null
-        RuleFor(x => x.UserId).NotEmpty();
-        RuleFor(x => x.ListingId).NotEmpty();
+        RuleFor(x => x.UserId).NotEmpty().WithMessage("UserId is required");
+        RuleFor(x => x.ListingId).NotEmpty().WithMessage("UserId is required ");
 
         //String Length
         RuleFor(x => x.Description).MaximumLength(500).WithMessage("Description length must be less than 500 characters.");

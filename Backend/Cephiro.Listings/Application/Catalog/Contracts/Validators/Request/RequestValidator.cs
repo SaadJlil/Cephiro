@@ -1,3 +1,4 @@
+using Cephiro.Listings.Application.Catalog.Contracts.Request;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 
@@ -10,11 +11,11 @@ public static class RequestValidator
 {
     public static void AddCatalogRequest(this IServiceCollection cfg)
     {
-        cfg.AddValidatorsFromAssemblyContaining<CreationValidator>();
-        cfg.AddValidatorsFromAssemblyContaining<DeleteListingValidator>();
-        cfg.AddValidatorsFromAssemblyContaining<DeleteUserListingsValidator>();
-        cfg.AddValidatorsFromAssemblyContaining<ListingInfoValidator>();
-        cfg.AddValidatorsFromAssemblyContaining<UpdateListingValidator>();
-        cfg.AddValidatorsFromAssemblyContaining<UserListingsValidator>();
+        cfg.AddValidatorsFromAssemblyContaining<CreationRequestValidator>();
+        cfg.AddValidatorsFromAssemblyContaining<DeleteListingRequestValidator>();
+        cfg.AddValidatorsFromAssemblyContaining<DeleteUserListingsRequestValidator>();
+        cfg.AddValidatorsFromAssemblyContaining<ListingInfoRequestValidator>();
+        cfg.AddValidatorsFromAssemblyContaining<UpdateListingRequestValidator>();
+        cfg.AddValidatorsFromAssemblyContaining<UserListingsRequestValidator>();
     }
 }

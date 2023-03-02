@@ -14,11 +14,6 @@ using Cephiro.Listings.Application.Reservation.Queries;
 using Cephiro.Listings.Application.Search.Queries;
 using Cephiro.Listings.Application;
 
-//fluent
-using FluentValidation;
-using Cephiro.Listings.Application.Catalog.Contracts.Validators;
-
-
 using Cephiro.Listings.Presentation.Api.Catalog.Endpoints;
 using MassTransit;
 
@@ -42,7 +37,6 @@ public static class ConfigureInfrastructure
     public static IServiceCollection AddFluentValidators(this IServiceCollection services)
     {
         services.AddListingValidator();
-    
         return services;
     }
 
