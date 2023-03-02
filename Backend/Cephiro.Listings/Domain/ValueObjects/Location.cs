@@ -1,18 +1,19 @@
 using Cephiro.Listings.Domain.ValueObjects;
 using Geolocation;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Cephiro.Listings.Domain.ValueObjects;
 
 public class Location: ValueObject
 {
-    [Column("street")] public string Street {get; set;}
-    [Column("country")] public string Country {get; set;}
-    [Column("city")] public string City {get; set;}
-    [Column("zipcode")] public string ZipCode {get; set;}
-    [Column("longitude")] public double? Longitude { get; set; }
-    [Column("latitude")] public double? Latitude { get; set; }
+    [StringLength(100, ErrorMessage = "The street name must be less than 50 characters")] [Column("street")] public string Street {get; set;}
+    [StringLength(100, ErrorMessage = "The country name must be less than 100 characters")] [Column("country")] public string Country {get; set;}
+    [StringLength(100, ErrorMessage = "The city name must be less than 100 characters")] [Column("city")] public string City {get; set;}
+    [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code has 5 digits")] [Column("zipcode")] public string ZipCode {get; set;}
+    [Range(-180, 180, ErrorMessage = "Longitude must be between -180 and 180")] [Column("longitude")] public double? Longitude { get; set; }
+    [Range(-90, 90, ErrorMessage = "Latitude must be between -90 and 90")] [Column("latitude")] public double? Latitude { get; set; }
     public Location(string country, string street, string zipCode, string city, double? latitude, double? longitude)
     {
         Country = country;
@@ -21,6 +22,12 @@ public class Location: ValueObject
         City = city;
         Latitude = latitude;
         Longitude = longitude;
+    }
+
+    public bool Is_Valid()
+    {
+        //Verify the Location (Youssef)
+        return true;
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

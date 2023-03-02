@@ -12,7 +12,11 @@ using Cephiro.Listings.Application.Catalog.Queries;
 using Cephiro.Listings.Application.Reservation.Commands;
 using Cephiro.Listings.Application.Reservation.Queries;
 using Cephiro.Listings.Application.Search.Queries;
+using Cephiro.Listings.Application;
 
+//fluent
+using FluentValidation;
+using Cephiro.Listings.Application.Catalog.Contracts.Validators;
 
 
 using Cephiro.Listings.Presentation.Api.Catalog.Endpoints;
@@ -29,10 +33,19 @@ public static class ConfigureInfrastructure
         services.AddDapperConnection(configuration);
         services.AddEfDbContext(configuration);
         services.AddWriteRepositories();
+        services.AddFluentValidators();
 
    
         return services;
     }
+
+    public static IServiceCollection AddFluentValidators(this IServiceCollection services)
+    {
+        services.AddListingValidator();
+    
+        return services;
+    }
+
 
     public static IServiceCollection AddDapperConnection(this IServiceCollection services, IConfiguration configuration)
     {

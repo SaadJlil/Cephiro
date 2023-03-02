@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iw0dCOpUDjqVnm1apeKesC91FJC/NS0GsR8DWwsdMorFBgUAbiWoEl2LSL9dcjKzgNTGX05rCeqShQwlZ6vWRg==",
+  "dgSpecHash": "N2X/mLA2X1+WmeyXzBlM4vagdgFxNZ+jQIgYvlqy37tw0XsbRccq2CplbV/5IodT5C8bbCX9dyFklngh8ISF7w==",
   "success": true,
   "projectFilePath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "/home/whoami/.nuget/packages/ardalis.apiendpoints.codeanalyzers/4.0.0/ardalis.apiendpoints.codeanalyzers.4.0.0.nupkg.sha512",
     "/home/whoami/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
     "/home/whoami/.nuget/packages/erroror/1.2.1/erroror.1.2.1.nupkg.sha512",
+    "/home/whoami/.nuget/packages/fluentvalidation/11.5.1/fluentvalidation.11.5.1.nupkg.sha512",
+    "/home/whoami/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.5.1/fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "/home/whoami/.nuget/packages/geolocation/1.2.1/geolocation.1.2.1.nupkg.sha512",
     "/home/whoami/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/whoami/.nuget/packages/libphonenumber-csharp/8.13.4/libphonenumber-csharp.8.13.4.nupkg.sha512",

@@ -9,12 +9,12 @@ public sealed class UpdateListingRequest
 {
     public  IEnumerable<Uri>? Images { get; set; }
     public  Location? Addresse { get; set; }
-    [MaxLength(500)] public string? Description { get; set; }
+    public string? Description { get; set; }
     public  float? Price_day { get; set; }
     public ListingType? Type { get; set; }
     public required Guid UserId{ get; set; }
     public required Guid ListingId{ get; set; }
-    [MaxLength(70)] public string? Name { get; set; }
+    public string? Name { get; set; }
     public int? Beds { get; set; }
     public int? Bedrooms { get; set; }
     public int? Bathrooms { get; set; }
