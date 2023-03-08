@@ -53,5 +53,4 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
         await context.RespondAsync<CreationResponse>(result);
         return;
     }
-
 }
