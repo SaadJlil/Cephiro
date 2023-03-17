@@ -22,6 +22,7 @@ public sealed class Listings: BaseEntity<Guid>
     [Column("number_views")] public int Views { get; set; } = 0;
     [Column("number_reviews")] public int NumberReviews { get; set; } = 0;
     [Range(100, 0)] [Column("beds")]  public required int Beds { get; set; }
+    [Range(100, 0)] [Column("surface")]  public required int Surface { get; set; }
     [Range(100, 0)] [Column("bedrooms")]  public required int Bedrooms { get; set; }
     [Range(100, 0)] [Column("bathrooms")]  public required int Bathrooms { get; set; }
     [Column("wifi")]  public required bool Wifi { get; set; }

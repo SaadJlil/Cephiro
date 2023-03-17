@@ -18,6 +18,7 @@ public sealed class UpdateListingRequest
     public int? Beds { get; set; }
     public int? Bedrooms { get; set; }
     public int? Bathrooms { get; set; }
+    public int? Surface { get; set; }
     public bool? Wifi { get; set; }
     public bool? AirConditioning { get; set; }
     public bool? Smoking { get; set; }

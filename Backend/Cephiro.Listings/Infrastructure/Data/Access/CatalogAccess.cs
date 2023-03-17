@@ -54,7 +54,16 @@ public class CatalogAccess: ICatalogAccess
             Type = result.Type,
             Average_stars = result.Average_stars,
             UserId = result.UserId,
-            Name = result.Name
+            Name = result.Name,
+            Beds = result.Beds,
+            Bedrooms = result.Bedrooms,
+            Surface = result.Surface,
+            Bathrooms = result.Bathrooms,
+            Wifi = result.Wifi,
+            AirConditioning = result.AirConditioning,
+            Smoking = result.Smoking,
+            WashingMachine = result.WashingMachine,
+            DishWasher = result.AirConditioning
         };
     }
 

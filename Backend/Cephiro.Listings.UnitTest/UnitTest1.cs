@@ -18,7 +18,6 @@ namespace Cephiro.Listings.UnitTest;
 
 public class Tests
 {
-    private CreationHandler handler;
     private Mock<ICatalogExecute> _MockRepo;
     private Mock<IValidator<CreationRequest>> _Mockvalidator;
 

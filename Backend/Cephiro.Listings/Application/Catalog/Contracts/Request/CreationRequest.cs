@@ -16,6 +16,7 @@ public sealed class CreationRequest
     public required string Name { get; set; }
     public required int Beds { get; set; }
     public required int Bedrooms { get; set; }
+    public required int Surface { get; set; }
     public required int Bathrooms { get; set; }
     public bool Wifi { get; set; } = false;
     public bool AirConditioning { get; set; } = false;

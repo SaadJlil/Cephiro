@@ -65,16 +65,28 @@ public class SearchAccess: ISearchAccess
             paramDic.Add("@City", Search.City);
         }
 
-        if(Search.MinimumPrice > 0)
+        if(Search.MinimumPrice != null)
         {
             listingarray.Add($@" price_day >= @MinimumPrice ");
             paramDic.Add("@MinimumPrice", Search.MinimumPrice);
         }
 
-        if(Search.MaximumPrice > 0)
+        if(Search.MaximumPrice != null)
         {
             listingarray.Add($@" price_day <= @MaximumPrice ");
             paramDic.Add("@MaximumPrice", Search.MaximumPrice);
+        }
+
+        if(Search.SurfaceMin != null)
+        {
+            listingarray.Add($@" surface >= @MinSurface ");
+            paramDic.Add("@MinSurface", Search.SurfaceMin);
+        }
+
+        if(Search.SurfaceMax != null)
+        {
+            listingarray.Add($@" surface <= @MaxSurface");
+            paramDic.Add("@MaxSurface", Search.SurfaceMax);
         }
 
         if(Search.Beds != null)

@@ -50,6 +50,7 @@ public class CatalogExecute : ICatalogExecute
             AirConditioning = listing.Wifi,
             Smoking = listing.Smoking,
             WashingMachine = listing.WashingMachine,
+            Surface = listing.Surface,
             DishWasher = listing.DishWasher
 
         };
@@ -192,6 +193,12 @@ public class CatalogExecute : ICatalogExecute
         {
             updatearray.Add($@" bedrooms = @Bedrooms ");
             paramDic.Add("@Bedrooms", Uplisting.Bedrooms);
+        }
+
+        if(Uplisting.Surface != null)
+        {
+            updatearray.Add($@" surface = @Surface ");
+            paramDic.Add("@Surface", Uplisting.Surface);
         }
 
         if(Uplisting.Bathrooms != null)

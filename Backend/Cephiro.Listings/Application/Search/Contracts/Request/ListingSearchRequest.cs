@@ -14,6 +14,8 @@ public sealed class ListingSearchRequest
     public string? QueryString { get; set; }
     public int? MinimumPrice { get; set; }
     public int? MaximumPrice { get; set; }
+    public int? SurfaceMin { get; set; }
+    public int? SurfaceMax { get; set; }
     public required string Country{ get; set; }
     public string? City { get; set; }
     public DateTime StartDate { get; set; } = DateTime.Now.ToUniversalTime();
