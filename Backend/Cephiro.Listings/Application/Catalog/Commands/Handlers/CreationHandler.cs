@@ -27,7 +27,10 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
         CreationResponse result = new () {IsError = false, Error = null};
 
         //validation 
-        var validation = await _validator.ValidateAsync(context.Message);
+        var validation = _validator.Validate(context.Message);
+
+        //var validation = await _validator.ValidateAsync(context.Message);
+
         if(!validation.IsValid)
         {
             result.Error = new Error{ 
@@ -40,6 +43,7 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
             return;
         }
 
+
         var response = await _catalogRepository.CreateListing(context.Message, context.CancellationToken); 
 
         if(response.Error is null)
@@ -49,7 +53,7 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
         }
 
         result.Error = response.Error;
-        result.IsError = false;
+        result.IsError = true;
         await context.RespondAsync<CreationResponse>(result);
         return;
     }

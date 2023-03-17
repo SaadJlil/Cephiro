@@ -36,6 +36,7 @@ public sealed class GetListingInfoHandler: IConsumer<ListingInfoRequest>
 
 
         var response = await _catalogRepository.GetListingInfo(context.Message, context.CancellationToken); 
+        
         await context.RespondAsync<ListingInfoResponse>(new ListingInfoResponse{
             Info = response
         });
