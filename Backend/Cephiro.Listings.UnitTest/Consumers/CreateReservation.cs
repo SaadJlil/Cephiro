@@ -45,7 +45,7 @@ public class CreateReservation
         )).ReturnsAsync(validationResult);
 
 
-        _MockRepo.Setup(x => x.CreateReservation(creation, new CancellationToken()))
+        _MockRepo.Setup(x => x.CreateReservation(It.IsAny<CreateReservationRequest>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new DbWriteInternal{
                 ChangeCount = 1,
                 Error = null
@@ -78,64 +78,43 @@ public class CreateReservation
             await harness.Stop();
         }
     }
-/*
+
     [Test]
     public async Task ListingCreation_NonValidRequest_Failure()
     {
-        var creation = new CreationRequest{
-                    Images = new List<Uri>{
-                        new Uri("/string")
-                    },
-                    Addresse = new Location(
-                        street : "string",
-                        country : "string",
-                        city : "string",
-                        zipCode : "strin",
-                        longitude : 180,
-                        latitude : 90
-                    ),
-                    Description = "string",
-                    Price_day = -10,
-                    Type = 0,
+        var creation = new CreateReservationRequest{
                     UserId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
-                    Name = "string",
-                    Beds = 0,
-                    Bedrooms = 0,
-                    Bathrooms = 0,
-                    Wifi = true,
-                    AirConditioning = true,
-                    Smoking = true,
-                    WashingMachine = true,
-                    DishWasher = true,
-                    Surface = 50
+                    ListingId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa5"),
+                    StartDate = DateTime.Now.AddDays(1).ToUniversalTime(),
+                    EndDate = DateTime.Now.AddDays(3).ToUniversalTime()
                 };
+        
 
         var validationResult = new FluentValidation.Results.ValidationResult();
         validationResult.Errors.Add(new FluentValidation.Results.ValidationFailure("propertyName", "Error message."));
         //_Mockvalidator.Setup(x => x.Validate(creation)).Returns(validationResult);
-        _Mockvalidator.Setup(x => x.Validate(It.IsAny<CreationRequest>())).Returns(validationResult);
+        _Mockvalidator.Setup(x => x.ValidateAsync(It.IsAny<CreateReservationRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(validationResult);
 
-
-        _MockRepo.Setup(x => x.CreateListing(creation, new CancellationToken()))
+        _MockRepo.Setup(x => x.CreateReservation(It.IsAny<CreateReservationRequest>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new DbWriteInternal{
-                ChangeCount = 0,
+                ChangeCount = 1,
                 Error = null
         });
 
 
         var harness = new InMemoryTestHarness();
         var consumer = harness.Consumer(() => {
-            return new CreationHandler(_MockRepo.Object, _Mockvalidator.Object);
+            return new CreateReservationHandler(_MockRepo.Object, _Mockvalidator.Object);
         });
 
         await harness.Start();
         try
         {
-            var requestClient = await harness.ConnectRequestClient<CreationRequest>();
+            var requestClient = await harness.ConnectRequestClient<CreateReservationRequest>();
 
-            var response = await requestClient.GetResponse<CreationResponse>(creation);
+            var response = await requestClient.GetResponse<CreateReservationResponse>(creation);
 
-            _Mockvalidator.Verify(x => x.Validate(It.IsAny<CreationRequest>()), Times.Once());
+            _Mockvalidator.Verify(x => x.ValidateAsync(It.IsAny<CreateReservationRequest>(), It.IsAny<CancellationToken>()), Times.Once());
             Assert.IsTrue(response.Message.IsError == true);
         }
         finally
@@ -143,5 +122,4 @@ public class CreateReservation
             await harness.Stop();
         }
     }
-*/
 }

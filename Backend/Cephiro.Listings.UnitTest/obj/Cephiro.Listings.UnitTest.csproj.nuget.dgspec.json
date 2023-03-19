@@ -73,6 +73,10 @@
             "coverlet.collector": {
               "target": "Package",
               "version": "[3.1.2, )"
+            },
+            "fluentassertions": {
+              "target": "Package",
+              "version": "[6.10.0, )"
             }
           },
           "imports": [

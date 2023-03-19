@@ -45,7 +45,7 @@ public class ListingCreation
                         latitude : 90
                     ),
                     Description = "string",
-                    Price_day = 0,
+                    Price_day = 10,
                     Type = 0,
                     UserId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
                     Name = "string",
@@ -63,9 +63,9 @@ public class ListingCreation
         _Mockvalidator.Setup(x => x.ValidateAsync(It.IsAny<CreationRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(validationResult);
 
 
-        _MockRepo.Setup(x => x.CreateListing(creation, new CancellationToken()))
+        _MockRepo.Setup(x => x.CreateListing(It.IsAny<CreationRequest>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new DbWriteInternal{
-                ChangeCount = 0,
+                ChangeCount = 1,
                 Error = null
         });
 
@@ -134,7 +134,7 @@ public class ListingCreation
         _Mockvalidator.Setup(x => x.ValidateAsync(It.IsAny<CreationRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(validationResult);
 
 
-        _MockRepo.Setup(x => x.CreateListing(creation, new CancellationToken()))
+        _MockRepo.Setup(x => x.CreateListing(It.IsAny<CreationRequest>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new DbWriteInternal{
                 ChangeCount = 0,
                 Error = null

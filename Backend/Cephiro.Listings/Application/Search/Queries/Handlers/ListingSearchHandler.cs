@@ -27,6 +27,7 @@ public sealed class ListingSearchHandler: IConsumer<ListingSearchRequest>
 
         //validation 
         var validation = await _validator.ValidateAsync(context.Message);
+
         if(!validation.IsValid)
         {
             await context.RespondAsync<ListingSearchResponse>(new ListingSearchResponse{
@@ -39,6 +40,7 @@ public sealed class ListingSearchHandler: IConsumer<ListingSearchRequest>
 
         var response = await _SearchRepository.GetListingSearch(context.Message, context.CancellationToken); 
         await context.RespondAsync<ListingSearchResponse>(response ?? new ListingSearchResponse{});
+
    }
 
 }
