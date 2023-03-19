@@ -27,9 +27,7 @@ public sealed class CreationHandler: IConsumer<CreationRequest>
         CreationResponse result = new () {IsError = false, Error = null};
 
         //validation 
-        var validation = _validator.Validate(context.Message);
-
-        //var validation = await _validator.ValidateAsync(context.Message);
+        var validation = await _validator.ValidateAsync(context.Message);
 
         if(!validation.IsValid)
         {

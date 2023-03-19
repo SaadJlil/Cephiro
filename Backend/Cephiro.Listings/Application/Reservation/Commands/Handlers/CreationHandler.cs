@@ -8,7 +8,7 @@ using Cephiro.Listings.Application.Shared.Contracts.Internal;
 using FluentValidation;
 
 
-namespace Cephiro.Listings.Application.Catalog.Commands.Handlers;
+namespace Cephiro.Listings.Application.Reservation.Commands.Handlers;
 
 
 public sealed class CreateReservationHandler: IConsumer<CreateReservationRequest>
@@ -28,6 +28,7 @@ public sealed class CreateReservationHandler: IConsumer<CreateReservationRequest
 
         //validation 
         var validation = await _validator.ValidateAsync(context.Message);
+        //var validation = _validator.Validate(context.Message);
         if(!validation.IsValid)
         {
             result.Error = new Error{ 
