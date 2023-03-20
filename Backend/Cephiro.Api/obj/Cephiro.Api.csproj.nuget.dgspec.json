@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj": {}
   },
   "projects": {
@@ -13,19 +12,6 @@
         "projectPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
         "packagesPath": "/home/whoami/.nuget/packages/",
         "outputPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/obj/",
-=======
-    "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj": {}
-  },
-  "projects": {
-    "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
-        "projectName": "Cephiro.Api",
-        "projectPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/Cephiro.Api.csproj",
-        "packagesPath": "/home/arkena/.nuget/packages/",
-        "outputPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Api/obj/",
->>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/whoami/.nuget/NuGet/NuGet.Config"
@@ -40,13 +26,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-<<<<<<< HEAD
               "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj": {
                 "projectPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Listings/Cephiro.Listings.csproj"
-=======
-              "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj": {
-                "projectPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj"
->>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
               }
             }
           }
@@ -61,15 +42,13 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-<<<<<<< HEAD
             "Fluentvalidation.DependencyInjectionExtensions": {
               "target": "Package",
               "version": "[11.5.1, )"
-=======
+            },
             "MassTransit": {
               "target": "Package",
               "version": "[8.0.12, )"
->>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",

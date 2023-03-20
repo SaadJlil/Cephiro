@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 using listings_conf = Cephiro.Listings.Infrastructure;
 using Cephiro.Listings.Infrastructure;
 using Microsoft.OpenApi.Models;
@@ -7,16 +6,13 @@ using MassTransit;
 using Cephiro.Listings.Application;
 
 
-=======
 using Cephiro.Identity;
 using Cephiro.Identity.Application;
 using MassTransit;
->>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-<<<<<<< HEAD
 builder.Services.AddServices(builder.Configuration);
 
 
@@ -24,12 +20,12 @@ builder.Services.AddServices(builder.Configuration);
 builder.Services.AddMediator(cfg =>
 {
     cfg.AddListingMediator();
-=======
+});
+
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddMediator(cfg =>
 {
     cfg.AddIdentityMediator();
->>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
 });
 
 builder.Services.AddControllers();
@@ -62,3 +58,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

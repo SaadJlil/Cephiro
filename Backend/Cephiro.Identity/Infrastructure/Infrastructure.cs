@@ -16,12 +16,9 @@ namespace Cephiro.Identity.Infrastructure;
 
 public static class Infrastructure
 {
-<<<<<<< HEAD:Backend/Cephiro.Identity/Infrastructure/ConfigureInfrastructure.cs
     /*
     public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
-=======
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
->>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3:Backend/Cephiro.Identity/Infrastructure/Infrastructure.cs
     {
         services.AddDapperConnection(configuration);
         services.AddEfDbContext(configuration);
