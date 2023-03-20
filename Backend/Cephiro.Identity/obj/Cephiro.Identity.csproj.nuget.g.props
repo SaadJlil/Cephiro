@@ -14,9 +14,14 @@
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore/7.0.2/buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore/7.0.2/buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design/7.0.2/build/net6.0/Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design/7.0.2/build/net6.0/Microsoft.EntityFrameworkCore.Design.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+<<<<<<< HEAD
     <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">/home/whoami/.nuget/packages/newtonsoft.json/9.0.1</PkgNewtonsoft_Json>
     <PkgArdalis_ApiEndpoints_CodeAnalyzers Condition=" '$(PkgArdalis_ApiEndpoints_CodeAnalyzers)' == '' ">/home/whoami/.nuget/packages/ardalis.apiendpoints.codeanalyzers/4.0.0</PkgArdalis_ApiEndpoints_CodeAnalyzers>
+=======
+    <PkgArdalis_ApiEndpoints_CodeAnalyzers Condition=" '$(PkgArdalis_ApiEndpoints_CodeAnalyzers)' == '' ">/home/arkena/.nuget/packages/ardalis.apiendpoints.codeanalyzers/4.0.0</PkgArdalis_ApiEndpoints_CodeAnalyzers>
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
   </PropertyGroup>
 </Project>
