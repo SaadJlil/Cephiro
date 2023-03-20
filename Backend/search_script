@@ -1,0 +1,7 @@
+alter table listing drop search;
+alter table listing
+add search tsvector
+generated always as (
+	setweight(to_tsvector('simple', name), 'A') || ' ' ||
+	setweight(to_tsvector('english', description), 'B') :: tsvector
+) stored;

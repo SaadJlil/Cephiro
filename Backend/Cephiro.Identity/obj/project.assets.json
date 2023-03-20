@@ -3215,19 +3215,19 @@
     ]
   },
   "packageFolders": {
-    "/home/arkena/.nuget/packages/": {}
+    "/home/whoami/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
+      "projectUniqueName": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
       "projectName": "Cephiro.Identity",
-      "projectPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
-      "packagesPath": "/home/arkena/.nuget/packages/",
-      "outputPath": "/home/arkena/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/",
+      "projectPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/Cephiro.Identity.csproj",
+      "packagesPath": "/home/whoami/.nuget/packages/",
+      "outputPath": "/home/whoami/Desktop/Cephiro/Cephiro/Backend/Cephiro.Identity/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/arkena/.nuget/NuGet/NuGet.Config"
+        "/home/whoami/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -3330,7 +3330,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/194/sdk/7.0.200/RuntimeIdentifierGraph.json"
       }
     }
   },

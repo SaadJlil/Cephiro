@@ -8,11 +8,20 @@
     ".NETCoreApp,Version=v7.0": {
       "Cephiro.Api/1.0.0": {
         "dependencies": {
+<<<<<<< HEAD
+          "Cephiro.Listings": "1.0.0",
+          "FluentValidation.DependencyInjectionExtensions": "11.5.1",
+          "Microsoft.AspNetCore.OpenApi": "7.0.2",
+          "Microsoft.EntityFrameworkCore.Design": "7.0.2",
+          "Swashbuckle.AspNetCore": "6.4.0",
+          "Swashbuckle.AspNetCore.Annotations": "6.5.0"
+=======
           "Cephiro.Identity": "1.0.0",
           "MassTransit": "8.0.12",
           "Microsoft.AspNetCore.OpenApi": "7.0.2",
           "Microsoft.EntityFrameworkCore.Design": "7.0.2",
           "Swashbuckle.AspNetCore": "6.4.0"
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
         },
         "runtime": {
           "Cephiro.Api.dll": {}
@@ -39,6 +48,57 @@
           }
         }
       },
+<<<<<<< HEAD
+      "ErrorOr/1.2.1": {
+        "runtime": {
+          "lib/net6.0/ErrorOr.dll": {
+            "assemblyVersion": "1.2.1.0",
+            "fileVersion": "1.2.1.0"
+          }
+        }
+      },
+      "FluentValidation/11.5.1": {
+        "runtime": {
+          "lib/net7.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.5.1.0"
+          }
+        }
+      },
+      "FluentValidation.AspNetCore/11.2.2": {
+        "dependencies": {
+          "FluentValidation": "11.5.1",
+          "FluentValidation.DependencyInjectionExtensions": "11.5.1"
+        },
+        "runtime": {
+          "lib/net6.0/FluentValidation.AspNetCore.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.2.2.0"
+          }
+        }
+      },
+      "FluentValidation.DependencyInjectionExtensions/11.5.1": {
+        "dependencies": {
+          "FluentValidation": "11.5.1",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.5.1.0"
+          }
+        }
+      },
+      "Geolocation/1.2.1": {
+        "runtime": {
+          "lib/netstandard2.0/Geolocation.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
+      },
+=======
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
@@ -549,16 +609,52 @@
       "Swashbuckle.AspNetCore/6.4.0": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
+<<<<<<< HEAD
+          "Swashbuckle.AspNetCore.Swagger": "6.5.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.5.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.4.0"
+        }
+      },
+      "Swashbuckle.AspNetCore.Annotations/6.5.0": {
+        "dependencies": {
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.5.0"
+        },
+        "runtime": {
+          "lib/net7.0/Swashbuckle.AspNetCore.Annotations.dll": {
+            "assemblyVersion": "6.5.0.0",
+            "fileVersion": "6.5.0.0"
+          }
+        }
+      },
+      "Swashbuckle.AspNetCore.Swagger/6.5.0": {
+=======
           "Swashbuckle.AspNetCore.Swagger": "6.4.0",
           "Swashbuckle.AspNetCore.SwaggerGen": "6.4.0",
           "Swashbuckle.AspNetCore.SwaggerUI": "6.4.0"
         }
       },
       "Swashbuckle.AspNetCore.Swagger/6.4.0": {
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
         "dependencies": {
           "Microsoft.OpenApi": "1.4.3"
         },
         "runtime": {
+<<<<<<< HEAD
+          "lib/net7.0/Swashbuckle.AspNetCore.Swagger.dll": {
+            "assemblyVersion": "6.5.0.0",
+            "fileVersion": "6.5.0.0"
+          }
+        }
+      },
+      "Swashbuckle.AspNetCore.SwaggerGen/6.5.0": {
+        "dependencies": {
+          "Swashbuckle.AspNetCore.Swagger": "6.5.0"
+        },
+        "runtime": {
+          "lib/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {
+            "assemblyVersion": "6.5.0.0",
+            "fileVersion": "6.5.0.0"
+=======
           "lib/net6.0/Swashbuckle.AspNetCore.Swagger.dll": {
             "assemblyVersion": "6.4.0.0",
             "fileVersion": "6.4.0.0"
@@ -573,6 +669,7 @@
           "lib/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {
             "assemblyVersion": "6.4.0.0",
             "fileVersion": "6.4.0.0"
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
           }
         }
       },
@@ -594,6 +691,10 @@
         }
       },
       "System.Collections.Immutable/1.7.1": {},
+<<<<<<< HEAD
+      "System.ComponentModel.Annotations/5.0.0": {},
+=======
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
       "System.Diagnostics.DiagnosticSource/6.0.0": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
@@ -636,10 +737,30 @@
       },
       "System.Threading.Channels/6.0.0": {},
       "System.Threading.Tasks.Extensions/4.5.0": {},
+<<<<<<< HEAD
+      "ValueOf/2.0.31": {
+        "runtime": {
+          "lib/netstandard2.0/ValueOf.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Cephiro.Listings/1.0.0": {
+        "dependencies": {
+          "Ardalis.ApiEndpoints": "4.0.1",
+          "Dapper": "2.0.123",
+          "ErrorOr": "1.2.1",
+          "FluentValidation": "11.5.1",
+          "FluentValidation.AspNetCore": "11.2.2",
+          "FluentValidation.DependencyInjectionExtensions": "11.5.1",
+          "Geolocation": "1.2.1",
+=======
       "Cephiro.Identity/1.0.0": {
         "dependencies": {
           "Ardalis.ApiEndpoints": "4.0.1",
           "Dapper": "2.0.123",
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
           "MassTransit": "8.0.12",
           "Microsoft.AspNet.Mvc": "5.2.9",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.2",
@@ -650,11 +771,21 @@
           "Microsoft.IdentityModel.Tokens": "6.26.0",
           "Npgsql": "7.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.1",
+<<<<<<< HEAD
+          "System.ComponentModel.Annotations": "5.0.0",
+          "System.IdentityModel.Tokens.Jwt": "6.26.0",
+          "ValueOf": "2.0.31",
+          "libphonenumber-csharp": "8.13.4"
+        },
+        "runtime": {
+          "Cephiro.Listings.dll": {}
+=======
           "System.IdentityModel.Tokens.Jwt": "6.26.0",
           "libphonenumber-csharp": "8.13.4"
         },
         "runtime": {
           "Cephiro.Identity.dll": {}
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
         }
       }
     }
@@ -686,6 +817,44 @@
       "path": "dapper/2.0.123",
       "hashPath": "dapper.2.0.123.nupkg.sha512"
     },
+<<<<<<< HEAD
+    "ErrorOr/1.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5xcbQErEPQKq2z/sLwSaFPX3T2G7x4ISX0us0X7jSxXSQT/wlfOOhw4knPUN/GWOf2strhuzdvRA36JViwvu+A==",
+      "path": "erroror/1.2.1",
+      "hashPath": "erroror.1.2.1.nupkg.sha512"
+    },
+    "FluentValidation/11.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0h1Q5lNOLLyYTWMJmyNoMqhY4CBRvvUWvJP1R4F2CnmmzuWwvB0A8aVmw5+lOuwYnwUwCRrdeMLbc81F38ahNQ==",
+      "path": "fluentvalidation/11.5.1",
+      "hashPath": "fluentvalidation.11.5.1.nupkg.sha512"
+    },
+    "FluentValidation.AspNetCore/11.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jU/MHXqg9cnOU18dY75vorP2c2WDKMan4zegOPsoc34xZVjzTEtXP0fKvkDEdeaChUVooNWuRr27u9w3sYbEFA==",
+      "path": "fluentvalidation.aspnetcore/11.2.2",
+      "hashPath": "fluentvalidation.aspnetcore.11.2.2.nupkg.sha512"
+    },
+    "FluentValidation.DependencyInjectionExtensions/11.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iWM0LS1MDYX06pcjMEQKqHirl2zkjHlNV23mEJSoR1IZI7KQmTa0RcTtGEJpj5+iHvBCfrzP2mYKM4FtRKVb+A==",
+      "path": "fluentvalidation.dependencyinjectionextensions/11.5.1",
+      "hashPath": "fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512"
+    },
+    "Geolocation/1.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qvdjGKWydk4hKmyGvIExkpNhJ0qoAk88f+wTsuQ6Bdb6Zl2MJccmQRKF2DLtAuuGSkeF9N99BbO2eKk4F932Mw==",
+      "path": "geolocation/1.2.1",
+      "hashPath": "geolocation.1.2.1.nupkg.sha512"
+    },
+=======
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
     "Humanizer.Core/2.14.1": {
       "type": "package",
       "serviceable": true,
@@ -1141,6 +1310,28 @@
       "path": "swashbuckle.aspnetcore/6.4.0",
       "hashPath": "swashbuckle.aspnetcore.6.4.0.nupkg.sha512"
     },
+<<<<<<< HEAD
+    "Swashbuckle.AspNetCore.Annotations/6.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EcHd1z2pEdnpaBMTI9qjVxk6mFVGVMZ1n0ySC3fjrkXCQQ8O9fMdt9TxPJRKyjiTiTjvO9700jKjmyl+hPBinQ==",
+      "path": "swashbuckle.aspnetcore.annotations/6.5.0",
+      "hashPath": "swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.Swagger/6.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XWmCmqyFmoItXKFsQSwQbEAsjDKcxlNf1l+/Ki42hcb6LjKL8m5Db69OTvz5vLonMSRntYO1XLqz0OP+n3vKnA==",
+      "path": "swashbuckle.aspnetcore.swagger/6.5.0",
+      "hashPath": "swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.SwaggerGen/6.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Y/qW8Qdg9OEs7V013tt+94OdPxbRdbhcEbw4NiwGvf4YBcfhL/y7qp/Mjv/cENsQ2L3NqJ2AOu94weBy/h4KvA==",
+      "path": "swashbuckle.aspnetcore.swaggergen/6.5.0",
+      "hashPath": "swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512"
+=======
     "Swashbuckle.AspNetCore.Swagger/6.4.0": {
       "type": "package",
       "serviceable": true,
@@ -1154,6 +1345,7 @@
       "sha512": "sha512-lXhcUBVqKrPFAQF7e/ZeDfb5PMgE8n5t6L5B6/BQSpiwxgHzmBcx8Msu42zLYFTvR5PIqE9Q9lZvSQAcwCxJjw==",
       "path": "swashbuckle.aspnetcore.swaggergen/6.4.0",
       "hashPath": "swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512"
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
     },
     "Swashbuckle.AspNetCore.SwaggerUI/6.4.0": {
       "type": "package",
@@ -1183,6 +1375,16 @@
       "path": "system.collections.immutable/1.7.1",
       "hashPath": "system.collections.immutable.1.7.1.nupkg.sha512"
     },
+<<<<<<< HEAD
+    "System.ComponentModel.Annotations/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg==",
+      "path": "system.componentmodel.annotations/5.0.0",
+      "hashPath": "system.componentmodel.annotations.5.0.0.nupkg.sha512"
+    },
+=======
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
     "System.Diagnostics.DiagnosticSource/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1267,7 +1469,18 @@
       "path": "system.threading.tasks.extensions/4.5.0",
       "hashPath": "system.threading.tasks.extensions.4.5.0.nupkg.sha512"
     },
+<<<<<<< HEAD
+    "ValueOf/2.0.31": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nEyKZGR8D1crnv2pcOCMhu4x0etnmjviJdP9OU33IfcRAfYibNYoGFMUQzeEOJT7yrQ87t/y0VCsNiTRb6l2LQ==",
+      "path": "valueof/2.0.31",
+      "hashPath": "valueof.2.0.31.nupkg.sha512"
+    },
+    "Cephiro.Listings/1.0.0": {
+=======
     "Cephiro.Identity/1.0.0": {
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
       "type": "project",
       "serviceable": false,
       "sha512": ""

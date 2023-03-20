@@ -5,7 +5,17 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cephiro.Identity", "Cephiro.Identity\Cephiro.Identity.csproj", "{7B41C350-59F6-442B-8562-C10A001A45FA}"
 EndProject
+<<<<<<< HEAD
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cephiro.Listings", "Cephiro.Listings\Cephiro.Listings.csproj", "{5956DEB6-5F86-4065-9154-F7C0BE32F760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cephiro.Api", "Cephiro.Api\Cephiro.Api.csproj", "{59001641-3F4C-461F-AD60-51EBEBC39475}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cephiro.Listings.UnitTests", "Cephiro.Listings.UnitTests\Cephiro.Listings.UnitTests.csproj", "{6B2C6C8B-9DA3-48BD-B6B9-A8CDFB12040F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cephiro.Listings.UnitTest", "Cephiro.Listings.UnitTest\Cephiro.Listings.UnitTest.csproj", "{45C4FDBF-D744-4B1A-A997-EA328FFB35F0}"
+=======
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cephiro.Api", "Cephiro.Api\Cephiro.Api.csproj", "{8248762E-8050-4A5E-9883-6A6B033CBD85}"
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,9 +30,28 @@ Global
 		{7B41C350-59F6-442B-8562-C10A001A45FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B41C350-59F6-442B-8562-C10A001A45FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B41C350-59F6-442B-8562-C10A001A45FA}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+		{5956DEB6-5F86-4065-9154-F7C0BE32F760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5956DEB6-5F86-4065-9154-F7C0BE32F760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5956DEB6-5F86-4065-9154-F7C0BE32F760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5956DEB6-5F86-4065-9154-F7C0BE32F760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59001641-3F4C-461F-AD60-51EBEBC39475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59001641-3F4C-461F-AD60-51EBEBC39475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59001641-3F4C-461F-AD60-51EBEBC39475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59001641-3F4C-461F-AD60-51EBEBC39475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B2C6C8B-9DA3-48BD-B6B9-A8CDFB12040F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B2C6C8B-9DA3-48BD-B6B9-A8CDFB12040F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B2C6C8B-9DA3-48BD-B6B9-A8CDFB12040F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B2C6C8B-9DA3-48BD-B6B9-A8CDFB12040F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45C4FDBF-D744-4B1A-A997-EA328FFB35F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45C4FDBF-D744-4B1A-A997-EA328FFB35F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45C4FDBF-D744-4B1A-A997-EA328FFB35F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45C4FDBF-D744-4B1A-A997-EA328FFB35F0}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
 		{8248762E-8050-4A5E-9883-6A6B033CBD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8248762E-8050-4A5E-9883-6A6B033CBD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8248762E-8050-4A5E-9883-6A6B033CBD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8248762E-8050-4A5E-9883-6A6B033CBD85}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> e0e781c61c4228bc84835fd6674e8323bb988dc3
 	EndGlobalSection
 EndGlobal
